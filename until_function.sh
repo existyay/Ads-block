@@ -39,7 +39,7 @@ test "${Description}" = "" && Description="${2}"
 local count=`cat "${file}" | busybox sed '/^!/d;/^[[:space:]]*$/d' | wc -l ` 
 local original_file=`cat "${file}"`
 cat << key > "${file}"
-[Adblock Plus 2.0]
+[Ads block 1.0]
 ! Title: ${2}
 ! Version: `date +'%Y%m%d%H%M%S'`
 ! Expires: 24 hours (update frequency)
@@ -466,14 +466,14 @@ cat << key > "${file}"
 <details>
 <summary>点击查看上游规则</summary>
 <ul>
-<li> <a href="https://easylist-downloads.adblockplus.org/easylist.txt" target="_blank" > Easylist </a> </li>
-<li> <a href="https://easylist-downloads.adblockplus.org/easylistchina.txt" target="_blank" > EasylistChina </a> </li>
-<li> <a href="https://raw.githubusercontent.com/easylist/easylist/refs/heads/master/easylist/easylist_adservers_popup.txt" target="_blank" > Easylist adservers popup </a> </li>
-<li> <a href="https://easylist-downloads.adblockplus.org/antiadblockfilters.txt" target="_blank" > Antiadblockfilters </a> </li>
-<li> <a href="https://filters.adtidy.org/android/filters/15_optimized.txt" target="_blank" > Adguard DNS optimized </a> </li>
-<li> <a href="https://filters.adtidy.org/extension/ublock/filters/11.txt" target="_blank" > Adguard mobile </a> </li>
-<li> <a href="https://filters.adtidy.org/extension/ublock/filters/224.txt" target="_blank" > Adguard Chinese </a> </li>
-<li> <a href="https://filters.adtidy.org/extension/ublock/filters/2_optimized.txt" target="_blank" > AdGuard Base filter </a> </li>
+<li> <a href="https://easylist-downloads.adblockplus.org/antiadblockfilters.txt" target="_blank" > antiadblockfilters </a> </li>
+<li> <a href="https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdns.txt" target="_blank" > adblockdns </a> </li>
+<li> <a href="https://raw.githubusercontent.com/Noyllopa/NoAppDownload/master/NoAppDownload.txt" target="_blank" > NoAppDownload </a> </li>
+<li> <a href="https://raw.githubusercontent.com/jk278/Ad-J/main/Ad-J.txt" target="_blank" > Ad-J </a> </li>
+<li> <a href="https://raw.githubusercontent.com/xinggsf/Adblock-Plus-Rule/refs/heads/master/mv.txt" target="_blank" > 乘风视频 </a> </li>
+<li> <a href="https://adguardteam.github.io/HostlistsRegistry/assets/filter_21.txt" target="_blank" > anti-AD </a> </li>
+<li> <a href="https://raw.githubusercontent.com/changzhaoCZ/fqnovel-adrules/refs/heads/main/fq.txt" target="_blank" > 番茄酱 </a> </li>
+<li> <a href="https://raw.githubusercontent.com/jdlingyu/ad-wars/master/hosts" target="_blank" > ad-wars </a> </li>
 </ul>
 </details>
 
