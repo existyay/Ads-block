@@ -36,6 +36,30 @@ if [ -f "${Download_Folder}/Adguard_filter_21.txt" ]; then
     sort_adguard_rules "${Sort_Folder}" "${Download_Folder}/Adguard_filter_21.txt"
 fi
 
+# 处理 NoAppDownload 规则（包含元素隐藏）
+if [ -f "${Download_Folder}/NoAppDownload.txt" ]; then
+    echo "※$(date +'%F %T') 处理 NoAppDownload.txt (元素隐藏规则)"
+    sort_adguard_rules "${Sort_Folder}" "${Download_Folder}/NoAppDownload.txt"
+fi
+
+# 处理 Ad-J 规则（包含元素隐藏）
+if [ -f "${Download_Folder}/Ad-J.txt" ]; then
+    echo "※$(date +'%F %T') 处理 Ad-J.txt (元素隐藏规则)"
+    sort_adguard_rules "${Sort_Folder}" "${Download_Folder}/Ad-J.txt"
+fi
+
+# 处理 EasyList 规则（提取弹窗拦截规则）
+if [ -f "${Download_Folder}/easylist.txt" ]; then
+    echo "※$(date +'%F %T') 从 easylist.txt 提取弹窗拦截规则"
+    extract_popup_rules "${Download_Folder}/easylist.txt" "${Sort_Folder}/popup_rules.txt"
+fi
+
+# 处理乘风视频规则（提取弹窗拦截规则）
+if [ -f "${Download_Folder}/mv.txt" ]; then
+    echo "※$(date +'%F %T') 从 mv.txt 提取弹窗拦截规则"
+    extract_popup_rules "${Download_Folder}/mv.txt" "${Sort_Folder}/popup_rules.txt"
+fi
+
 # 处理 hosts 格式并转换
 if [ -f "${Download_Folder}/ad-wars_hosts.txt" ]; then
     echo "※$(date +'%F %T') 转换 hosts 格式为 AdGuard Home 格式"
