@@ -17,7 +17,7 @@ chmod -R 777 "$(pwd)"
 # 下载规则
 download_link "${Download_Folder}"
 
-# 处理Easylist规则
+处理Easylist规则
 echo "※$(date +'%F %T') 开始处理Easylist规则……"
 wipe_white_list "${Sort_Folder}" "${Download_Folder}/easylistchina.txt" '^\@\@|^[[:space:]]\@\@\|\||^<<|<<1023<<|^\@\@\|\||^\|\|'
 add_rules_file "${Sort_Folder}" "${Download_Folder}/easylistchina.txt" '^\|\|.*\^$'
