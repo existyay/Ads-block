@@ -372,6 +372,27 @@ do
 done
 }
 
+#精简规则，剔除AdGuard Home不支持的规则
+function lite_AdguardHome_Rules(){
+local file="${1}"
+test ! -f "${file}" && return
+# 仅保留纯域名或以||开头并以^结尾的域名屏蔽规则，去除元素隐藏、脚本、重定向、正则、复杂选项等
+local new=$(cat "${file}" \
+  | busybox sed '/^!/d;/^[[:space:]]*$/d;/^\[/d' \
+  | grep -Ev '##|#@#|##\+js\(|#\%#|redirect=|removeparam=|\,replace=|redirect-rule=|dnsrewrite=|\$|\/.+\/|\\\/|:has-text|:matches-css|xpath|nth-ancestor|elemhide|generichide|scriptlet' \
+  | grep -E '^\|\|[A-Za-z0-9\.-]+\^$|^[A-Za-z0-9\.-]+\.[A-Za-z]{2,}(:[0-9]{1,5})?(/.*)?$' \
+  | sort -u)
+echo "${new}" > "${file}"
+}
+
+#在AdGuard Home不支持正则表达式时移除正则规则
+function Remove_regex_Rules_for_adguardhome(){
+local file="${1}"
+test ! -f "${file}" && return
+# 删除以斜线包裹的正则和包含反斜线转义的大量正则标志
+busybox sed -i -E '/^\/.*\/$/d;/\\\//d;/\\\./d;/\\\?/d;/\^\^/d' "${file}"
+}
+
 #精简规则，剔除Via不支持的规则
 function lite_Adblock_Rules(){
 local file="${1}"
