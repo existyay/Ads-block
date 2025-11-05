@@ -42,19 +42,12 @@ cat << key > "${file}"
 [Adblock Plus 2.0]
 ! Title: ${2}
 ! Version: `date +'%Y%m%d%H%M%S'`
-! Expires: 12 hours (update frequency)
+! Expires: 24 hours (update frequency)
 ! Last modified: `date +'%F %T'`
 ! Total Count: ${count}
 ! Blocked Filters: ${count}
 ! Description: ${Description}
-! Homepage: https://lingeringsound.github.io/adblock_auto
-! Gitcode Homepage: https://gitcode.net/weixin_45617236/adblock_auto
-! GitHub Homepage: https://github.com/lingeringsound/adblock_auto
-! Gitlink Homepage: https://www.gitlink.org.cn/keytoolazy/adblock_auto
-! Gitcode Raw Link: https://gitcode.net/weixin_45617236/adblock_auto/-/raw/main/Rules/${file##*/}
-! Github Raw Link: https://lingeringsound.github.io/adblock_auto/Rules/${file##*/}
-! Github Raw gh Link: https://raw.gitmirror.com/lingeringsound/adblock_auto/main/Rules/${file##*/}
-! Gitlink Raw Link: https://cdn09022024.gitlink.org.cn/api/v1/repos/keytoolazy/adblock_auto/raw/Rules/${file##*/}?ref=main&access_token=9aa2be1250ca725d0ef1b1f638fb3de408a11335
+! Homepage: https://github.com/existyay/Ads-block
 
 key
 echo "${original_file}" >> "${file}"
@@ -442,18 +435,13 @@ cat << key > "${file}"
 # 混合规则
 ### 自动更新(`date +'%F %T'`)
 
-| 名称 | GIthub订阅链接 | Github加速订阅链接 | GitCode订阅链接 | Gitlink订阅链接 |
+| 名称 | GIthub订阅链接 | Github加速订阅链接 |
 | :-- | :-- | :-- | :-- | :-- |
-| 混合规则(自动更新) | [订阅](https://raw.githubusercontent.com/lingeringsound/adblock_auto/main/Rules/adblock_auto.txt) | [订阅](https://raw.gitmirror.com/lingeringsound/adblock_auto/main/Rules/adblock_auto.txt) | [订阅](https://gitcode.net/weixin_45617236/adblock_auto/-/raw/main/Rules/adblock_auto.txt) | [订阅](https://cdn09022024.gitlink.org.cn/api/v1/repos/keytoolazy/adblock_auto/raw/Rules/adblock_auto.txt?ref=main&access_token=9aa2be1250ca725d0ef1b1f638fb3de408a11335) |
-| 混合规则精简版(自动更新) | [订阅](https://raw.githubusercontent.com/lingeringsound/adblock_auto/main/Rules/adblock_auto_lite.txt) | [订阅](https://raw.gitmirror.com/lingeringsound/adblock_auto/main/Rules/adblock_auto_lite.txt) | [订阅](https://gitcode.net/weixin_45617236/adblock_auto/-/raw/main/Rules/adblock_auto_lite.txt) | [订阅](https://cdn09022024.gitlink.org.cn/api/v1/repos/keytoolazy/adblock_auto/raw/Rules/adblock_auto_lite.txt?ref=main&access_token=9aa2be1250ca725d0ef1b1f638fb3de408a11335) |
-
-### 拦截器说明
-> #### [混合规则(自动更新)](https://lingeringsound.github.io/adblock_auto/Rules/adblock_auto.txt) 适用于 \`Adguard\` / \`Ublock Origin\` / \`Adblock Plus\`(用Adblock Plus源码编译的软件也支持，例如[嗅觉浏览器](https://www.coolapk.com/apk/com.hiker.youtoo) ) 支持复杂语法的过滤器，或者能兼容大规则的浏览器例如 [X浏览器](https://www.coolapk.com/apk/com.mmbox.xbrowser)
-
-> #### [混合规则精简版(自动更新)](https://lingeringsound.github.io/adblock_auto/Rules/adblock_auto_lite.txt) 适用于轻量的浏览器，例如  [VIA](https://www.coolapk.com/apk/mark.via)  / [Rian](https://www.coolapk.com/apk/com.rainsee.create) / [B仔浏览器](https://www.coolapk.com/apk/com.huicunjun.bbrowser)
+| 混合规则(自动更新) | [订阅](https://raw.githubusercontent.com/existyay/Ads-block/refs/heads/main/Rules/adblock_auto.txt) | [订阅](https://raw.gitmirror.com/existyay/Ads-block/refs/heads/main/Rules/adblock_auto.txt) 
+| 混合规则精简版(自动更新) | [订阅](https://raw.githubusercontent.com/existyay/Ads-block/refs/heads/main/Rules/adblock_auto_lite.txt) | [订阅](https://raw.gitmirror.com/existyay/Ads-block/refs/heads/main/Rules/adblock_auto.txt)
 
 ### 上游规则
-#### 感谢各位大佬❤ (ɔˆз(ˆ⌣ˆc)
+#### 感谢各位大佬❤
 <details>
 <summary>点击查看上游规则</summary>
 <ul>
