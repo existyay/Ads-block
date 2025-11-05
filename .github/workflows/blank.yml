@@ -13,4 +13,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Run a one-line script
-        run: sudo rm -rf /etc/localtime && ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && apt-get install -y dos2unix perl gawk && bash update.sh
+        run: sudo rm -rf /etc/localtime && sudo ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime &&sudo apt-get install -y dos2unix perl gawk &&sudo bash update.sh
