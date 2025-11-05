@@ -11,6 +11,16 @@ mkdir -p "${target_dir}"
 
 list='
 https://easylist-downloads.adblockplus.org/antiadblockfilters.txt|antiadblockfilters.txt
+https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdns.txt|adblockdns.txt
+https://raw.githubusercontent.com/Noyllopa/NoAppDownload/master/NoAppDownload.txt|NoAppDownload.txt
+https://raw.githubusercontent.com/jk278/Ad-J/main/Ad-J.txt|Ad-J.txt
+https://raw.githubusercontent.com/xinggsf/Adblock-Plus-Rule/refs/heads/master/mv.txt|mv.txt
+https://raw.githubusercontent.com/damengzhu/abpmerge/main/abpmerge.txt|abpmerge.txt
+https://adguardteam.github.io/HostlistsRegistry/assets/filter_53.txt|Adguard_filter_53.txt
+https://adguardteam.github.io/HostlistsRegistry/assets/filter_29.txt|Adguard_filter_29.txt
+https://adguardteam.github.io/HostlistsRegistry/assets/filter_21.txt|Adguard_filter_21.txt
+https://raw.githubusercontent.com/changzhaoCZ/fqnovel-adrules/refs/heads/main/fq.txt|fq.txt
+https://raw.githubusercontent.com/jdlingyu/ad-wars/master/hosts|ad-wars_hosts.txt
 https://easylist-downloads.adblockplus.org/easylist.txt|easylist.txt
 https://easylist-downloads.adblockplus.org/easylistchina.txt|easylistchina.txt
 https://raw.githubusercontent.com/easylist/easylist/refs/heads/master/easylist/easylist_adservers_popup.txt|easylist_adservers_popup.txt
