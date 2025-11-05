@@ -436,7 +436,7 @@ cat << key > "${file}"
 ### 自动更新(`date +'%F %T'`)
 
 | 名称 | GIthub订阅链接 | Github加速订阅链接 |
-| :-- | :-- | :-- | :-- | :-- |
+| :-- | :-- | :-- |
 | 混合规则(自动更新) | [订阅](https://raw.githubusercontent.com/existyay/Ads-block/refs/heads/main/Rules/adblock_auto.txt) | [订阅](https://raw.gitmirror.com/existyay/Ads-block/refs/heads/main/Rules/adblock_auto.txt) 
 | 混合规则精简版(自动更新) | [订阅](https://raw.githubusercontent.com/existyay/Ads-block/refs/heads/main/Rules/adblock_auto_lite.txt) | [订阅](https://raw.gitmirror.com/existyay/Ads-block/refs/heads/main/Rules/adblock_auto.txt)
 
