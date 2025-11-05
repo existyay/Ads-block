@@ -37,36 +37,36 @@ if [ -f "${Download_Folder}/Adguard_filter_21.txt" ]; then
     sort_adguard_rules "${Sort_Folder}" "${Download_Folder}/Adguard_filter_21.txt"
 fi
 
-# 处理 NoAppDownload 规则（包含元素隐藏）
-if [ -f "${Download_Folder}/NoAppDownload.txt" ]; then
-    echo "※$(date +'%F %T') 处理 NoAppDownload.txt (元素隐藏规则)"
-    sort_adguard_rules "${Sort_Folder}" "${Download_Folder}/NoAppDownload.txt"
-fi
+# 批量处理所有下载的规则文件
+echo "※$(date +'%F %T') 批量处理所有规则源..."
 
-# 处理 Ad-J 规则（包含元素隐藏）
-if [ -f "${Download_Folder}/Ad-J.txt" ]; then
-    echo "※$(date +'%F %T') 处理 Ad-J.txt (元素隐藏规则)"
-    sort_adguard_rules "${Sort_Folder}" "${Download_Folder}/Ad-J.txt"
-fi
+for rule_file in "${Download_Folder}"/*.txt; do
+    if [ -f "${rule_file}" ]; then
+        filename=$(basename "${rule_file}")
+        echo "※$(date +'%F %T') 处理 ${filename}"
+        
+        # 特殊处理 hosts 格式
+        if echo "${filename}" | grep -q "hosts"; then
+            convert_hosts_to_adguard "${rule_file}"
+            mv "${rule_file}" "${Sort_Folder}/${filename}"
+        # 特殊处理 Windows Spy Blocker
+        elif echo "${filename}" | grep -q "spy"; then
+            convert_hosts_to_adguard "${rule_file}"
+            mv "${rule_file}" "${Sort_Folder}/${filename}"
+        else
+            # 标准处理流程
+            sort_adguard_rules "${Sort_Folder}" "${rule_file}"
+        fi
+    fi
+done
 
-# 处理 EasyList 规则（提取弹窗拦截规则）
-if [ -f "${Download_Folder}/easylist.txt" ]; then
-    echo "※$(date +'%F %T') 从 easylist.txt 提取弹窗拦截规则"
-    extract_popup_rules "${Download_Folder}/easylist.txt" "${Sort_Folder}/popup_rules.txt"
-fi
-
-# 处理乘风视频规则（提取弹窗拦截规则）
-if [ -f "${Download_Folder}/mv.txt" ]; then
-    echo "※$(date +'%F %T') 从 mv.txt 提取弹窗拦截规则"
-    extract_popup_rules "${Download_Folder}/mv.txt" "${Sort_Folder}/popup_rules.txt"
-fi
-
-# 处理 hosts 格式并转换
-if [ -f "${Download_Folder}/ad-wars_hosts.txt" ]; then
-    echo "※$(date +'%F %T') 转换 hosts 格式为 AdGuard Home 格式"
-    convert_hosts_to_adguard "${Download_Folder}/ad-wars_hosts.txt"
-    mv "${Download_Folder}/ad-wars_hosts.txt" "${Sort_Folder}/ad-wars_hosts.txt"
-fi
+# 额外提取弹窗拦截规则
+echo "※$(date +'%F %T') 提取弹窗拦截规则..."
+for rule_file in "${Download_Folder}"/*.txt; do
+    if [ -f "${rule_file}" ]; then
+        extract_popup_rules "${rule_file}" "${Sort_Folder}/popup_rules.txt"
+    fi
+done
 
 # 合并所有规则
 echo "※$(date +'%F %T') 合并规则文件..."
