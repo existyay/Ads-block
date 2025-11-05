@@ -12,18 +12,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
       - name: Run a one-line script
-        run: sudo rm -rf /etc/localtime && sudo ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime &&sudo apt-get install -y dos2unix perl gawk &&sudo bash update.sh
+        run: |
+          sudo rm -rf /etc/localtime
+          sudo ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+          sudo apt-get update
+          sudo apt-get install -y dos2unix perl gawk
+          sudo bash update.sh
+          
       - name: Commit files
         run: |
           git pull
-          git config --local user.email ${{ secrets.MYEMAIL }}
-          git config --local user.name ${{ secrets.MYUSERNAME }}
+          git config --local user.email "${{ secrets.MYEMAIL }}"
+          git config --local user.name "${{ secrets.MYUSERNAME }}"
           git add .
-          git commit -a -m "Rules update"
+          git commit -a -m "Rules update" || exit 0
+          
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
-          force : true
+          force: true
