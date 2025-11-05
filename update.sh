@@ -22,7 +22,27 @@ echo "※$(date +'%F %T') 开始处理Easylist规则……"
 wipe_white_list "${Sort_Folder}" "${Download_Folder}/easylistchina.txt" '^\@\@|^[[:space:]]\@\@\|\||^<<|<<1023<<|^\@\@\|\||^\|\|'
 add_rules_file "${Sort_Folder}" "${Download_Folder}/easylistchina.txt" '^\|\|.*\^$'
 sort_adblock_Rules "${Sort_Folder}" "${Download_Folder}/easylist.txt" '^##|^###|^\/|\/ad\/|^:\/\/|^_|^\?|^\.|^-|^=|^:|^~|^,|^&'
-sort_web_rules "${Sort_Folder}" "${Download_Folder}/easylist.txt" 
+sort_web_rules "${Sort_Folder}" "${Download_Folder}/easylist.txt"
+sort_adblock_Rules "${Sort_Folder}" "${Download_Folder}/easylist_adservers_popup.txt" '^\|\|'
+wipe_fiter_popup_domain "${Sort_Folder}/easylist_adservers_popup.txt"
+
+# 处理第三方规则
+echo "※$(date +'%F %T') 开始处理第三方规则……"
+sort_adblock_Rules "${Sort_Folder}" "${Download_Folder}/adblockdns.txt" '^\|\|'
+sort_adblock_Rules "${Sort_Folder}" "${Download_Folder}/NoAppDownload.txt" '^\|\||^#'
+sort_adblock_Rules "${Sort_Folder}" "${Download_Folder}/Ad-J.txt" '^\|\||^#'
+sort_adblock_Rules "${Sort_Folder}" "${Download_Folder}/mv.txt" '^\|\||^#'
+sort_adblock_Rules "${Sort_Folder}" "${Download_Folder}/abpmerge.txt" '^\|\||^#'
+sort_adblock_Rules "${Sort_Folder}" "${Download_Folder}/Adguard_filter_53.txt" '^\|\||^#'
+sort_adblock_Rules "${Sort_Folder}" "${Download_Folder}/Adguard_filter_29.txt" '^\|\||^#'
+sort_adblock_Rules "${Sort_Folder}" "${Download_Folder}/Adguard_filter_21.txt" '^\|\||^#'
+sort_adblock_Rules "${Sort_Folder}" "${Download_Folder}/fq.txt" '^\|\||^#'
+
+# 处理hosts格式
+if [ -f "${Download_Folder}/ad-wars_hosts.txt" ]; then
+    echo "※$(date +'%F %T') 转换hosts格式……"
+    grep -v '^#' "${Download_Folder}/ad-wars_hosts.txt" | grep -v '^$' | awk '{print "||"$2"^"}' > "${Sort_Folder}/ad-wars_hosts.txt"
+fi
 
 # 处理lite规则
 echo "※$(date +'%F %T') 开始处理精简版规则……"
@@ -40,12 +60,12 @@ wipe_white_list "${Sort_Folder}" "${Download_Folder}/Adguard_Chinese.txt" '^\@\@
 wipe_white_list "${Sort_Folder}" "${Download_Folder}/adguard_optimized.txt" '^\@\@|^[[:space:]]\@\@\|\||^<<|<<1023<<|\@\@\|\|'
 sort_adblock_Rules "${Sort_Folder}" "${Download_Folder}/Adguard_mobile.txt" '^##|^###|^\/|\/ad\/|^:\/\/|^_|^\?|^\.|^-|^=|^:|^~|^,|^&|^\|\||^#\$#|^#\?#'
 sort_web_rules "${Sort_Folder}" "${Download_Folder}/Adguard_mobile.txt"
-sort_adblock_Rules "${Sort_Folder}" "${Download_Folder}/easylist_adservers_popup.txt" '^\|\|'
-wipe_fiter_popup_domain "${Sort_Folder}/easylist_adservers_popup.txt"
+sort_adblock_Rules "${Sort_Folder}" "${Download_Folder}/AdGuard_Base_filter_dns.txt" '^\|\||^#'
 
 # 合并规则
 echo "※$(date +'%F %T') 开始合并规则……"
 Combine_adblock_original_file "${Combine_Folder}/adblock_combine.txt" "${Sort_Folder}"
+cp -f "${Download_Folder}/antiadblockfilters.txt" "${Combine_Folder}/antiadblockfilters.txt"
 
 # 处理完整版规则
 process_full_rules() {
@@ -80,6 +100,7 @@ write_head "${Rules_Folder}/adblock_auto.txt" "混合规则(更新日期$(date '
 
 # 处理lite版本
 Combine_adblock_original_file "${Combine_Folder}/lite/adblock_combine.txt" "${Sort_Folder}/lite"
+cp -f "${Download_Folder}/antiadblockfilters.txt" "${Combine_Folder}/lite/antiadblockfilters.txt"
 Combine_adblock_original_file "${Rules_Folder}/adblock_auto_lite.txt" "${Combine_Folder}/lite"
 
 # 修复lite规则
