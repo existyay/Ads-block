@@ -334,21 +334,21 @@ done
 }
 
 #去除部分选择器
-function wipe_same_selector_fiter(){
-local file="${1}"
-local IFS=$'\n'
-test ! -f "${file}" && return
-local target_domain_list="$(grep -E '^\|\|' "${file}" | busybox sed -E 's/\$third-party$//g;s/\$popup$//g;s/\$third-party,important$//g;s/\$popup,third-party$//g;s/\$third-party,popup$//g;s/\$script$//g;s/\$image$//g;s/\$image,third-party$//g;s/\$third-party,image$//g;s/\$script,third-party$//g;s/\$third-party,script$//g;/domain=/d;/^!/d;/^[[:space:]]*$/d' | sort | uniq -d)"
-local target_domain_list_count_all=$(echo "$target_domain_list" | wc -l)
-local a=0
-for i in $target_domain_list; do
-    End_target=$((${target_domain_list_count_all} - $a))
-    a=$(($a + 1))
-    same_fiter_rule=$(escape_special_chars "${i}")
-    busybox sed -i -E "/^${same_fiter_rule}\\$/d" "${file}"
-    echo "※去除域名规则(${target_domain_list_count_all} → ${End_target}) ${i}"
-done
-}
+# function wipe_same_selector_fiter(){
+# local file="${1}"
+# local IFS=$'\n'
+# test ! -f "${file}" && return
+# local target_domain_list="$(grep -E '^\|\|' "${file}" | busybox sed -E 's/\$third-party$//g;s/\$popup$//g;s/\$third-party,important$//g;s/\$popup,third-party$//g;s/\$third-party,popup$//g;s/\$script$//g;s/\$image$//g;s/\$image,third-party$//g;s/\$third-party,image$//g;s/\$script,third-party$//g;s/\$third-party,script$//g;/domain=/d;/^!/d;/^[[:space:]]*$/d' | sort | uniq -d)"
+# local target_domain_list_count_all=$(echo "$target_domain_list" | wc -l)
+# local a=0
+# for i in $target_domain_list; do
+#     End_target=$((${target_domain_list_count_all} - $a))
+#     a=$(($a + 1))
+#     same_fiter_rule=$(escape_special_chars "${i}")
+#     busybox sed -i -E "/^${same_fiter_rule}\\$/d" "${file}"
+#     echo "※去除域名规则(${target_domain_list_count_all} → ${End_target}) ${i}"
+# done
+# }
 
 #去除重复的域名规则
 function clear_domain_white_list(){
