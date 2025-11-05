@@ -1,24 +1,27 @@
-# 混合规则
-### 自动更新(2025-11-05 23:13:32)
+# Ads-block
+### 自动更新(2025-11-05 23:33:35)
+
+## ACTION脚本来自大佬
+https://github.com/lingeringsound/adblock_auto
 
 | 名称 | GIthub订阅链接 | Github加速订阅链接 |
 | :-- | :-- | :-- |
-| 混合规则(自动更新) | [订阅](https://raw.githubusercontent.com/existyay/Ads-block/refs/heads/main/Rules/adblock_auto.txt) | [订阅](https://raw.gitmirror.com/existyay/Ads-block/refs/heads/main/Rules/adblock_auto.txt) 
-| 混合规则精简版(自动更新) | [订阅](https://raw.githubusercontent.com/existyay/Ads-block/refs/heads/main/Rules/adblock_auto_lite.txt) | [订阅](https://raw.gitmirror.com/existyay/Ads-block/refs/heads/main/Rules/adblock_auto.txt)
+| Ads-block(自动更新) | [订阅](https://raw.githubusercontent.com/existyay/Ads-block/refs/heads/main/Rules/adblock_auto.txt) | [订阅](https://raw.gitmirror.com/existyay/Ads-block/refs/heads/main/Rules/adblock_auto.txt) 
+| Ads-block-lite(自动更新) | [订阅](https://raw.githubusercontent.com/existyay/Ads-block/refs/heads/main/Rules/adblock_auto_lite.txt) | [订阅](https://raw.gitmirror.com/existyay/Ads-block/refs/heads/main/Rules/adblock_auto.txt)
 
 ### 上游规则
 #### 感谢各位大佬❤
 <details>
 <summary>点击查看上游规则</summary>
 <ul>
-<li> <a href="https://easylist-downloads.adblockplus.org/easylist.txt" target="_blank" > Easylist </a> </li>
-<li> <a href="https://easylist-downloads.adblockplus.org/easylistchina.txt" target="_blank" > EasylistChina </a> </li>
-<li> <a href="https://raw.githubusercontent.com/easylist/easylist/refs/heads/master/easylist/easylist_adservers_popup.txt" target="_blank" > Easylist adservers popup </a> </li>
-<li> <a href="https://easylist-downloads.adblockplus.org/antiadblockfilters.txt" target="_blank" > Antiadblockfilters </a> </li>
-<li> <a href="https://filters.adtidy.org/android/filters/15_optimized.txt" target="_blank" > Adguard DNS optimized </a> </li>
-<li> <a href="https://filters.adtidy.org/extension/ublock/filters/11.txt" target="_blank" > Adguard mobile </a> </li>
-<li> <a href="https://filters.adtidy.org/extension/ublock/filters/224.txt" target="_blank" > Adguard Chinese </a> </li>
-<li> <a href="https://filters.adtidy.org/extension/ublock/filters/2_optimized.txt" target="_blank" > AdGuard Base filter </a> </li>
+<li> <a href="https://easylist-downloads.adblockplus.org/antiadblockfilters.txt" target="_blank" > antiadblockfilters </a> </li>
+<li> <a href="https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdns.txt" target="_blank" > adblockdns </a> </li>
+<li> <a href="https://raw.githubusercontent.com/Noyllopa/NoAppDownload/master/NoAppDownload.txt" target="_blank" > NoAppDownload </a> </li>
+<li> <a href="https://raw.githubusercontent.com/jk278/Ad-J/main/Ad-J.txt" target="_blank" > Ad-J </a> </li>
+<li> <a href="https://raw.githubusercontent.com/xinggsf/Adblock-Plus-Rule/refs/heads/master/mv.txt" target="_blank" > 乘风视频 </a> </li>
+<li> <a href="https://adguardteam.github.io/HostlistsRegistry/assets/filter_21.txt" target="_blank" > anti-AD </a> </li>
+<li> <a href="https://raw.githubusercontent.com/changzhaoCZ/fqnovel-adrules/refs/heads/main/fq.txt" target="_blank" > 番茄酱 </a> </li>
+<li> <a href="https://raw.githubusercontent.com/jdlingyu/ad-wars/master/hosts" target="_blank" > ad-wars </a> </li>
 </ul>
 </details>
 
