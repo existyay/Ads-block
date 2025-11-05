@@ -1,7 +1,8 @@
 #!/bin/sh
 
-# AdGuard Home 专用规则生成脚本
-# 仅生成 AdGuard Home 兼容的域名拦截规则
+# AdGuard Home 完整功能规则生成脚本
+# 生成包含所有高级语法的 AdGuard Home 规则
+# 支持：域名拦截、元素隐藏、扩展CSS、JavaScript注入、Scriptlet、弹窗拦截等
 
 # 加载公共函数
 source "$(pwd)/until_function.sh"
@@ -21,7 +22,7 @@ chmod -R 777 "$(pwd)"
 echo "※$(date +'%F %T') 开始下载规则源..."
 download_link "${Download_Folder}"
 
-# 处理规则源 - 提取 AdGuard Home 兼容的规则
+# 处理规则源 - 提取 AdGuard Home 支持的所有类型规则（包含高级语法）
 echo "※$(date +'%F %T') 开始处理规则源..."
 
 # 处理 adblockdns 规则
@@ -96,8 +97,8 @@ format_adguard_rules "${Rules_Folder}/adblock_auto.txt"
 # 写入文件头
 echo "※$(date +'%F %T') 写入文件头信息..."
 write_head "${Rules_Folder}/adblock_auto.txt" \
-    "AdGuard Home 专用规则 (更新日期 $(date '+%F %T'))" \
-    "专为 AdGuard Home 优化的域名拦截规则，仅包含域名格式规则和白名单，不包含 CSS 选择器、JavaScript 注入等复杂语法"
+    "AdGuard Home 完整规则集 (更新日期 $(date '+%F %T'))" \
+    "AdGuard Home 完整功能规则集，包含域名拦截、元素隐藏、扩展CSS选择器、JavaScript注入、Scriptlet、弹窗拦截等所有高级语法。同时兼容 uBlock Origin 和 AdGuard 浏览器扩展"
 
 echo "※$(date +'%F %T') 规则生成完成！"
 

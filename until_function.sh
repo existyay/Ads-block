@@ -55,25 +55,26 @@ EOF
     perl "`pwd`/addchecksum.pl" "${file}" 2>/dev/null
 }
 
-# 净化规则 - 保留 AdGuard Home 支持的格式
+# 净化规则 - 保留 AdGuard Home 支持的所有格式（包含高级语法）
 function modtify_adblock_original_file() {
     local file="${1}"
     local exclude_pattern="${2}"
     
-    # AdGuard Home 支持的规则格式：
+    # AdGuard Home 支持的完整规则格式：
     # ✅ ||domain.com^ - 域名拦截
     # ✅ @@||domain.com^ - 白名单
     # ✅ domain.com##selector - 元素隐藏（基本 CSS 选择器）
-    # ✅ ##selector - 通用元素隐藏
-    # ❌ #?# - 扩展 CSS（不支持 :has, :has-text 等）
-    # ❌ #$# - JavaScript 注入
-    # ❌ #%# - Scriptlet 注入
+    # ✅ domain.com#?#selector - 扩展 CSS 选择器（:has, :has-text, :matches-css 等）
+    # ✅ domain.com#$#script - JavaScript 注入
+    # ✅ domain.com#%#//scriptlet - Scriptlet 注入
+    # ✅ ##selector - 通用规则
+    # ✅ $redirect= - 重定向规则
+    # ✅ $removeparam= - 移除 URL 参数
     
     if test "${exclude_pattern}" = ""; then
         local new=`cat "${file}" | \
             iconv -t 'utf8' | \
-            grep -Ev '^#\?#|^#\$#|^#\%#|^\$\$|^#@\?#|^\$@\$|^#@\$#|##\+js\(|#%#//scriptlet|#\$#//scriptlet|redirect=|removeparam=|:has\(|:has-text\(|:matches-css|:matches-css-before|:matches-css-after|:xpath\(|:nth-ancestor\(|:upward\(|:remove\(|:style\(' | \
-            grep -E '^\|\||^@@\|\||^[a-zA-Z0-9].*##|^##|^[0-9]|^!' | \
+            grep -E '^\|\||^@@\|\||^[a-zA-Z0-9].*##|^[a-zA-Z0-9].*#\?#|^[a-zA-Z0-9].*#\$#|^[a-zA-Z0-9].*#%#|^##|^#\?#|^#\$#|^#%#|^[0-9]|^!|^~' | \
             busybox sed 's|^[[:space:]]@@|@@|g' | \
             sort -u | \
             busybox sed '/^!/d;/^[[:space:]]*$/d'`
@@ -81,8 +82,7 @@ function modtify_adblock_original_file() {
     else
         local new=`cat "${file}" | \
             iconv -t 'utf8' | \
-            grep -Ev '^#\?#|^#\$#|^#\%#|^\$\$|^#@\?#|^\$@\$|^#@\$#|##\+js\(|#%#//scriptlet|#\$#//scriptlet|redirect=|removeparam=|:has\(|:has-text\(|:matches-css|:matches-css-before|:matches-css-after|:xpath\(|:nth-ancestor\(|:upward\(|:remove\(|:style\(' | \
-            grep -E '^\|\||^@@\|\||^[a-zA-Z0-9].*##|^##|^[0-9]|^!' | \
+            grep -E '^\|\||^@@\|\||^[a-zA-Z0-9].*##|^[a-zA-Z0-9].*#\?#|^[a-zA-Z0-9].*#\$#|^[a-zA-Z0-9].*#%#|^##|^#\?#|^#\$#|^#%#|^[0-9]|^!|^~' | \
             grep -Ev "${exclude_pattern}" | \
             busybox sed 's|^[[:space:]]@@|@@|g' | \
             sort -u | \
@@ -118,7 +118,7 @@ function Combine_adblock_original_file(){
     done
 }
 
-# 筛选 AdGuard Home 兼容的规则（包含元素隐藏和弹窗拦截）
+# 筛选 AdGuard Home 兼容的规则（包含所有高级语法）
 function sort_adguard_rules() {
     local output_folder="${1}"
     local file="${2}"
@@ -126,15 +126,16 @@ function sort_adguard_rules() {
     test ! -f "${file}" && return
     
     local IFS=$'\n'
-    # 提取 AdGuard Home 支持的规则：
+    # 提取 AdGuard Home 支持的所有规则格式：
     # 1. 域名格式规则 (||domain.com^)
     # 2. 白名单规则 (@@||domain.com^)
     # 3. 元素隐藏规则 (domain.com##selector 或 ##selector)
-    # 4. 保留 $popup 和 $document 修饰符用于弹窗拦截
-    # 排除：扩展CSS、JS注入、Scriptlet等
+    # 4. 扩展 CSS 规则 (domain.com#?#selector)
+    # 5. JavaScript 注入 (domain.com#$#script)
+    # 6. Scriptlet 注入 (domain.com#%#//scriptlet)
+    # 7. 所有修饰符（$popup, $document, $redirect, $removeparam 等）
     local new=$(cat "${file}" | \
-        grep -E '^\|\||^@@\|\||^[a-zA-Z0-9].*##|^##' | \
-        grep -Ev '#\?#|#\$#|#\%#|\$\$|##\+js\(|#%#//scriptlet|#\$#//scriptlet|redirect=|removeparam=|:has\(|:has-text\(|:matches-css|:xpath\(|:nth-ancestor\(|:upward\(|:remove\(|:style\(' | \
+        grep -E '^\|\||^@@\|\||^[a-zA-Z0-9].*##|^[a-zA-Z0-9].*#\?#|^[a-zA-Z0-9].*#\$#|^[a-zA-Z0-9].*#%#|^##|^#\?#|^#\$#|^#%#|^~' | \
         sort -u | \
         busybox sed '/^!/d;/^[[:space:]]*$/d')
     
@@ -142,7 +143,7 @@ function sort_adguard_rules() {
     echo "$new" > "${output_folder}/${file##*/}"
 }
 
-# 添加规则到已存在的文件（包含元素隐藏和弹窗拦截）
+# 添加规则到已存在的文件（包含所有高级语法）
 function add_adguard_rules() {
     local output_folder="${1}"
     local file="${2}"
@@ -151,8 +152,7 @@ function add_adguard_rules() {
     
     local IFS=$'\n'
     local new=$(cat "${file}" | \
-        grep -E '^\|\||^@@\|\||^[a-zA-Z0-9].*##|^##' | \
-        grep -Ev '#\?#|#\$#|#\%#|\$\$|##\+js\(|#%#//scriptlet|redirect=|removeparam=|:has\(|:has-text\(|:matches-css|:xpath\(' | \
+        grep -E '^\|\||^@@\|\||^[a-zA-Z0-9].*##|^[a-zA-Z0-9].*#\?#|^[a-zA-Z0-9].*#\$#|^[a-zA-Z0-9].*#%#|^##|^#\?#|^#\$#|^#%#|^~' | \
         sort -u | \
         busybox sed '/^!/d;/^[[:space:]]*$/d')
     
@@ -193,20 +193,21 @@ function clean_adguard_rules(){
     echo "※`date +'%F %T'` 规则清理完成，共 $(echo "${cleaned}" | wc -l) 条"
 }
 
-# 移除 AdGuard Home 不支持的修饰符（保留弹窗拦截相关）
+# 移除 AdGuard Home 不支持的修饰符（保留所有支持的高级功能）
 function remove_unsupported_modifiers(){
     local file="${1}"
     test ! -f "${file}" && return
     
-    # AdGuard Home 支持的修饰符：
-    # ✅ $popup - 弹窗拦截
-    # ✅ $document - 文档级拦截
+    # AdGuard Home 支持的修饰符（保留）：
+    # ✅ $popup, $document - 弹窗拦截
     # ✅ $third-party - 第三方请求
-    # ✅ $script - 脚本拦截
-    # ✅ $image - 图片拦截
-    # ✅ $stylesheet - 样式表拦截
+    # ✅ $script, $image, $stylesheet, $media, $font - 资源类型
     # ✅ $important - 重要规则优先
-    # ❌ 移除不支持的修饰符
+    # ✅ $redirect - 重定向
+    # ✅ $removeparam - 移除参数
+    # ✅ $csp - 内容安全策略
+    # ✅ $all - 所有类型
+    # ❌ 仅移除真正不支持的修饰符
     busybox sed -i -E \
         -e 's/\$badfilter//g' \
         -e 's/,badfilter//g' \
@@ -214,17 +215,6 @@ function remove_unsupported_modifiers(){
         -e 's/,empty//g' \
         -e 's/\$mp4//g' \
         -e 's/,mp4//g' \
-        -e 's/\$generichide//g' \
-        -e 's/,generichide//g' \
-        -e 's/\$genericblock//g' \
-        -e 's/,genericblock//g' \
-        -e 's/\$elemhide//g' \
-        -e 's/,elemhide//g' \
-        -e 's/\$\$//g' \
-        -e '/redirect=/d' \
-        -e '/removeparam=/d' \
-        -e '/replace=/d' \
-        -e '/csp=/d' \
         "${file}"
     
     # 清理可能产生的多余逗号和美元符号
@@ -236,7 +226,7 @@ function remove_unsupported_modifiers(){
         -e 's/\^\$\$/\^\$/g' \
         "${file}"
     
-    echo "※`date +'%F %T'` 已保留 \$popup 和 \$document 修饰符用于弹窗拦截"
+    echo "※`date +'%F %T'` 保留所有 AdGuard Home 支持的高级语法和修饰符"
 }
 
 # 提取弹窗拦截规则
@@ -259,25 +249,37 @@ function extract_popup_rules(){
     fi
 }
 
-# 规则分类和格式化输出
+# 规则分类和格式化输出（支持所有高级语法）
 function format_adguard_rules(){
     local file="${1}"
     test ! -f "${file}" && return
     
     # 分类规则
-    local element_hiding_rules=$(cat "${file}" | grep -E '##' | grep -Ev '^\|\|' | sort -u)
+    local js_rules=$(cat "${file}" | grep -E '#\$#|#%#' | sort -u)
+    local extended_css_rules=$(cat "${file}" | grep -E '#\?#' | sort -u)
+    local element_hiding_rules=$(cat "${file}" | grep -E '##' | grep -Ev '^\|\||#\?#|#\$#|#%#' | sort -u)
     local popup_rules=$(cat "${file}" | grep -E '^\|\|.*\$(popup|document)' | sort -u)
-    local domain_rules=$(cat "${file}" | grep -E '^\|\|' | grep -Ev '\$(popup|document)|##' | sort -u)
+    local domain_rules=$(cat "${file}" | grep -E '^\|\|' | grep -Ev '\$(popup|document)|##|#\?#|#\$#|#%#' | sort -u)
     local whitelist_rules=$(cat "${file}" | grep -E '^@@' | sort -u)
     
+    local js_count=$(echo "${js_rules}" | grep -c '^' || echo "0")
+    local extended_count=$(echo "${extended_css_rules}" | grep -c '^' || echo "0")
     local element_count=$(echo "${element_hiding_rules}" | grep -c '^' || echo "0")
     local popup_count=$(echo "${popup_rules}" | grep -c '^' || echo "0")
     local domain_count=$(echo "${domain_rules}" | grep -c '^' || echo "0")
     local whitelist_count=$(echo "${whitelist_rules}" | grep -c '^' || echo "0")
     
     cat << EOF > "${file}"
+! ===== JavaScript / Scriptlet 注入规则 (共 ${js_count} 条) =====
+! 注入脚本以拦截或修改页面行为
+${js_rules}
+
+! ===== 扩展 CSS 选择器规则 (共 ${extended_count} 条) =====
+! 使用高级选择器（:has, :has-text, :matches-css 等）
+${extended_css_rules}
+
 ! ===== 元素隐藏规则 (共 ${element_count} 条) =====
-! 隐藏网页中的广告元素（支持基本 CSS 选择器）
+! 隐藏网页中的广告元素（基本 CSS 选择器）
 ${element_hiding_rules}
 
 ! ===== 弹窗拦截规则 (共 ${popup_count} 条) =====
@@ -311,16 +313,16 @@ function update_README_info(){
 
 ## 特性
 
-- ✅ 仅包含 AdGuard Home 完全兼容的规则
+- ✅ 包含 AdGuard Home 支持的所有高级语法
 - ✅ 域名拦截规则 (\`||domain.com^\`)
 - ✅ 白名单规则 (\`@@||domain.com^\`)
-- ✅ **元素隐藏规则** (\`domain.com##selector\`) - 隐藏页面广告元素
+- ✅ **元素隐藏规则** (\`domain.com##selector\`) - 基本 CSS 选择器
+- ✅ **扩展 CSS 选择器** (\`domain.com#?#selector\`) - \`:has()\`, \`:has-text()\`, \`:matches-css()\` 等
+- ✅ **JavaScript 注入** (\`domain.com#\$#script\`) - 执行自定义脚本
+- ✅ **Scriptlet 注入** (\`domain.com#%#//scriptlet\`) - 使用预定义脚本片段
 - ✅ **手机端弹窗广告拦截** (\`\$popup\`, \`\$document\`)
-- ✅ 基本修饰符支持 (\`\$important\`, \`\$third-party\`, \`\$script\`, \`\$image\` 等)
-- ✅ 支持基本 CSS 选择器（如 \`.class\`, \`#id\`, \`element\`, \`:nth-of-type()\` 等）
-- ❌ 不包含扩展 CSS（\`:has()\`, \`:has-text()\`, \`:matches-css()\` 等）
-- ❌ 不包含 JavaScript 注入和 Scriptlet
-- ❌ 不包含复杂的正则表达式
+- ✅ **高级修饰符** (\`\$redirect\`, \`\$removeparam\`, \`\$csp\` 等)
+- ✅ 完整的修饰符支持 (\`\$important\`, \`\$third-party\`, \`\$script\`, \`\$image\` 等)
 
 ## 上游规则源
 
@@ -350,24 +352,42 @@ function update_README_info(){
 
 ### 规则类型说明
 
-本规则集包含三种类型的广告拦截规则：
+本规则集包含 AdGuard Home 支持的所有类型广告拦截规则：
 
-**1. 元素隐藏规则**
+**1. JavaScript / Scriptlet 注入**
+- 格式：\`domain.com#\$#script\` 或 \`domain.com#%#//scriptlet\`
+- 功能：注入 JavaScript 代码或预定义脚本片段
+- 示例：\`example.com#\$#document.getElementById('ad').remove();\`
+- 用途：修改页面行为、移除动态加载的广告等
+
+**2. 扩展 CSS 选择器**
+- 格式：\`domain.com#?#selector\`
+- 功能：使用高级 CSS 选择器
+- 支持：\`:has()\`, \`:has-text()\`, \`:matches-css()\`, \`:xpath()\` 等
+- 示例：\`example.com#?#div:has(> .ad-banner)\`
+
+**3. 元素隐藏规则**
 - 格式：\`domain.com##selector\` 或 \`##selector\`
-- 功能：隐藏网页中的广告元素，如应用下载提示、二维码等
+- 功能：隐藏网页中的广告元素
 - 示例：\`12306.cn##li.menu-item:nth-of-type(3) > .menu-hd\`
-- 来源：NoAppDownload、Ad-J 等规则集
+- 来源：NoAppDownload、Ad-J 等
 
-**2. 弹窗拦截规则**
+**4. 弹窗拦截规则**
 - 格式：\`||domain.com^\$popup\` 或 \`||domain.com^\$document\`
 - 功能：拦截弹窗窗口和整页广告
-- 适用场景：手机浏览器、应用内弹窗广告
+- 适用：手机浏览器、应用内弹窗
 - 来源：EasyList、乘风规则等
 
-**3. 域名拦截规则**
+**5. 域名拦截规则**
 - 格式：\`||domain.com^\`
 - 功能：DNS 级别拦截广告域名
 - 来源：anti-AD、adblockdns、ad-wars 等
+
+**6. 高级修饰符**
+- \`\$redirect=\` - 重定向请求
+- \`\$removeparam=\` - 移除 URL 参数
+- \`\$csp=\` - 修改内容安全策略
+- \`\$important\` - 提高规则优先级
 
 ## Star History
 
@@ -375,6 +395,6 @@ function update_README_info(){
 
 ---
 
-**注意**: 本规则集已针对 AdGuard Home 进行优化，不再兼容浏览器扩展（如 uBlock Origin、AdBlock Plus）。
+**注意**: 本规则集包含 AdGuard Home 的完整高级语法，包括 JavaScript 注入、Scriptlet、扩展 CSS 等。同时也兼容 uBlock Origin 和 AdGuard 浏览器扩展。
 EOF
 }
