@@ -453,13 +453,16 @@ function update_README_info(){
 local file="`pwd`/README.md"
 test -f "${file}" && rm -rf "${file}"
 cat << key > "${file}"
-# 混合规则
+# Ads-block
 ### 自动更新(`date +'%F %T'`)
+
+## ACTION脚本来自大佬
+https://github.com/lingeringsound/adblock_auto
 
 | 名称 | GIthub订阅链接 | Github加速订阅链接 |
 | :-- | :-- | :-- |
-| 混合规则(自动更新) | [订阅](https://raw.githubusercontent.com/existyay/Ads-block/refs/heads/main/Rules/adblock_auto.txt) | [订阅](https://raw.gitmirror.com/existyay/Ads-block/refs/heads/main/Rules/adblock_auto.txt) 
-| 混合规则精简版(自动更新) | [订阅](https://raw.githubusercontent.com/existyay/Ads-block/refs/heads/main/Rules/adblock_auto_lite.txt) | [订阅](https://raw.gitmirror.com/existyay/Ads-block/refs/heads/main/Rules/adblock_auto.txt)
+| Ads-block(自动更新) | [订阅](https://raw.githubusercontent.com/existyay/Ads-block/refs/heads/main/Rules/adblock_auto.txt) | [订阅](https://raw.gitmirror.com/existyay/Ads-block/refs/heads/main/Rules/adblock_auto.txt) 
+| Ads-block-lite(自动更新) | [订阅](https://raw.githubusercontent.com/existyay/Ads-block/refs/heads/main/Rules/adblock_auto_lite.txt) | [订阅](https://raw.gitmirror.com/existyay/Ads-block/refs/heads/main/Rules/adblock_auto.txt)
 
 ### 上游规则
 #### 感谢各位大佬❤
