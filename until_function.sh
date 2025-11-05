@@ -458,7 +458,7 @@ cat << key > "${file}"
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=lingeringsound/adblock_auto&type=Date)](https://star-history.com/#lingeringsound/adblock_auto&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=existyay/Ads-block&type=Date)](https://star-history.com/#lexistyay/Ads-block&Date)
 
 key
 }
