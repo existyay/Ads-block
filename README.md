@@ -1,5 +1,5 @@
 # Ads-block
-### 自动更新(2025-11-05 23:57:13)
+### 自动更新(2025-11-06 00:52:12)
 
 ## ACTION脚本来自大佬
 https://github.com/lingeringsound/adblock_auto
