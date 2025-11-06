@@ -1,42 +1,13 @@
-# Ads-block
-### 🚀 强力广告拦截规则集 - 自动更新(2025-11-06 09:27:16)
+# Ads-block(参考并感谢作者https://github.com/lingeringsound/adblock_auto/)
+### 🚀 强力广告拦截规则集 - 自动更新(2025-11-06 10:22:28)
 
 **涵盖 25+ 顶级规则源，近 50 万条规则**
-
-专为 AdGuard Home 打造的全能广告拦截规则集，完美支持：
-- 📱 **移动端**：手机浏览器、APP 内广告、弹窗
-- 💻 **PC端**：桌面浏览器、视频网站、新闻网站
-- 🌐 **全平台**：Windows、macOS、Linux、Android、iOS
-- 🎯 **全场景**：网页广告、视频广告、跟踪器、隐私保护
 
 ## 订阅链接
 
 | 名称 | GitHub 订阅链接 | GitHub 加速订阅链接 |
 | :-- | :-- | :-- |
 | AdGuard Home 规则 | [订阅](https://raw.githubusercontent.com/existyay/Ads-block/refs/heads/main/Rules/adblock_auto.txt) | [订阅](https://raw.gitmirror.com/existyay/Ads-block/refs/heads/main/Rules/adblock_auto.txt)
-
-## ⭐ 核心特性
-
-### 🎯 强力拦截能力
-- ✅ **25+ 顶级规则源** - 整合全球最优质的广告拦截规则
-- ✅ **48万+ 拦截规则** - 覆盖各类广告、跟踪器、恶意网站
-- ✅ **多平台覆盖** - PC端 + 移动端 + 全设备
-- ✅ **中英文双语** - 中文网站 + 国际网站全面覆盖
-
-### 🛡️ 全面保护
-- ✅ **域名拦截** (`||domain.com^`) - DNS 级别拦截广告域名
-- ✅ **元素隐藏** (`domain.com##selector`) - 隐藏页面广告元素
-- ✅ **扩展 CSS** (`domain.com#?#selector`) - 高级选择器（`:has()`, `:has-text()` 等）
-- ✅ **JavaScript 注入** (`domain.com#$#script`) - 阻止广告脚本执行
-- ✅ **Scriptlet 注入** (`domain.com#%#//scriptlet`) - 预定义脚本片段
-- ✅ **弹窗拦截** (`$popup`, `$document`) - 移动端弹窗广告克星
-- ✅ **隐私保护** - 阻止跟踪器、数据收集、Windows 遥测
-
-### 🚀 高级功能
-- ✅ **智能重定向** (`$redirect=`) - 将广告请求重定向到空资源
-- ✅ **参数清理** (`$removeparam=`) - 移除 URL 跟踪参数
-- ✅ **CSP 修改** (`$csp=`) - 修改内容安全策略
-- ✅ **完整修饰符** - `$important`, `$third-party`, `$script`, `$image` 等
 
 ## 上游规则源
 
@@ -97,38 +68,6 @@
 </ul>
 </details>
 
-## 📊 覆盖范围
-
-### 🌐 网站类型
-- ✅ 视频网站（优酷、爱奇艺、腾讯视频、YouTube、Netflix 等）
-- ✅ 新闻网站（新浪、网易、搜狐、今日头条等）
-- ✅ 社交媒体（微博、知乎、贴吧、Facebook、Twitter 等）
-- ✅ 电商平台（淘宝、京东、拼多多、Amazon 等）
-- ✅ 搜索引擎（百度、Google、Bing 等）
-- ✅ 工具网站（CSDN、GitHub、Stack Overflow 等）
-
-### 📱 移动端优化
-- ✅ 手机浏览器内广告
-- ✅ APP 内嵌广告
-- ✅ 弹窗广告
-- ✅ 应用下载提示
-- ✅ 悬浮广告
-- ✅ 全屏广告
-
-### 💻 PC端覆盖
-- ✅ 网页横幅广告
-- ✅ 视频前贴片广告
-- ✅ 侧边栏广告
-- ✅ 弹窗广告
-- ✅ 底部悬浮广告
-- ✅ 文章内嵌广告
-
-### 🔒 隐私保护
-- ✅ 阻止网页跟踪器
-- ✅ 阻止数据收集
-- ✅ 阻止指纹识别
-- ✅ 阻止 Windows 遥测
-- ✅ 移除 URL 跟踪参数
 
 ## 使用说明
 
@@ -138,45 +77,6 @@
 2. 添加自定义过滤器
 3. 粘贴上方的订阅链接
 4. 保存并更新
-
-### 规则类型说明
-
-本规则集包含 AdGuard Home 支持的所有类型广告拦截规则：
-
-**1. JavaScript / Scriptlet 注入**
-- 格式：`domain.com#$#script` 或 `domain.com#%#//scriptlet`
-- 功能：注入 JavaScript 代码或预定义脚本片段
-- 示例：`example.com#$#document.getElementById('ad').remove();`
-- 用途：修改页面行为、移除动态加载的广告等
-
-**2. 扩展 CSS 选择器**
-- 格式：`domain.com#?#selector`
-- 功能：使用高级 CSS 选择器
-- 支持：`:has()`, `:has-text()`, `:matches-css()`, `:xpath()` 等
-- 示例：`example.com#?#div:has(> .ad-banner)`
-
-**3. 元素隐藏规则**
-- 格式：`domain.com##selector` 或 `##selector`
-- 功能：隐藏网页中的广告元素
-- 示例：`12306.cn##li.menu-item:nth-of-type(3) > .menu-hd`
-- 来源：NoAppDownload、Ad-J 等
-
-**4. 弹窗拦截规则**
-- 格式：`||domain.com^$popup` 或 `||domain.com^$document`
-- 功能：拦截弹窗窗口和整页广告
-- 适用：手机浏览器、应用内弹窗
-- 来源：EasyList、乘风规则等
-
-**5. 域名拦截规则**
-- 格式：`||domain.com^`
-- 功能：DNS 级别拦截广告域名
-- 来源：anti-AD、adblockdns、ad-wars 等
-
-**6. 高级修饰符**
-- `$redirect=` - 重定向请求
-- `$removeparam=` - 移除 URL 参数
-- `$csp=` - 修改内容安全策略
-- `$important` - 提高规则优先级
 
 ## Star History
 
