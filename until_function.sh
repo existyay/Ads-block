@@ -329,7 +329,7 @@ function update_README_info(){
     
     cat << EOF > "${file}"
 # Ads-block
-# (参考并感谢作者https://github.com/lingeringsound/adblock_auto/)
+# 源码参考自https://github.com/lingeringsound/adblock_auto/
 ### 🚀 强力广告拦截规则集 - 自动更新(`date +'%F %T'`)
 
 **涵盖 25+ 顶级规则源，近 50 万条规则**
