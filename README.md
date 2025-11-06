@@ -1,13 +1,16 @@
-# Ads-block(参考并感谢作者https://github.com/lingeringsound/adblock_auto/)
+# Ads-block
+
+# (参考并感谢作者https://github.com/lingeringsound/adblock_auto/)
+
 ### 🚀 强力广告拦截规则集 - 自动更新(2025-11-06 10:22:28)
 
 **涵盖 25+ 顶级规则源，近 50 万条规则**
 
 ## 订阅链接
 
-| 名称 | GitHub 订阅链接 | GitHub 加速订阅链接 |
-| :-- | :-- | :-- |
-| AdGuard Home 规则 | [订阅](https://raw.githubusercontent.com/existyay/Ads-block/refs/heads/main/Rules/adblock_auto.txt) | [订阅](https://raw.gitmirror.com/existyay/Ads-block/refs/heads/main/Rules/adblock_auto.txt)
+| 名称              | GitHub 订阅链接                                                                                  | GitHub 加速订阅链接                                                                      |
+| :---------------- | :----------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------- |
+| AdGuard Home 规则 | [订阅](https://raw.githubusercontent.com/existyay/Ads-block/refs/heads/main/Rules/adblock_auto.txt) | [订阅](https://raw.gitmirror.com/existyay/Ads-block/refs/heads/main/Rules/adblock_auto.txt) |
 
 ## 上游规则源
 
@@ -67,7 +70,6 @@
 </ul>
 </ul>
 </details>
-
 
 ## 使用说明
 
