@@ -22,17 +22,18 @@ https://adguardteam.github.io/HostlistsRegistry/assets/filter_21.txt|anti-AD.txt
 # === Hagezi 规则（选择最全面的 multi 版本）===
 # multi 已包含 pro + 额外规则，无需重复添加 pro
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/multi.txt|hagezi_multi.txt
-# Android/iOS 原生追踪器（独立规则，不重复）
-https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.android.txt|hagezi_android_native.txt
+# iOS 原生追踪器
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.apple.txt|hagezi_apple_native.txt
+# 国产手机厂商追踪器（小米、华为、TikTok）
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.xiaomi.txt|hagezi_xiaomi.txt
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.huawei.txt|hagezi_huawei.txt
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.tiktok.txt|hagezi_tiktok.txt
 
 # === 中国特色广告拦截 ===
-# 秋风广告规则：专注国产 App 开屏广告
-https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Adblock-Rule/main/AWAvenue-Adblock-Rule.txt|AWAvenue.txt
+# 秋风广告规则：专注国产 App 开屏广告（仓库已更名）
+https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt|AWAvenue.txt
 # ad-wars: hosts 格式的中文广告规则
 https://raw.githubusercontent.com/jdlingyu/ad-wars/master/hosts|ad-wars_hosts.txt
-# 接口广告规则：API 层面的广告拦截
-https://raw.githubusercontent.com/damengzhu/banad/main/jiekouAd.txt|jiekouAd.txt
 # NoAppDownload: 拦截"下载 App"弹窗
 https://raw.githubusercontent.com/Noyllopa/NoAppDownload/master/NoAppDownload.txt|NoAppDownload.txt
 # ADgk: 开屏广告专用规则
@@ -43,14 +44,12 @@ https://raw.githubusercontent.com/banbendalao/ADgk/master/ADgk.txt|ADgk_splash.t
 https://raw.githubusercontent.com/Cats-Team/AdRules/main/dns.txt|CatsTeam_dns.txt
 # 大圣净化规则（专注国产 App 广告）
 https://raw.githubusercontent.com/jk278/Ad-J/main/Ad-J.txt|Ad-J.txt
-# 乘风广告规则（综合中文广告）
-https://raw.githubusercontent.com/xinggsf/Adblock-Plus-Rule/master/ABP.txt|xinggsf_ABP.txt
-# 墨鱼去广告规则（专注移动端广告 SDK）
-https://raw.githubusercontent.com/ddgksf2013/Cuttlefish/master/Filter/Advertising.txt|ddgksf_ad.txt
-# 知乎/微博/抖音等热门 App 专项规则
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/AdGuardHome/Advertising/Advertising.txt|blackmatrix7_ad.txt
-# 国内广告联盟域名收集
-https://raw.githubusercontent.com/Noyllopa/NoAppDownload/master/NoAppDownload.txt|NoAppDownload.txt
+# CatsTeam 域名集（补充 DNS 拦截）
+https://raw.githubusercontent.com/Cats-Team/AdRules/main/adrules_domainset.txt|CatsTeam_domainset.txt
+# blackmatrix7 广告规则（知乎/微博/抖音等热门 App）
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/AdGuard/Advertising/Advertising.txt|blackmatrix7_ad.txt
+# ACL4SSR 广告拦截规则
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list|ACL4SSR_BanAD.txt
 
 # === 国际规则（EasyList 系列）===
 # EasyList: 国际广告拦截基础
@@ -167,14 +166,18 @@ function Combine_adblock_original_file(){
 }
 
 # 筛选 AdGuard Home DNS 拦截规则（仅 ||domain^ 格式）
+# 先转换各种格式，再提取标准规则
 function sort_adguard_rules() {
     local output_folder="${1}"
     local file="${2}"
     
     test ! -f "${file}" && return
     
+    # 先将各种格式统一转换为 AdGuard Home 格式
+    convert_all_formats_to_adguard "${file}"
+    
     local IFS=$'\n'
-    # 仅提取标准 DNS 拦截规则格式：
+    # 提取标准 DNS 拦截规则格式：
     # 1. 域名拦截规则 (||domain.com^)
     # 2. 白名单规则 (@@||domain.com^)
     # 排除所有浏览器扩展语法（##, #?#, #$#, #%# 等）
@@ -182,7 +185,7 @@ function sort_adguard_rules() {
         grep -E '^\|\||^@@\|\|' | \
         grep -Ev '##|#\?#|#\$#|#%#' | \
         busybox sed -E 's/\$.*//g' | \
-        busybox sed -E 's/\^$/\^/g' | \
+        busybox sed -E 's/\^\^/^/g' | \
         sort -u | \
         busybox sed '/^!/d;/^[[:space:]]*$/d')
     
@@ -227,6 +230,94 @@ function convert_hosts_to_adguard(){
         -e 's/^(0\.0\.0\.0|127\.0\.0\.1)[[:space:]]+/||/g' \
         -e 's/$/^/g' \
         "${file}"
+}
+
+# 统一转换各种规则格式为 AdGuard Home 标准格式 ||domain^
+# 支持的输入格式：
+#   1. hosts 格式: 0.0.0.0 domain.com / 127.0.0.1 domain.com
+#   2. 纯域名格式: domain.com
+#   3. 带点前缀: .domain.com
+#   4. Clash/Surge 格式: DOMAIN,domain.com / DOMAIN-SUFFIX,domain.com
+#   5. dnsmasq 格式: address=/domain.com/
+#   6. AdBlock 格式: ||domain.com^ (保持不变)
+#   7. 白名单格式: @@||domain.com^
+function convert_all_formats_to_adguard(){
+    local file="${1}"
+    test ! -f "${file}" && return
+    
+    local temp_file="${file}.tmp"
+    
+    cat "${file}" | \
+    # 移除注释行和空行
+    grep -Ev '^[[:space:]]*(#|!|;|\[|//)' | \
+    grep -Ev '^[[:space:]]*$' | \
+    # 移除行首行尾空格
+    busybox sed -E 's/^[[:space:]]+//g; s/[[:space:]]+$//g' | \
+    # 转换 hosts 格式: 0.0.0.0 domain.com 或 127.0.0.1 domain.com
+    busybox sed -E 's/^(0\.0\.0\.0|127\.0\.0\.1)[[:space:]]+(.+)/||\2^/g' | \
+    # 转换 Clash DOMAIN 格式: DOMAIN,domain.com
+    busybox sed -E 's/^DOMAIN,(.+)/||\1^/gi' | \
+    # 转换 Clash DOMAIN-SUFFIX 格式: DOMAIN-SUFFIX,domain.com
+    busybox sed -E 's/^DOMAIN-SUFFIX,(.+)/||\1^/gi' | \
+    # 转换 Surge 格式: .domain.com
+    busybox sed -E 's/^\.([a-zA-Z0-9])/||\1/g' | \
+    # 转换 dnsmasq 格式: address=/domain.com/ 或 server=/domain.com/
+    busybox sed -E 's/^(address|server)=\/([^\/]+)\/.*/||\2^/g' | \
+    # 转换纯域名格式（没有任何前缀的域名）
+    busybox sed -E '/^\|\|/!{ /^@@/!{ /^[a-zA-Z0-9][-a-zA-Z0-9]*\.[a-zA-Z]/s/^(.+)$/||\1^/ } }' | \
+    # 确保 AdBlock 格式的规则以 ^ 结尾
+    busybox sed -E '/^\|\|.*[^^]$/s/$/^/' | \
+    # 移除修饰符 $xxx
+    busybox sed -E 's/\$.*//g' | \
+    # 修复可能的双 ^ 问题
+    busybox sed -E 's/\^\^/^/g' | \
+    # 修复可能的 ^^ 在末尾
+    busybox sed -E 's/\^$/^/g' \
+    > "${temp_file}"
+    
+    mv "${temp_file}" "${file}"
+    echo "※`date +'%F %T'` 格式转换完成: ${file##*/}"
+}
+
+# 提取并转换规则文件中的域名为标准格式
+function extract_and_convert_domains(){
+    local file="${1}"
+    local output_file="${2}"
+    
+    test ! -f "${file}" && return
+    test -z "${output_file}" && output_file="${file}"
+    
+    local temp_file="${file}.extract.tmp"
+    
+    cat "${file}" | \
+    # 移除注释和空行
+    grep -Ev '^[[:space:]]*(#|!|;|\[|//)' | \
+    grep -Ev '^[[:space:]]*$' | \
+    busybox sed -E 's/^[[:space:]]+//g; s/[[:space:]]+$//g' | \
+    # 提取 hosts 格式中的域名
+    busybox sed -E 's/^(0\.0\.0\.0|127\.0\.0\.1)[[:space:]]+/||/g' | \
+    # 提取 Clash 格式中的域名
+    busybox sed -E 's/^DOMAIN(-SUFFIX)?,//gi' | \
+    # 提取 dnsmasq 格式中的域名
+    busybox sed -E 's/^(address|server)=\/([^\/]+)\/.*/\2/g' | \
+    # 提取已有 AdBlock 格式中的域名
+    busybox sed -E 's/^\|\|//g' | \
+    busybox sed -E 's/\^.*//g' | \
+    # 移除通配符规则（不适用于 DNS 拦截）
+    grep -Ev '^\*|^/' | \
+    # 只保留有效域名格式
+    grep -E '^[a-zA-Z0-9][-a-zA-Z0-9.]*\.[a-zA-Z]{2,}$' | \
+    # 转换为标准格式
+    busybox sed -E 's/^(.+)$/||\1^/g' | \
+    sort -u \
+    > "${temp_file}"
+    
+    if [ "${output_file}" = "${file}" ]; then
+        mv "${temp_file}" "${file}"
+    else
+        cat "${temp_file}" >> "${output_file}"
+        rm -f "${temp_file}"
+    fi
 }
 
 # 清理和优化 AdGuard Home 规则

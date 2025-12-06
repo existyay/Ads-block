@@ -22,41 +22,29 @@ chmod -R 777 "$(pwd)"
 echo "※$(date +'%F %T') 开始下载规则源..."
 download_link "${Download_Folder}"
 
-# 处理规则源 - 提取 AdGuard Home 支持的所有类型规则（包含高级语法）
+# 处理规则源 - 转换各种格式为 AdGuard Home 标准格式
 echo "※$(date +'%F %T') 开始处理规则源..."
 
-# 处理 adblockdns 规则
-if [ -f "${Download_Folder}/adblockdns.txt" ]; then
-    echo "※$(date +'%F %T') 处理 adblockdns.txt"
-    sort_adguard_rules "${Sort_Folder}" "${Download_Folder}/adblockdns.txt"
-fi
-
-# 处理 anti-AD 规则
-if [ -f "${Download_Folder}/Adguard_filter_21.txt" ]; then
-    echo "※$(date +'%F %T') 处理 Adguard_filter_21.txt (anti-AD)"
-    sort_adguard_rules "${Sort_Folder}" "${Download_Folder}/Adguard_filter_21.txt"
-fi
-
 # 批量处理所有下载的规则文件
-echo "※$(date +'%F %T') 批量处理所有规则源..."
+echo "※$(date +'%F %T') 批量转换和处理所有规则源..."
 
 for rule_file in "${Download_Folder}"/*.txt; do
     if [ -f "${rule_file}" ]; then
         filename=$(basename "${rule_file}")
         echo "※$(date +'%F %T') 处理 ${filename}"
         
-        # 特殊处理 hosts 格式
-        if echo "${filename}" | grep -q "hosts"; then
-            convert_hosts_to_adguard "${rule_file}"
-            mv "${rule_file}" "${Sort_Folder}/${filename}"
-        # 特殊处理 Windows Spy Blocker
-        elif echo "${filename}" | grep -q "spy"; then
-            convert_hosts_to_adguard "${rule_file}"
-            mv "${rule_file}" "${Sort_Folder}/${filename}"
-        else
-            # 标准处理流程
-            sort_adguard_rules "${Sort_Folder}" "${rule_file}"
-        fi
+        # 统一使用 sort_adguard_rules 处理（已内置格式转换）
+        sort_adguard_rules "${Sort_Folder}" "${rule_file}"
+    fi
+done
+
+# 额外处理特殊格式文件（Clash 格式等）
+for rule_file in "${Download_Folder}"/*.list; do
+    if [ -f "${rule_file}" ]; then
+        filename=$(basename "${rule_file}")
+        echo "※$(date +'%F %T') 转换 Clash 格式: ${filename}"
+        convert_all_formats_to_adguard "${rule_file}"
+        sort_adguard_rules "${Sort_Folder}" "${rule_file}"
     fi
 done
 
