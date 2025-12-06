@@ -8,36 +8,25 @@ function download_link(){
     test "${target_dir}" = "" && target_dir="`pwd`/temple/download_Rules"
     mkdir -p "${target_dir}"
 
-    # 专为 AdGuard Home DNS 拦截优化的规则源（已去重优化）
-    # 重点：移动端开屏广告、弹窗广告、广告SDK域名
+    # 专为 AdGuard Home DNS 拦截优化的规则源
+    # 针对中国区优化，去除重复的国际规则
+    # 目标规则数：30-50万条（平衡拦截效果和性能）
     local list='
 # === 核心 DNS 拦截规则 ===
-# adblockdns: 217heidai 维护的综合 DNS 规则（已包含多个上游）
+# 217heidai adblockdns: 已整合 anti-AD、EasyList、EasyPrivacy 等多个上游
 https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdns.txt|adblockdns.txt
-# AdGuard DNS filter: AdGuard 官方 DNS 过滤器（最权威）
-https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt|AdGuard_DNS_filter.txt
-# anti-AD: 中文区最流行的广告过滤规则
-https://adguardteam.github.io/HostlistsRegistry/assets/filter_21.txt|anti-AD.txt
 
-# === Hagezi 规则（选择最全面的 multi 版本）===
-# multi 已包含 pro + 额外规则，无需重复添加 pro
+# === Hagezi 精选规则 ===
+# multi: 综合广告拦截
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/multi.txt|hagezi_multi.txt
-# 威胁情报源（恶意软件、钓鱼、诈骗）- 强烈推荐
+# TIF: 威胁情报（恶意软件、钓鱼、诈骗）
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/tif.txt|hagezi_tif.txt
-# 弹窗广告专项拦截
+# 弹窗广告专项
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/popupads.txt|hagezi_popup.txt
-# 假冒网站拦截（假商店、假流媒体、诈骗网站）
+# 假冒网站
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/fake.txt|hagezi_fake.txt
-# 动态 DNS 恶意使用防护
-https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/dyndns.txt|hagezi_dyndns.txt
-# 恶意 TLD 拦截（.top, .xyz, .gdn 等高风险顶级域）
-https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/spam-tlds-adblock-aggressive.txt|hagezi_spam_tlds.txt
 
-# === 手机厂商追踪器专项拦截（Hagezi Native 系列）===
-# iOS/macOS 追踪器
-https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.apple.txt|hagezi_apple.txt
-# Windows/Office 追踪器
-https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.winoffice.txt|hagezi_windows.txt
+# === 中国区手机厂商追踪器（全部保留）===
 # 小米/红米/POCO
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.xiaomi.txt|hagezi_xiaomi.txt
 # 华为/荣耀
@@ -46,17 +35,13 @@ https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.huaw
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.oppo-realme.txt|hagezi_oppo.txt
 # vivo/iQOO
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.vivo.txt|hagezi_vivo.txt
-# 三星
+# 三星（国内有大量用户）
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.samsung.txt|hagezi_samsung.txt
-# TikTok/字节跳动
+# TikTok/字节跳动（抖音/今日头条/西瓜视频等）
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.tiktok.txt|hagezi_tiktok.txt
-# 亚马逊
-https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.amazon.txt|hagezi_amazon.txt
-# LG WebOS (智能电视)
-https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.lgwebos.txt|hagezi_lgwebos.txt
 
-# === 中国特色广告拦截 ===
-# 秋风广告规则：专注国产 App 开屏广告（仓库已更名）
+# === 中国区广告拦截（核心，全部保留）===
+# 秋风广告规则：国产 App 开屏广告
 https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt|AWAvenue.txt
 # ad-wars: hosts 格式的中文广告规则
 https://raw.githubusercontent.com/jdlingyu/ad-wars/master/hosts|ad-wars_hosts.txt
@@ -65,65 +50,17 @@ https://raw.githubusercontent.com/Noyllopa/NoAppDownload/master/NoAppDownload.tx
 # ADgk: 开屏广告专用规则
 https://raw.githubusercontent.com/banbendalao/ADgk/master/ADgk.txt|ADgk_splash.txt
 
-# === 国产 App 广告 SDK 专项拦截 ===
-# 广告联盟 SDK 域名（穿山甲、优量汇、快手联盟等）
+# === 国产 App 广告 SDK 拦截（全部保留）===
+# CatsTeam DNS 规则（穿山甲、优量汇、快手联盟等广告 SDK）
 https://raw.githubusercontent.com/Cats-Team/AdRules/main/dns.txt|CatsTeam_dns.txt
 # 大圣净化规则（专注国产 App 广告）
 https://raw.githubusercontent.com/jk278/Ad-J/main/Ad-J.txt|Ad-J.txt
-# CatsTeam 域名集（补充 DNS 拦截）
-https://raw.githubusercontent.com/Cats-Team/AdRules/main/adrules_domainset.txt|CatsTeam_domainset.txt
-# blackmatrix7 广告规则（知乎/微博/抖音等热门 App）
+# blackmatrix7 广告规则（知乎/微博/抖音/B站等热门国产 App）
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/AdGuard/Advertising/Advertising.txt|blackmatrix7_ad.txt
-# ACL4SSR 广告拦截规则
-https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list|ACL4SSR_BanAD.txt
 
-# === 威胁情报 & 恶意软件拦截 ===
-# Phishing Army: 钓鱼网站实时更新（全球最大钓鱼数据库之一）
-https://phishing.army/download/phishing_army_blocklist_extended.txt|phishing_army.txt
-# URLhaus: Abuse.ch 维护的恶意软件 URL 数据库
-https://urlhaus.abuse.ch/downloads/hostfile/|urlhaus_malware.txt
-# Phishing Database: 活跃钓鱼域名数据库
-https://raw.githubusercontent.com/mitchellkrogza/Phishing.Database/master/phishing-domains-ACTIVE.txt|phishing_db.txt
-# Maltrail: 恶意软件/僵尸网络追踪器
-https://raw.githubusercontent.com/stamparm/maltrail/master/trails/static/malware/generic.txt|maltrail_malware.txt
-# DandelionSprout 反恶意软件规则（AdGuard Home 专用格式）
+# === 安全规则补充 ===
+# DandelionSprout 反恶意软件（AdGuard Home 专用格式）
 https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareAdGuardHome.txt|dandelion_antimalware.txt
-# Scam Blocklist: 诈骗网站拦截
-https://raw.githubusercontent.com/durablenapkin/scamblocklist/master/adguard.txt|scamblocklist.txt
-
-# === BlockListProject 安全系列 ===
-# 诈骗网站
-https://raw.githubusercontent.com/blocklistproject/Lists/master/scam.txt|blp_scam.txt
-# 钓鱼网站
-https://raw.githubusercontent.com/blocklistproject/Lists/master/phishing.txt|blp_phishing.txt
-# 恶意软件
-https://raw.githubusercontent.com/blocklistproject/Lists/master/malware.txt|blp_malware.txt
-# 勒索软件
-https://raw.githubusercontent.com/blocklistproject/Lists/master/ransomware.txt|blp_ransomware.txt
-# 隐私追踪
-https://raw.githubusercontent.com/blocklistproject/Lists/master/tracking.txt|blp_tracking.txt
-
-# === 隐私追踪专项拦截 ===
-# WindowsSpyBlocker: Windows 遥测和隐私追踪
-https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/hosts/spy.txt|windows_spy.txt
-# StevenBlack Hosts: 综合广告+恶意软件+追踪器
-https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts|stevenblack_hosts.txt
-# KADhosts: 钓鱼/欺诈/追踪综合规则
-https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt|kadhosts.txt
-
-# === 国际规则（EasyList 系列）===
-# EasyList: 国际广告拦截基础
-https://easylist-downloads.adblockplus.org/easylist.txt|easylist.txt
-# EasyList China: 中文网站补充
-https://easylist-downloads.adblockplus.org/easylistchina.txt|easylistchina.txt
-# EasyPrivacy: 隐私保护和追踪器拦截
-https://easylist-downloads.adblockplus.org/easyprivacy.txt|easyprivacy.txt
-
-# === 补充规则 ===
-# HalfLife: 综合广告规则
-https://raw.githubusercontent.com/o0HalfLife0o/list/master/ad.txt|halflife_ad.txt
-# Loyalsoldier: 代理工具常用的拒绝列表
-https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/reject-list.txt|loyalsoldier_reject.txt
 '
 
     for i in ${list}; do
