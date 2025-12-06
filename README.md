@@ -1,6 +1,6 @@
 # Ads-block
 # 源码参考自https://github.com/lingeringsound/adblock_auto/
-### 🚀 强力广告拦截规则集 - 自动更新(2025-12-06 10:03:53)
+### 🚀 强力广告拦截规则集 - 自动更新(2025-12-06 18:02:32)
 
 **涵盖 25+ 顶级规则源，近 50 万条规则**
 
@@ -85,4 +85,9 @@
 
 ---
 
-**注意**: 本规则集包含 AdGuard Home 的完整高级语法，包括 JavaScript 注入、Scriptlet、扩展 CSS 等。同时也兼容 uBlock Origin 和 AdGuard 浏览器扩展。
+**注意**: 本规则集为标准 ||domain^ 格式的 DNS 拦截规则，专为 AdGuard Home 优化。
+
+⚠️ **重要提示**：DNS 拦截能力有限，无法 100% 拦截所有开屏/弹窗广告。如需更强效果，建议：
+- Android：安装 AdGuard 客户端或使用 Magisk 模块（如 AdAway）
+- iOS：安装 AdGuard Pro 或使用 Quantumult X 等工具
+- 使用支持 SSL 拦截的方案可获得最佳效果
