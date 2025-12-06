@@ -38,6 +38,20 @@ https://raw.githubusercontent.com/Noyllopa/NoAppDownload/master/NoAppDownload.tx
 # ADgk: 开屏广告专用规则
 https://raw.githubusercontent.com/banbendalao/ADgk/master/ADgk.txt|ADgk_splash.txt
 
+# === 国产 App 广告 SDK 专项拦截 ===
+# 广告联盟 SDK 域名（穿山甲、优量汇、快手联盟等）
+https://raw.githubusercontent.com/Cats-Team/AdRules/main/dns.txt|CatsTeam_dns.txt
+# 大圣净化规则（专注国产 App 广告）
+https://raw.githubusercontent.com/jk278/Ad-J/main/Ad-J.txt|Ad-J.txt
+# 乘风广告规则（综合中文广告）
+https://raw.githubusercontent.com/xinggsf/Adblock-Plus-Rule/master/ABP.txt|xinggsf_ABP.txt
+# 墨鱼去广告规则（专注移动端广告 SDK）
+https://raw.githubusercontent.com/ddgksf2013/Cuttlefish/master/Filter/Advertising.txt|ddgksf_ad.txt
+# 知乎/微博/抖音等热门 App 专项规则
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/AdGuardHome/Advertising/Advertising.txt|blackmatrix7_ad.txt
+# 国内广告联盟域名收集
+https://raw.githubusercontent.com/Noyllopa/NoAppDownload/master/NoAppDownload.txt|NoAppDownload.txt
+
 # === 国际规则（EasyList 系列）===
 # EasyList: 国际广告拦截基础
 https://easylist-downloads.adblockplus.org/easylist.txt|easylist.txt
