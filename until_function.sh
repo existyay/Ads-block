@@ -8,44 +8,49 @@ function download_link(){
     test "${target_dir}" = "" && target_dir="`pwd`/temple/download_Rules"
     mkdir -p "${target_dir}"
 
-    # 专为 AdGuard Home DNS 拦截优化的规则源
+    # 专为 AdGuard Home DNS 拦截优化的规则源（已去重优化）
     # 重点：移动端开屏广告、弹窗广告、广告SDK域名
     local list='
-# === 核心 DNS 拦截规则（专为 AdGuard Home 优化）===
+# === 核心 DNS 拦截规则 ===
+# adblockdns: 217heidai 维护的综合 DNS 规则（已包含多个上游）
 https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdns.txt|adblockdns.txt
+# AdGuard DNS filter: AdGuard 官方 DNS 过滤器（最权威）
 https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt|AdGuard_DNS_filter.txt
+# anti-AD: 中文区最流行的广告过滤规则
 https://adguardteam.github.io/HostlistsRegistry/assets/filter_21.txt|anti-AD.txt
 
-# === 移动端广告 SDK 域名拦截（重点）===
-https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.txt|hagezi_pro.txt
+# === Hagezi 规则（选择最全面的 multi 版本）===
+# multi 已包含 pro + 额外规则，无需重复添加 pro
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/multi.txt|hagezi_multi.txt
-https://raw.githubusercontent.com/Cats-Team/AdRules/main/dns.txt|CatsTeam_dns.txt
-https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Adblock-Rule/main/AWAvenue-Adblock-Rule.txt|AWAvenue.txt
-
-# === 中国广告 SDK 专用拦截 ===
-https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/anti-ad-adguard.txt|anti-ad-adguard.txt
-https://raw.githubusercontent.com/jdlingyu/ad-wars/master/hosts|ad-wars_hosts.txt
-https://raw.githubusercontent.com/damengzhu/banad/main/jiekouAd.txt|jiekouAd.txt
-https://raw.githubusercontent.com/Noyllopa/NoAppDownload/master/NoAppDownload.txt|NoAppDownload.txt
-
-# === 开屏广告专用规则 ===
-https://raw.githubusercontent.com/banbendalao/ADgk/master/ADgk.txt|ADgk_splash.txt
-https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/reject-list.txt|loyalsoldier_reject.txt
-
-# === 追踪器和遥测拦截 ===
+# Android/iOS 原生追踪器（独立规则，不重复）
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.android.txt|hagezi_android_native.txt
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.apple.txt|hagezi_apple_native.txt
-https://adguardteam.github.io/HostlistsRegistry/assets/filter_3.txt|Adguard_Tracking.txt
-https://adguardteam.github.io/HostlistsRegistry/assets/filter_11.txt|Adguard_Mobile.txt
 
-# === 国际广告网络 ===
+# === 中国特色广告拦截 ===
+# 秋风广告规则：专注国产 App 开屏广告
+https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Adblock-Rule/main/AWAvenue-Adblock-Rule.txt|AWAvenue.txt
+# ad-wars: hosts 格式的中文广告规则
+https://raw.githubusercontent.com/jdlingyu/ad-wars/master/hosts|ad-wars_hosts.txt
+# 接口广告规则：API 层面的广告拦截
+https://raw.githubusercontent.com/damengzhu/banad/main/jiekouAd.txt|jiekouAd.txt
+# NoAppDownload: 拦截"下载 App"弹窗
+https://raw.githubusercontent.com/Noyllopa/NoAppDownload/master/NoAppDownload.txt|NoAppDownload.txt
+# ADgk: 开屏广告专用规则
+https://raw.githubusercontent.com/banbendalao/ADgk/master/ADgk.txt|ADgk_splash.txt
+
+# === 国际规则（EasyList 系列）===
+# EasyList: 国际广告拦截基础
 https://easylist-downloads.adblockplus.org/easylist.txt|easylist.txt
+# EasyList China: 中文网站补充
 https://easylist-downloads.adblockplus.org/easylistchina.txt|easylistchina.txt
+# EasyPrivacy: 隐私保护和追踪器拦截
 https://easylist-downloads.adblockplus.org/easyprivacy.txt|easyprivacy.txt
 
-# === 额外补充 ===
+# === 补充规则 ===
+# HalfLife: 综合广告规则
 https://raw.githubusercontent.com/o0HalfLife0o/list/master/ad.txt|halflife_ad.txt
-https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/hosts/spy.txt|windows_spy.txt
+# Loyalsoldier: 代理工具常用的拒绝列表
+https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/reject-list.txt|loyalsoldier_reject.txt
 '
 
     for i in ${list}; do
