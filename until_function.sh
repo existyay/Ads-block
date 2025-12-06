@@ -22,12 +22,38 @@ https://adguardteam.github.io/HostlistsRegistry/assets/filter_21.txt|anti-AD.txt
 # === Hagezi 规则（选择最全面的 multi 版本）===
 # multi 已包含 pro + 额外规则，无需重复添加 pro
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/multi.txt|hagezi_multi.txt
-# iOS 原生追踪器
-https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.apple.txt|hagezi_apple_native.txt
-# 国产手机厂商追踪器（小米、华为、TikTok）
+# 威胁情报源（恶意软件、钓鱼、诈骗）- 强烈推荐
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/tif.txt|hagezi_tif.txt
+# 弹窗广告专项拦截
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/popupads.txt|hagezi_popup.txt
+# 假冒网站拦截（假商店、假流媒体、诈骗网站）
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/fake.txt|hagezi_fake.txt
+# 动态 DNS 恶意使用防护
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/dyndns.txt|hagezi_dyndns.txt
+# 恶意 TLD 拦截（.top, .xyz, .gdn 等高风险顶级域）
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/spam-tlds-adblock-aggressive.txt|hagezi_spam_tlds.txt
+
+# === 手机厂商追踪器专项拦截（Hagezi Native 系列）===
+# iOS/macOS 追踪器
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.apple.txt|hagezi_apple.txt
+# Windows/Office 追踪器
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.winoffice.txt|hagezi_windows.txt
+# 小米/红米/POCO
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.xiaomi.txt|hagezi_xiaomi.txt
+# 华为/荣耀
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.huawei.txt|hagezi_huawei.txt
+# OPPO/Realme/一加
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.oppo-realme.txt|hagezi_oppo.txt
+# vivo/iQOO
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.vivo.txt|hagezi_vivo.txt
+# 三星
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.samsung.txt|hagezi_samsung.txt
+# TikTok/字节跳动
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.tiktok.txt|hagezi_tiktok.txt
+# 亚马逊
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.amazon.txt|hagezi_amazon.txt
+# LG WebOS (智能电视)
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.lgwebos.txt|hagezi_lgwebos.txt
 
 # === 中国特色广告拦截 ===
 # 秋风广告规则：专注国产 App 开屏广告（仓库已更名）
@@ -50,6 +76,40 @@ https://raw.githubusercontent.com/Cats-Team/AdRules/main/adrules_domainset.txt|C
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/AdGuard/Advertising/Advertising.txt|blackmatrix7_ad.txt
 # ACL4SSR 广告拦截规则
 https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list|ACL4SSR_BanAD.txt
+
+# === 威胁情报 & 恶意软件拦截 ===
+# Phishing Army: 钓鱼网站实时更新（全球最大钓鱼数据库之一）
+https://phishing.army/download/phishing_army_blocklist_extended.txt|phishing_army.txt
+# URLhaus: Abuse.ch 维护的恶意软件 URL 数据库
+https://urlhaus.abuse.ch/downloads/hostfile/|urlhaus_malware.txt
+# Phishing Database: 活跃钓鱼域名数据库
+https://raw.githubusercontent.com/mitchellkrogza/Phishing.Database/master/phishing-domains-ACTIVE.txt|phishing_db.txt
+# Maltrail: 恶意软件/僵尸网络追踪器
+https://raw.githubusercontent.com/stamparm/maltrail/master/trails/static/malware/generic.txt|maltrail_malware.txt
+# DandelionSprout 反恶意软件规则（AdGuard Home 专用格式）
+https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareAdGuardHome.txt|dandelion_antimalware.txt
+# Scam Blocklist: 诈骗网站拦截
+https://raw.githubusercontent.com/durablenapkin/scamblocklist/master/adguard.txt|scamblocklist.txt
+
+# === BlockListProject 安全系列 ===
+# 诈骗网站
+https://raw.githubusercontent.com/blocklistproject/Lists/master/scam.txt|blp_scam.txt
+# 钓鱼网站
+https://raw.githubusercontent.com/blocklistproject/Lists/master/phishing.txt|blp_phishing.txt
+# 恶意软件
+https://raw.githubusercontent.com/blocklistproject/Lists/master/malware.txt|blp_malware.txt
+# 勒索软件
+https://raw.githubusercontent.com/blocklistproject/Lists/master/ransomware.txt|blp_ransomware.txt
+# 隐私追踪
+https://raw.githubusercontent.com/blocklistproject/Lists/master/tracking.txt|blp_tracking.txt
+
+# === 隐私追踪专项拦截 ===
+# WindowsSpyBlocker: Windows 遥测和隐私追踪
+https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/hosts/spy.txt|windows_spy.txt
+# StevenBlack Hosts: 综合广告+恶意软件+追踪器
+https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts|stevenblack_hosts.txt
+# KADhosts: 钓鱼/欺诈/追踪综合规则
+https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt|kadhosts.txt
 
 # === 国际规则（EasyList 系列）===
 # EasyList: 国际广告拦截基础
