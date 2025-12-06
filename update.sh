@@ -70,6 +70,16 @@ fi
 echo "※$(date +'%F %T') 清理和去重规则..."
 clean_adguard_rules "${Rules_Folder}/adblock_auto.txt"
 
+# 移除冗余子域名（可选，耗时较长）
+# 如果规则数量太大（超过50万），可以跳过此步骤
+rule_count=$(wc -l < "${Rules_Folder}/adblock_auto.txt")
+if [ "${rule_count}" -lt 500000 ]; then
+    echo "※$(date +'%F %T') 执行子域名去重（规则数：${rule_count}）..."
+    remove_redundant_subdomains "${Rules_Folder}/adblock_auto.txt"
+else
+    echo "※$(date +'%F %T') 规则数量较大（${rule_count}），跳过子域名去重..."
+fi
+
 # 格式化输出
 echo "※$(date +'%F %T') 格式化规则..."
 format_adguard_rules "${Rules_Folder}/adblock_auto.txt"

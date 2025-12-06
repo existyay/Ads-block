@@ -385,13 +385,89 @@ function clean_adguard_rules(){
     local file="${1}"
     test ! -f "${file}" && return
     
-    # 去重并排序
-    local cleaned=$(cat "${file}" | \
-        busybox sed '/^!/d;/^[[:space:]]*$/d' | \
-        sort -u)
+    echo "※`date +'%F %T'` 开始深度清理规则..."
     
-    echo "${cleaned}" > "${file}"
-    echo "※`date +'%F %T'` 规则清理完成，共 $(echo "${cleaned}" | wc -l) 条"
+    local temp_file="${file}.clean.tmp"
+    
+    cat "${file}" | \
+    # 移除注释行和空行
+    busybox sed '/^!/d;/^[[:space:]]*$/d' | \
+    # 移除行首行尾空格
+    busybox sed -E 's/^[[:space:]]+//g; s/[[:space:]]+$//g' | \
+    # 只保留有效的 AdGuard Home 规则格式
+    grep -E '^\|\|[a-zA-Z0-9][-a-zA-Z0-9.]*\^$|^@@\|\|[a-zA-Z0-9][-a-zA-Z0-9.]*\^$' | \
+    # 移除无效域名（单个字符、纯数字等）
+    grep -Ev '^\|\|[0-9]+\^$' | \
+    grep -Ev '^\|\|[a-zA-Z]\^$' | \
+    # 移除包含无效字符的规则
+    grep -Ev '\|\|.*[_].*\^' | \
+    # 移除过短的域名（如 ||a.b^）
+    grep -Ev '^\|\|[a-zA-Z0-9]\.[a-zA-Z0-9]\^$' | \
+    # 排序去重
+    sort -u \
+    > "${temp_file}"
+    
+    mv "${temp_file}" "${file}"
+    
+    local count=$(cat "${file}" | wc -l)
+    echo "※`date +'%F %T'` 规则清理完成，共 ${count} 条有效规则"
+}
+
+# 高级去重：移除冗余的子域名规则
+# 如果 ||example.com^ 存在，则 ||sub.example.com^ 是冗余的
+function remove_redundant_subdomains(){
+    local file="${1}"
+    test ! -f "${file}" && return
+    
+    echo "※`date +'%F %T'` 移除冗余子域名规则..."
+    
+    local temp_file="${file}.dedup.tmp"
+    local domains_file="${file}.domains.tmp"
+    local result_file="${file}.result.tmp"
+    
+    # 提取所有被拦截的域名（不含 || 和 ^）
+    cat "${file}" | \
+        grep -E '^\|\|' | \
+        grep -Ev '^@@' | \
+        busybox sed -E 's/^\|\|//g; s/\^$//g' | \
+        sort -u > "${domains_file}"
+    
+    # 保留白名单规则（@@开头的）
+    cat "${file}" | grep -E '^@@' > "${result_file}"
+    
+    # 对每个域名检查是否有父域名已被拦截
+    while IFS= read -r domain; do
+        # 检查是否存在父域名
+        local parent_blocked=0
+        local check_domain="${domain}"
+        
+        # 逐级检查父域名
+        while [[ "${check_domain}" == *.* ]]; do
+            # 获取父域名（移除第一个子域）
+            check_domain="${check_domain#*.}"
+            
+            # 如果父域名存在于拦截列表中，则当前域名是冗余的
+            if grep -qFx "${check_domain}" "${domains_file}" 2>/dev/null; then
+                parent_blocked=1
+                break
+            fi
+        done
+        
+        # 如果没有父域名被拦截，则保留此规则
+        if [ "${parent_blocked}" -eq 0 ]; then
+            echo "||${domain}^" >> "${result_file}"
+        fi
+    done < "${domains_file}"
+    
+    # 排序并去重
+    cat "${result_file}" | sort -u > "${temp_file}"
+    mv "${temp_file}" "${file}"
+    
+    # 清理临时文件
+    rm -f "${domains_file}" "${result_file}"
+    
+    local count=$(cat "${file}" | wc -l)
+    echo "※`date +'%F %T'` 子域名去重完成，剩余 ${count} 条规则"
 }
 
 # 清理规则格式（确保 ||domain^ 标准格式）
@@ -435,25 +511,29 @@ function extract_domain_rules(){
     fi
 }
 
-# 规则格式化输出（仅 ||domain^ 标准格式）
+# 规则格式化输出（简洁输出，不添加分类注释）
 function format_adguard_rules(){
     local file="${1}"
     test ! -f "${file}" && return
     
-    # 分类规则（仅域名拦截和白名单）
-    local domain_rules=$(cat "${file}" | grep -E '^\|\|' | sort -u)
-    local whitelist_rules=$(cat "${file}" | grep -E '^@@' | sort -u)
+    # 分离白名单和拦截规则，白名单放在前面
+    local whitelist_rules=$(cat "${file}" | grep -E '^@@\|\|' | sort -u)
+    local domain_rules=$(cat "${file}" | grep -E '^\|\|' | grep -Ev '^@@' | sort -u)
     
-    local domain_count=$(echo "${domain_rules}" | grep -c '^' || echo "0")
-    local whitelist_count=$(echo "${whitelist_rules}" | grep -c '^' || echo "0")
+    # 输出：先白名单，再拦截规则，保持纯净格式
+    {
+        # 输出白名单（如果有）
+        if [ -n "${whitelist_rules}" ]; then
+            echo "${whitelist_rules}"
+        fi
+        # 输出拦截规则
+        if [ -n "${domain_rules}" ]; then
+            echo "${domain_rules}"
+        fi
+    } > "${file}"
     
-    cat << EOF > "${file}"
-! ===== 域名拦截规则 (共 ${domain_count} 条) =====
-${domain_rules}
-
-! ===== 白名单规则 (共 ${whitelist_count} 条) =====
-${whitelist_rules}
-EOF
+    local total=$(cat "${file}" | wc -l)
+    echo "※`date +'%F %T'` 格式化完成，共 ${total} 条规则"
 }
 
 # 更新 README 信息
