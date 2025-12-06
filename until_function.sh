@@ -350,61 +350,110 @@ function clean_adguard_rules(){
     echo "※`date +'%F %T'` 规则清理完成，共 ${count} 条有效规则"
 }
 
-# 高级去重：移除冗余的子域名规则
+# 高级去重：移除冗余的子域名规则（高性能版本）
 # 如果 ||example.com^ 存在，则 ||sub.example.com^ 是冗余的
+# 使用 awk 进行高效处理，适合百万级规则
 function remove_redundant_subdomains(){
     local file="${1}"
     test ! -f "${file}" && return
     
-    echo "※`date +'%F %T'` 移除冗余子域名规则..."
+    echo "※`date +'%F %T'` 移除冗余子域名规则（高性能模式）..."
     
     local temp_file="${file}.dedup.tmp"
     local domains_file="${file}.domains.tmp"
+    local parents_file="${file}.parents.tmp"
     local result_file="${file}.result.tmp"
     
-    # 提取所有被拦截的域名（不含 || 和 ^）
+    # 保留白名单规则（@@开头的）
+    cat "${file}" | grep -E '^@@' > "${result_file}"
+    
+    # 提取所有被拦截的域名（不含 || 和 ^）并排序
     cat "${file}" | \
         grep -E '^\|\|' | \
         grep -Ev '^@@' | \
         busybox sed -E 's/^\|\|//g; s/\^$//g' | \
         sort -u > "${domains_file}"
     
-    # 保留白名单规则（@@开头的）
-    cat "${file}" | grep -E '^@@' > "${result_file}"
+    local total_count=$(wc -l < "${domains_file}")
+    echo "※`date +'%F %T'` 共 ${total_count} 条域名待处理..."
     
-    # 对每个域名检查是否有父域名已被拦截
-    while IFS= read -r domain; do
-        # 检查是否存在父域名
-        local parent_blocked=0
-        local check_domain="${domain}"
-        
-        # 逐级检查父域名
-        while [[ "${check_domain}" == *.* ]]; do
-            # 获取父域名（移除第一个子域）
-            check_domain="${check_domain#*.}"
+    # 提取所有可能的父域名（二级及以上域名）
+    # 例如: a.b.example.com -> b.example.com, example.com
+    cat "${domains_file}" | \
+        awk -F'.' '{
+            # 生成所有可能的父域名
+            for (i = 2; i <= NF; i++) {
+                parent = ""
+                for (j = i; j <= NF; j++) {
+                    if (parent == "") {
+                        parent = $j
+                    } else {
+                        parent = parent "." $j
+                    }
+                }
+                if (parent ~ /\./) {
+                    print parent
+                }
+            }
+        }' | sort -u > "${parents_file}"
+    
+    # 找出同时存在于域名列表和父域名列表中的域名（即被拦截的父域名）
+    local blocked_parents="${file}.blocked_parents.tmp"
+    comm -12 "${domains_file}" "${parents_file}" > "${blocked_parents}"
+    
+    local blocked_count=$(wc -l < "${blocked_parents}")
+    echo "※`date +'%F %T'` 发现 ${blocked_count} 个被拦截的父域名..."
+    
+    # 如果没有被拦截的父域名，直接使用原文件
+    if [ "${blocked_count}" -eq 0 ]; then
+        cat "${domains_file}" | busybox sed 's/^/||/; s/$/^/' >> "${result_file}"
+    else
+        # 使用 awk 高效过滤：移除其父域名已被拦截的子域名
+        cat "${domains_file}" | awk -v parents_file="${blocked_parents}" '
+        BEGIN {
+            # 读取所有被拦截的父域名到数组
+            while ((getline parent < parents_file) > 0) {
+                blocked[parent] = 1
+            }
+            close(parents_file)
+        }
+        {
+            domain = $0
+            is_redundant = 0
             
-            # 如果父域名存在于拦截列表中，则当前域名是冗余的
-            if grep -qFx "${check_domain}" "${domains_file}" 2>/dev/null; then
-                parent_blocked=1
-                break
-            fi
-        done
-        
-        # 如果没有父域名被拦截，则保留此规则
-        if [ "${parent_blocked}" -eq 0 ]; then
-            echo "||${domain}^" >> "${result_file}"
-        fi
-    done < "${domains_file}"
+            # 逐级检查父域名
+            n = split(domain, parts, ".")
+            for (i = 2; i <= n; i++) {
+                parent = ""
+                for (j = i; j <= n; j++) {
+                    if (parent == "") {
+                        parent = parts[j]
+                    } else {
+                        parent = parent "." parts[j]
+                    }
+                }
+                if (parent in blocked) {
+                    is_redundant = 1
+                    break
+                }
+            }
+            
+            if (!is_redundant) {
+                print "||" domain "^"
+            }
+        }' >> "${result_file}"
+    fi
     
     # 排序并去重
     cat "${result_file}" | sort -u > "${temp_file}"
     mv "${temp_file}" "${file}"
     
     # 清理临时文件
-    rm -f "${domains_file}" "${result_file}"
+    rm -f "${domains_file}" "${parents_file}" "${blocked_parents}" "${result_file}"
     
-    local count=$(cat "${file}" | wc -l)
-    echo "※`date +'%F %T'` 子域名去重完成，剩余 ${count} 条规则"
+    local final_count=$(wc -l < "${file}")
+    local removed=$((total_count - final_count + $(cat "${file}" | grep -c '^@@' || echo 0)))
+    echo "※`date +'%F %T'` 子域名去重完成！移除 ${removed} 条冗余规则，剩余 ${final_count} 条"
 }
 
 # 清理规则格式（确保 ||domain^ 标准格式）
