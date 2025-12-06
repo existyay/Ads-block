@@ -1,17 +1,20 @@
 name: sync
 on:
   schedule:
-    - cron:  '0 0 * * *'
+    - cron: '0 0 * * *'
   workflow_dispatch:
 
 jobs:
-  build:
+  sync:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.PAT_TOKEN }}
+          # 使用 GitHub 令牌
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # 获取完整历史记录以便推送
+          fetch-depth: 0
 
       - name: Setup environment and run script
         run: |
@@ -21,13 +24,27 @@ jobs:
           bash update.sh
 
       - name: Configure Git and Push
+        env:
+          # 设置身份验证
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          # 配置 Git 用户
           git config --local user.name "github-actions[bot]"
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # 添加所有更改
           git add .
+          
+          # 检查是否有更改需要提交
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
+            # 提交更改
             git commit -m "Rules update $(date +'%Y-%m-%d %H:%M:%S')"
-            git push
+            
+            # 设置远程 URL 使用令牌认证
+            git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+            
+            # 推送更改
+            git push origin HEAD:main
           fi
