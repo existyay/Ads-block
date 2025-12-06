@@ -8,42 +8,43 @@ function download_link(){
     test "${target_dir}" = "" && target_dir="`pwd`/temple/download_Rules"
     mkdir -p "${target_dir}"
 
-    # 强力广告拦截规则源 - 覆盖手机端、PC端、各类网站
+    # 专为 AdGuard Home DNS 拦截优化的规则源
+    # 重点：移动端开屏广告、弹窗广告、广告SDK域名
     local list='
-# === 核心规则集 - 必备 ===
+# === 核心 DNS 拦截规则（专为 AdGuard Home 优化）===
 https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdns.txt|adblockdns.txt
-https://adguardteam.github.io/HostlistsRegistry/assets/filter_21.txt|Adguard_filter_21.txt
+https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt|AdGuard_DNS_filter.txt
+https://adguardteam.github.io/HostlistsRegistry/assets/filter_21.txt|anti-AD.txt
+
+# === 移动端广告 SDK 域名拦截（重点）===
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.txt|hagezi_pro.txt
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/multi.txt|hagezi_multi.txt
+https://raw.githubusercontent.com/Cats-Team/AdRules/main/dns.txt|CatsTeam_dns.txt
+https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Adblock-Rule/main/AWAvenue-Adblock-Rule.txt|AWAvenue.txt
+
+# === 中国广告 SDK 专用拦截 ===
+https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/anti-ad-adguard.txt|anti-ad-adguard.txt
 https://raw.githubusercontent.com/jdlingyu/ad-wars/master/hosts|ad-wars_hosts.txt
-
-# === 中文规则 - 强力拦截 ===
-https://raw.githubusercontent.com/xinggsf/Adblock-Plus-Rule/master/ABP.txt|xinggsf_ABP.txt
-https://raw.githubusercontent.com/xinggsf/Adblock-Plus-Rule/master/mv.txt|xinggsf_mv.txt
-https://raw.githubusercontent.com/Noyllopa/NoAppDownload/master/NoAppDownload.txt|NoAppDownload.txt
-https://raw.githubusercontent.com/jk278/Ad-J/main/Ad-J.txt|Ad-J.txt
 https://raw.githubusercontent.com/damengzhu/banad/main/jiekouAd.txt|jiekouAd.txt
+https://raw.githubusercontent.com/Noyllopa/NoAppDownload/master/NoAppDownload.txt|NoAppDownload.txt
 
-# === 国际规则 - EasyList 系列 ===
+# === 开屏广告专用规则 ===
+https://raw.githubusercontent.com/banbendalao/ADgk/master/ADgk.txt|ADgk_splash.txt
+https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/reject-list.txt|loyalsoldier_reject.txt
+
+# === 追踪器和遥测拦截 ===
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.android.txt|hagezi_android_native.txt
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.apple.txt|hagezi_apple_native.txt
+https://adguardteam.github.io/HostlistsRegistry/assets/filter_3.txt|Adguard_Tracking.txt
+https://adguardteam.github.io/HostlistsRegistry/assets/filter_11.txt|Adguard_Mobile.txt
+
+# === 国际广告网络 ===
 https://easylist-downloads.adblockplus.org/easylist.txt|easylist.txt
 https://easylist-downloads.adblockplus.org/easylistchina.txt|easylistchina.txt
 https://easylist-downloads.adblockplus.org/easyprivacy.txt|easyprivacy.txt
-https://secure.fanboy.co.nz/fanboy-annoyance.txt|fanboy-annoyance.txt
 
-# === 移动端优化 ===
-https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.txt|hagezi_pro.txt
-https://raw.githubusercontent.com/Cats-Team/AdRules/main/adguard_mobile.txt|adguard_mobile.txt
-
-# === AdGuard 官方规则集 ===
-https://adguardteam.github.io/HostlistsRegistry/assets/filter_2.txt|Adguard_Base.txt
-https://adguardteam.github.io/HostlistsRegistry/assets/filter_3.txt|Adguard_Tracking.txt
-https://adguardteam.github.io/HostlistsRegistry/assets/filter_4.txt|Adguard_Social.txt
-https://adguardteam.github.io/HostlistsRegistry/assets/filter_11.txt|Adguard_Mobile.txt
-https://adguardteam.github.io/HostlistsRegistry/assets/filter_17.txt|Adguard_Annoyances.txt
-
-# === 视频网站专用 ===
-https://raw.githubusercontent.com/Silentely/AdBlock-Acceleration/master/AdGuard_Simplified_Domain.txt|video_ads.txt
+# === 额外补充 ===
 https://raw.githubusercontent.com/o0HalfLife0o/list/master/ad.txt|halflife_ad.txt
-
-# === 隐私保护 ===
 https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/hosts/spy.txt|windows_spy.txt
 '
 
@@ -75,7 +76,7 @@ function write_head(){
 ! Expires: 24 hours (update frequency)
 ! Last modified: `date +'%F %T'`
 ! Total Count: ${count}
-! Description: ${Description} (AdGuard Home 专用)
+! Description: ${Description} (AdGuard Home DNS 拦截规则)
 ! Homepage: https://github.com/existyay/Ads-block
 
 EOF
@@ -83,26 +84,23 @@ EOF
     perl "`pwd`/addchecksum.pl" "${file}" 2>/dev/null
 }
 
-# 净化规则 - 保留 AdGuard Home 支持的所有格式（包含高级语法）
+# 净化规则 - 仅保留 ||domain^ 标准 DNS 拦截格式
 function modtify_adblock_original_file() {
     local file="${1}"
     local exclude_pattern="${2}"
     
-    # AdGuard Home 支持的完整规则格式：
+    # AdGuard Home DNS 拦截仅支持：
     # ✅ ||domain.com^ - 域名拦截
     # ✅ @@||domain.com^ - 白名单
-    # ✅ domain.com##selector - 元素隐藏（基本 CSS 选择器）
-    # ✅ domain.com#?#selector - 扩展 CSS 选择器（:has, :has-text, :matches-css 等）
-    # ✅ domain.com#$#script - JavaScript 注入
-    # ✅ domain.com#%#//scriptlet - Scriptlet 注入
-    # ✅ ##selector - 通用规则
-    # ✅ $redirect= - 重定向规则
-    # ✅ $removeparam= - 移除 URL 参数
+    # ❌ 元素隐藏、JS注入等浏览器扩展语法不支持
     
     if test "${exclude_pattern}" = ""; then
         local new=`cat "${file}" | \
             iconv -t 'utf8' | \
-            grep -E '^\|\||^@@\|\||^[a-zA-Z0-9].*##|^[a-zA-Z0-9].*#\?#|^[a-zA-Z0-9].*#\$#|^[a-zA-Z0-9].*#%#|^##|^#\?#|^#\$#|^#%#|^[0-9]|^!|^~' | \
+            grep -E '^\|\||^@@\|\|' | \
+            grep -Ev '##|#\?#|#\$#|#%#' | \
+            busybox sed -E 's/\$.*//g' | \
+            busybox sed -E 's/\^$/\^/g' | \
             busybox sed 's|^[[:space:]]@@|@@|g' | \
             sort -u | \
             busybox sed '/^!/d;/^[[:space:]]*$/d'`
@@ -110,8 +108,11 @@ function modtify_adblock_original_file() {
     else
         local new=`cat "${file}" | \
             iconv -t 'utf8' | \
-            grep -E '^\|\||^@@\|\||^[a-zA-Z0-9].*##|^[a-zA-Z0-9].*#\?#|^[a-zA-Z0-9].*#\$#|^[a-zA-Z0-9].*#%#|^##|^#\?#|^#\$#|^#%#|^[0-9]|^!|^~' | \
+            grep -E '^\|\||^@@\|\|' | \
+            grep -Ev '##|#\?#|#\$#|#%#' | \
             grep -Ev "${exclude_pattern}" | \
+            busybox sed -E 's/\$.*//g' | \
+            busybox sed -E 's/\^$/\^/g' | \
             busybox sed 's|^[[:space:]]@@|@@|g' | \
             sort -u | \
             busybox sed '/^!/d;/^[[:space:]]*$/d'`
@@ -146,7 +147,7 @@ function Combine_adblock_original_file(){
     done
 }
 
-# 筛选 AdGuard Home 兼容的规则（包含所有高级语法）
+# 筛选 AdGuard Home DNS 拦截规则（仅 ||domain^ 格式）
 function sort_adguard_rules() {
     local output_folder="${1}"
     local file="${2}"
@@ -154,16 +155,15 @@ function sort_adguard_rules() {
     test ! -f "${file}" && return
     
     local IFS=$'\n'
-    # 提取 AdGuard Home 支持的所有规则格式：
-    # 1. 域名格式规则 (||domain.com^)
+    # 仅提取标准 DNS 拦截规则格式：
+    # 1. 域名拦截规则 (||domain.com^)
     # 2. 白名单规则 (@@||domain.com^)
-    # 3. 元素隐藏规则 (domain.com##selector 或 ##selector)
-    # 4. 扩展 CSS 规则 (domain.com#?#selector)
-    # 5. JavaScript 注入 (domain.com#$#script)
-    # 6. Scriptlet 注入 (domain.com#%#//scriptlet)
-    # 7. 所有修饰符（$popup, $document, $redirect, $removeparam 等）
+    # 排除所有浏览器扩展语法（##, #?#, #$#, #%# 等）
     local new=$(cat "${file}" | \
-        grep -E '^\|\||^@@\|\||^[a-zA-Z0-9].*##|^[a-zA-Z0-9].*#\?#|^[a-zA-Z0-9].*#\$#|^[a-zA-Z0-9].*#%#|^##|^#\?#|^#\$#|^#%#|^~' | \
+        grep -E '^\|\||^@@\|\|' | \
+        grep -Ev '##|#\?#|#\$#|#%#' | \
+        busybox sed -E 's/\$.*//g' | \
+        busybox sed -E 's/\^$/\^/g' | \
         sort -u | \
         busybox sed '/^!/d;/^[[:space:]]*$/d')
     
@@ -171,7 +171,7 @@ function sort_adguard_rules() {
     echo "$new" > "${output_folder}/${file##*/}"
 }
 
-# 添加规则到已存在的文件（包含所有高级语法）
+# 添加规则到已存在的文件（仅 ||domain^ 格式）
 function add_adguard_rules() {
     local output_folder="${1}"
     local file="${2}"
@@ -180,7 +180,10 @@ function add_adguard_rules() {
     
     local IFS=$'\n'
     local new=$(cat "${file}" | \
-        grep -E '^\|\||^@@\|\||^[a-zA-Z0-9].*##|^[a-zA-Z0-9].*#\?#|^[a-zA-Z0-9].*#\$#|^[a-zA-Z0-9].*#%#|^##|^#\?#|^#\$#|^#%#|^~' | \
+        grep -E '^\|\||^@@\|\|' | \
+        grep -Ev '##|#\?#|#\$#|#%#' | \
+        busybox sed -E 's/\$.*//g' | \
+        busybox sed -E 's/\^$/\^/g' | \
         sort -u | \
         busybox sed '/^!/d;/^[[:space:]]*$/d')
     
@@ -221,99 +224,60 @@ function clean_adguard_rules(){
     echo "※`date +'%F %T'` 规则清理完成，共 $(echo "${cleaned}" | wc -l) 条"
 }
 
-# 移除 AdGuard Home 不支持的修饰符（保留所有支持的高级功能）
+# 清理规则格式（确保 ||domain^ 标准格式）
 function remove_unsupported_modifiers(){
     local file="${1}"
     test ! -f "${file}" && return
     
-    # AdGuard Home 支持的修饰符（保留）：
-    # ✅ $popup, $document - 弹窗拦截
-    # ✅ $third-party - 第三方请求
-    # ✅ $script, $image, $stylesheet, $media, $font - 资源类型
-    # ✅ $important - 重要规则优先
-    # ✅ $redirect - 重定向
-    # ✅ $removeparam - 移除参数
-    # ✅ $csp - 内容安全策略
-    # ✅ $all - 所有类型
-    # ❌ 仅移除真正不支持的修饰符
+    # 移除所有修饰符，只保留纯净的 ||domain^ 格式
     busybox sed -i -E \
-        -e 's/\$badfilter//g' \
-        -e 's/,badfilter//g' \
-        -e 's/\$empty//g' \
-        -e 's/,empty//g' \
-        -e 's/\$mp4//g' \
-        -e 's/,mp4//g' \
+        -e 's/\$.*//g' \
+        -e 's/\^$/\^/g' \
         "${file}"
     
-    # 清理可能产生的多余逗号和美元符号
+    # 确保每行以 ^ 结尾
     busybox sed -i -E \
-        -e 's/,+/,/g' \
-        -e 's/\$,/\$/g' \
-        -e 's/,\$/\$/g' \
-        -e 's/\$\$+/\$/g' \
-        -e 's/\^\$\$/\^\$/g' \
+        -e '/^\|\|/{ /\^$/!s/$/\^/ }' \
+        -e '/^@@\|\|/{ /\^$/!s/$/\^/ }' \
         "${file}"
     
-    echo "※`date +'%F %T'` 保留所有 AdGuard Home 支持的高级语法和修饰符"
+    echo "※`date +'%F %T'` 已转换为标准 ||domain^ 格式"
 }
 
-# 提取弹窗拦截规则
-function extract_popup_rules(){
+# 提取域名拦截规则（从各种格式转换为 ||domain^）
+function extract_domain_rules(){
     local file="${1}"
     local output_file="${2}"
     
     test ! -f "${file}" && return
     
-    # 提取包含 $popup 或 $document 的规则
-    local popup_rules=$(cat "${file}" | \
+    # 提取所有域名拦截规则并标准化
+    local domain_rules=$(cat "${file}" | \
         grep -E '^\|\||^@@\|\|' | \
-        grep -E '\$.*popup|\$.*document' | \
-        grep -Ev '##|#\?#|#\$#|redirect=' | \
+        grep -Ev '##|#\?#|#\$#|#%#' | \
+        busybox sed -E 's/\$.*//g' | \
+        busybox sed -E 's/\^$/\^/g' | \
         sort -u)
     
-    if [ ! -z "${popup_rules}" ]; then
-        echo "${popup_rules}" >> "${output_file}"
-        echo "※`date +'%F %T'` 提取到 $(echo "${popup_rules}" | wc -l) 条弹窗拦截规则"
+    if [ ! -z "${domain_rules}" ]; then
+        echo "${domain_rules}" >> "${output_file}"
+        echo "※`date +'%F %T'` 提取到 $(echo "${domain_rules}" | wc -l) 条域名拦截规则"
     fi
 }
 
-# 规则分类和格式化输出（支持所有高级语法）
+# 规则格式化输出（仅 ||domain^ 标准格式）
 function format_adguard_rules(){
     local file="${1}"
     test ! -f "${file}" && return
     
-    # 分类规则
-    local js_rules=$(cat "${file}" | grep -E '#\$#|#%#' | sort -u)
-    local extended_css_rules=$(cat "${file}" | grep -E '#\?#' | sort -u)
-    local element_hiding_rules=$(cat "${file}" | grep -E '##' | grep -Ev '^\|\||#\?#|#\$#|#%#' | sort -u)
-    local popup_rules=$(cat "${file}" | grep -E '^\|\|.*\$(popup|document)' | sort -u)
-    local domain_rules=$(cat "${file}" | grep -E '^\|\|' | grep -Ev '\$(popup|document)|##|#\?#|#\$#|#%#' | sort -u)
+    # 分类规则（仅域名拦截和白名单）
+    local domain_rules=$(cat "${file}" | grep -E '^\|\|' | sort -u)
     local whitelist_rules=$(cat "${file}" | grep -E '^@@' | sort -u)
     
-    local js_count=$(echo "${js_rules}" | grep -c '^' || echo "0")
-    local extended_count=$(echo "${extended_css_rules}" | grep -c '^' || echo "0")
-    local element_count=$(echo "${element_hiding_rules}" | grep -c '^' || echo "0")
-    local popup_count=$(echo "${popup_rules}" | grep -c '^' || echo "0")
     local domain_count=$(echo "${domain_rules}" | grep -c '^' || echo "0")
     local whitelist_count=$(echo "${whitelist_rules}" | grep -c '^' || echo "0")
     
     cat << EOF > "${file}"
-! ===== JavaScript / Scriptlet 注入规则 (共 ${js_count} 条) =====
-! 注入脚本以拦截或修改页面行为
-${js_rules}
-
-! ===== 扩展 CSS 选择器规则 (共 ${extended_count} 条) =====
-! 使用高级选择器（:has, :has-text, :matches-css 等）
-${extended_css_rules}
-
-! ===== 元素隐藏规则 (共 ${element_count} 条) =====
-! 隐藏网页中的广告元素（基本 CSS 选择器）
-${element_hiding_rules}
-
-! ===== 弹窗拦截规则 (共 ${popup_count} 条) =====
-! 专门拦截手机端和网页弹窗广告
-${popup_rules}
-
 ! ===== 域名拦截规则 (共 ${domain_count} 条) =====
 ${domain_rules}
 
@@ -415,6 +379,11 @@ function update_README_info(){
 
 ---
 
-**注意**: 本规则集包含 AdGuard Home 的完整高级语法，包括 JavaScript 注入、Scriptlet、扩展 CSS 等。同时也兼容 uBlock Origin 和 AdGuard 浏览器扩展。
+**注意**: 本规则集为标准 ||domain^ 格式的 DNS 拦截规则，专为 AdGuard Home 优化。
+
+⚠️ **重要提示**：DNS 拦截能力有限，无法 100% 拦截所有开屏/弹窗广告。如需更强效果，建议：
+- Android：安装 AdGuard 客户端或使用 Magisk 模块（如 AdAway）
+- iOS：安装 AdGuard Pro 或使用 Quantumult X 等工具
+- 使用支持 SSL 拦截的方案可获得最佳效果
 EOF
 }
