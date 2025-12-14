@@ -8,25 +8,31 @@ function download_link(){
     test "${target_dir}" = "" && target_dir="`pwd`/temple/download_Rules"
     mkdir -p "${target_dir}"
 
-    # 极简版规则源 - 大幅减少数量以优化性能
-    # 只保留最核心的高质量源，移除所有重复和低效源
+    # 精简高效版 - 基于 AWAvenue 高质量规则 + 优秀补充源
+    # 涵盖追踪、隐私、安全、钓鱼、国内App广告
     local list='
-# === 核心 DNS 拦截规则 ===
-# 217heidai adblockdns: 已整合 anti-AD、EasyList、EasyPrivacy 等多个上游
-https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdns.txt|adblockdns.txt
+# === AWAvenue 秋风广告规则（核心，精简高效）===
+# 主规则：专注国产 App 开屏广告，规则精简命中率高
+https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt|AWAvenue_main.txt
 
-# === Hagezi 核心规则 ===
-# multi: 综合广告拦截（最全面）
-https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/multi.txt|hagezi_multi.txt
+# === AWAvenue 补充规则（可选激进拦截）===
+# 补充规则：更激进的拦截，包含详细说明
+https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Replenish.txt|AWAvenue_replenish.txt
 
-# === 中国区核心广告拦截 ===
-# 秋风广告规则：国产 App 开屏广告（最有效）
-https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt|AWAvenue.txt
-# 大圣净化规则（专注国产 App 广告）
+# === HaGeZi 高质量补充规则 ===
+# privacy: 追踪和隐私保护（精简高效）
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/privacy.txt|hagezi_privacy.txt
+# phishing: 钓鱼网站拦截（安全防护）
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/phishing.txt|hagezi_phishing.txt
+
+# === 国内手机App广告补充 ===
+# CatsTeam 移动端广告：补充国内App弹窗拦截
+https://raw.githubusercontent.com/Cats-Team/AdRules/main/adguard_mobile.txt|CatsTeam_mobile.txt
+# 大圣净化规则：专注国产 App 广告
 https://raw.githubusercontent.com/jk278/Ad-J/main/Ad-J.txt|Ad-J.txt
 
-# === 安全规则 ===
-# DandelionSprout 反恶意软件（AdGuard Home 专用格式）
+# === 安全威胁拦截 ===
+# DandelionSprout 反恶意软件：安全威胁拦截
 https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareAdGuardHome.txt|dandelion_antimalware.txt
 '
 
@@ -509,7 +515,7 @@ function update_README_info(){
 # 源码参考自https://github.com/lingeringsound/adblock_auto/
 ### 🚀 强力广告拦截规则集 - 自动更新(`date +'%F %T'`)
 
-**涵盖 25+ 顶级规则源，近 50 万条规则**
+**涵盖许多优秀规则集，1.5万条规则**
 
 ## 订阅链接
 
@@ -524,25 +530,10 @@ function update_README_info(){
 <details>
 <summary>点击查看上游规则</summary>
 <ul>
-<li><strong>核心规则集</strong></li>
+<li><strong>AWAvenue 秋风广告规则</strong></li>
 <ul>
-<li><a href="https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdns.txt" target="_blank">adblockdns</a> - 综合 DNS 拦截规则</li>
-</ul>
-
-<li><strong>Hagezi 规则</strong></li>
-<ul>
-<li><a href="https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/multi.txt" target="_blank">HaGeZi Multi</a> - 综合广告拦截</li>
-</ul>
-
-<li><strong>中文规则集</strong></li>
-<ul>
-<li><a href="https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt" target="_blank">秋风广告规则</a> - 国产 App 开屏广告</li>
-<li><a href="https://raw.githubusercontent.com/jk278/Ad-J/main/Ad-J.txt" target="_blank">Ad-J</a> - 综合广告拦截</li>
-</ul>
-
-<li><strong>安全规则</strong></li>
-<ul>
-<li><a href="https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareAdGuardHome.txt" target="_blank">DandelionSprout Anti-Malware</a> - 反恶意软件</li>
+<li><a href="https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt" target="_blank">AWAvenue 主规则</a> - 精简高效的国产 App 广告拦截</li>
+<li><a href="https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Replenish.txt" target="_blank">AWAvenue 补充规则</a> - 激进拦截补充</li>
 </ul>
 </ul>
 </details>
