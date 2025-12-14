@@ -25,11 +25,19 @@ https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/privacy.txt
 # phishing: 钓鱼网站拦截（安全防护）
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/phishing.txt|hagezi_phishing.txt
 
+# === 其他高质量规则源 ===
+# hacamer adblock_lite: 精简广告拦截规则
+https://bitbucket.org/hacamer/adrules/raw/main/adblock_lite.txt|hacamer_lite.txt
+# lemon399 abpmerge: ABP格式合并规则
+https://gitea.com/lemon399/AdRules/raw/branch/main/abpmerge.txt|lemon399_abpmerge.txt
+
 # === 国内手机App广告补充 ===
 # CatsTeam 移动端广告：补充国内App弹窗拦截
 https://raw.githubusercontent.com/Cats-Team/AdRules/main/adguard_mobile.txt|CatsTeam_mobile.txt
 # 大圣净化规则：专注国产 App 广告
 https://raw.githubusercontent.com/jk278/Ad-J/main/Ad-J.txt|Ad-J.txt
+# NoAppDownload: 应用下载提示拦截（CDN加速版）
+https://gcore.jsdelivr.net/gh/Noyllopa/NoAppDownload@master/NoAppDownload.txt|NoAppDownload_cdn.txt
 
 # === 安全威胁拦截 ===
 # DandelionSprout 反恶意软件：安全威胁拦截
