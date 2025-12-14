@@ -19,21 +19,12 @@ https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ad
 # 补充规则：更激进的拦截，包含详细说明
 https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Replenish.txt|AWAvenue_replenish.txt
 
-# === HaGeZi 高质量补充规则 ===
-# privacy: 追踪和隐私保护（精简高效）
-https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/privacy.txt|hagezi_privacy.txt
-# phishing: 钓鱼网站拦截（安全防护）
-https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/phishing.txt|hagezi_phishing.txt
-
 # === 其他高质量规则源 ===
 # hacamer adblock_lite: 精简广告拦截规则
 https://bitbucket.org/hacamer/adrules/raw/main/adblock_lite.txt|hacamer_lite.txt
 # lemon399 abpmerge: ABP格式合并规则
 https://gitea.com/lemon399/AdRules/raw/branch/main/abpmerge.txt|lemon399_abpmerge.txt
 
-# === 国内手机App广告补充 ===
-# CatsTeam 移动端广告：补充国内App弹窗拦截
-https://raw.githubusercontent.com/Cats-Team/AdRules/main/adguard_mobile.txt|CatsTeam_mobile.txt
 # 大圣净化规则：专注国产 App 广告
 https://raw.githubusercontent.com/jk278/Ad-J/main/Ad-J.txt|Ad-J.txt
 # NoAppDownload: 应用下载提示拦截（CDN加速版）
@@ -523,7 +514,7 @@ function update_README_info(){
 # 源码参考自https://github.com/lingeringsound/adblock_auto/
 ### 🚀 强力广告拦截规则集 - 自动更新(`date +'%F %T'`)
 
-**涵盖许多优秀规则集，1.5万条规则**
+**涵盖 8 优秀规则源，精简高效规则集**
 
 ## 订阅链接
 
@@ -538,10 +529,28 @@ function update_README_info(){
 <details>
 <summary>点击查看上游规则</summary>
 <ul>
-<li><strong>AWAvenue 秋风广告规则</strong></li>
+<li><strong>AWAvenue 秋风广告规则（核心）</strong></li>
 <ul>
-<li><a href="https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt" target="_blank">AWAvenue 主规则</a> - 精简高效的国产 App 广告拦截</li>
-<li><a href="https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Replenish.txt" target="_blank">AWAvenue 补充规则</a> - 激进拦截补充</li>
+<li><a href="https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt" target="_blank">AWAvenue 主规则</a> - 精简高效的国产 App 开屏广告拦截</li>
+<li><a href="https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Replenish.txt" target="_blank">AWAvenue 补充规则</a> - 更激进的拦截补充</li>
+</ul>
+
+<li><strong>其他高质量规则源</strong></li>
+<ul>
+<li><a href="https://bitbucket.org/hacamer/adrules/raw/main/adblock_lite.txt" target="_blank">hacamer adblock_lite</a> - 精简广告拦截规则</li>
+<li><a href="https://gitea.com/lemon399/AdRules/raw/branch/main/abpmerge.txt" target="_blank">lemon399 abpmerge</a> - ABP格式合并规则</li>
+</ul>
+
+<li><strong>国内手机App广告</strong></li>
+<ul>
+<li><a href="https://raw.githubusercontent.com/Cats-Team/AdRules/main/adguard_mobile.txt" target="_blank">CatsTeam Mobile</a> - 移动端广告拦截</li>
+<li><a href="https://raw.githubusercontent.com/jk278/Ad-J/main/Ad-J.txt" target="_blank">Ad-J</a> - 国产 App 广告净化</li>
+<li><a href="https://gcore.jsdelivr.net/gh/Noyllopa/NoAppDownload@master/NoAppDownload.txt" target="_blank">NoAppDownload (CDN)</a> - 应用下载提示拦截</li>
+</ul>
+
+<li><strong>安全威胁</strong></li>
+<ul>
+<li><a href="https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareAdGuardHome.txt" target="_blank">DandelionSprout Anti-Malware</a> - 恶意软件拦截</li>
 </ul>
 </ul>
 </details>
