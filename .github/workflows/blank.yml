@@ -1,11 +1,15 @@
 name: sync
 on:
+  push:
+    branches:
+      - main
   schedule:
     - cron: '0 0 * * *'
   workflow_dispatch:
 
 jobs:
   sync:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
