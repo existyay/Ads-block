@@ -8,9 +8,8 @@ function download_link(){
     test "${target_dir}" = "" && target_dir="`pwd`/temple/download_Rules"
     mkdir -p "${target_dir}"
 
-    # 专为 AdGuard Home DNS 拦截优化的规则源
-    # 针对中国区优化，去除重复的国际规则
-    # 目标规则数：30-50万条（平衡拦截效果和性能）
+    # 精简版规则源 - 减少数量以优化性能
+    # 保留核心规则，移除重复和低效源
     local list='
 # === 核心 DNS 拦截规则 ===
 # 217heidai adblockdns: 已整合 anti-AD、EasyList、EasyPrivacy 等多个上游
@@ -21,42 +20,18 @@ https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdns
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/multi.txt|hagezi_multi.txt
 # TIF: 威胁情报（恶意软件、钓鱼、诈骗）
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/tif.txt|hagezi_tif.txt
-# 弹窗广告专项
-https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/popupads.txt|hagezi_popup.txt
-# 假冒网站
-https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/fake.txt|hagezi_fake.txt
 
-# === 中国区手机厂商追踪器（全部保留）===
-# 小米/红米/POCO
-https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.xiaomi.txt|hagezi_xiaomi.txt
-# 华为/荣耀
-https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.huawei.txt|hagezi_huawei.txt
-# OPPO/Realme/一加
-https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.oppo-realme.txt|hagezi_oppo.txt
-# vivo/iQOO
-https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.vivo.txt|hagezi_vivo.txt
-# 三星（国内有大量用户）
-https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.samsung.txt|hagezi_samsung.txt
-# TikTok/字节跳动（抖音/今日头条/西瓜视频等）
-https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.tiktok.txt|hagezi_tiktok.txt
-
-# === 中国区广告拦截（核心，全部保留）===
+# === 中国区广告拦截（核心）===
 # 秋风广告规则：国产 App 开屏广告
 https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt|AWAvenue.txt
 # ad-wars: hosts 格式的中文广告规则
 https://raw.githubusercontent.com/jdlingyu/ad-wars/master/hosts|ad-wars_hosts.txt
 # NoAppDownload: 拦截"下载 App"弹窗
 https://raw.githubusercontent.com/Noyllopa/NoAppDownload/master/NoAppDownload.txt|NoAppDownload.txt
-# ADgk: 开屏广告专用规则
-https://raw.githubusercontent.com/banbendalao/ADgk/master/ADgk.txt|ADgk_splash.txt
-
-# === 国产 App 广告 SDK 拦截（全部保留）===
 # CatsTeam DNS 规则（穿山甲、优量汇、快手联盟等广告 SDK）
 https://raw.githubusercontent.com/Cats-Team/AdRules/main/dns.txt|CatsTeam_dns.txt
 # 大圣净化规则（专注国产 App 广告）
 https://raw.githubusercontent.com/jk278/Ad-J/main/Ad-J.txt|Ad-J.txt
-# blackmatrix7 广告规则（知乎/微博/抖音/B站等热门国产 App）
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/AdGuard/Advertising/Advertising.txt|blackmatrix7_ad.txt
 
 # === 安全规则补充 ===
 # DandelionSprout 反恶意软件（AdGuard Home 专用格式）
@@ -409,6 +384,7 @@ function remove_redundant_subdomains(){
         cat "${domains_file}" | busybox sed 's/^/||/; s/$/^/' >> "${result_file}"
     else
         # 使用 awk 高效过滤：移除其父域名已被拦截的子域名
+        # 但保留包含广告关键词的子域名（用于区分广告和内容）
         cat "${domains_file}" | awk -v parents_file="${blocked_parents}" '
         BEGIN {
             # 读取所有被拦截的父域名到数组
@@ -421,20 +397,25 @@ function remove_redundant_subdomains(){
             domain = $0
             is_redundant = 0
             
-            # 逐级检查父域名
-            n = split(domain, parts, ".")
-            for (i = 2; i <= n; i++) {
-                parent = ""
-                for (j = i; j <= n; j++) {
-                    if (parent == "") {
-                        parent = parts[j]
-                    } else {
-                        parent = parent "." parts[j]
+            # 检查是否包含广告关键词，如果是则保留（不标记为冗余）
+            if (domain ~ /(^|\.)ad(s?)\.|banner|popup|track|analytics|stat|log|counter|pixel|beacon|impression|click|view|doubleclick|googlesyndication|adsystem|advertisement|affiliate|promotion|marketing|retargeting|remarketing/) {
+                is_redundant = 0
+            } else {
+                # 逐级检查父域名
+                n = split(domain, parts, ".")
+                for (i = 2; i <= n; i++) {
+                    parent = ""
+                    for (j = i; j <= n; j++) {
+                        if (parent == "") {
+                            parent = parts[j]
+                        } else {
+                            parent = parent "." parts[j]
+                        }
                     }
-                }
-                if (parent in blocked) {
-                    is_redundant = 1
-                    break
+                    if (parent in blocked) {
+                        is_redundant = 1
+                        break
+                    }
                 }
             }
             
@@ -550,51 +531,26 @@ function update_README_info(){
 <li><strong>核心规则集（必备）</strong></li>
 <ul>
 <li><a href="https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdns.txt" target="_blank">adblockdns</a> - DNS 拦截规则</li>
-<li><a href="https://adguardteam.github.io/HostlistsRegistry/assets/filter_21.txt" target="_blank">anti-AD</a> - 中文广告过滤列表</li>
-<li><a href="https://raw.githubusercontent.com/jdlingyu/ad-wars/master/hosts" target="_blank">ad-wars</a> - hosts 格式规则</li>
+</ul>
+
+<li><strong>Hagezi 精选规则</strong></li>
+<ul>
+<li><a href="https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/multi.txt" target="_blank">HaGeZi Multi</a> - 综合广告拦截</li>
+<li><a href="https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/tif.txt" target="_blank">HaGeZi TIF</a> - 威胁情报</li>
 </ul>
 
 <li><strong>中文规则集（强力拦截）</strong></li>
 <ul>
-<li><a href="https://raw.githubusercontent.com/xinggsf/Adblock-Plus-Rule/master/ABP.txt" target="_blank">乘风广告规则</a> - 综合中文广告拦截</li>
-<li><a href="https://raw.githubusercontent.com/xinggsf/Adblock-Plus-Rule/master/mv.txt" target="_blank">乘风视频规则</a> - 视频网站广告</li>
+<li><a href="https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt" target="_blank">秋风广告规则</a> - 国产 App 开屏广告</li>
+<li><a href="https://raw.githubusercontent.com/jdlingyu/ad-wars/master/hosts" target="_blank">ad-wars</a> - hosts 格式规则</li>
 <li><a href="https://raw.githubusercontent.com/Noyllopa/NoAppDownload/master/NoAppDownload.txt" target="_blank">NoAppDownload</a> - 应用下载提示拦截</li>
+<li><a href="https://raw.githubusercontent.com/Cats-Team/AdRules/main/dns.txt" target="_blank">CatsTeam DNS</a> - 广告 SDK 拦截</li>
 <li><a href="https://raw.githubusercontent.com/jk278/Ad-J/main/Ad-J.txt" target="_blank">Ad-J</a> - 综合广告拦截</li>
-<li><a href="https://raw.githubusercontent.com/damengzhu/banad/main/jiekouAd.txt" target="_blank">接口广告规则</a> - API 广告拦截</li>
 </ul>
 
-<li><strong>国际规则集（EasyList 系列）</strong></li>
+<li><strong>安全规则</strong></li>
 <ul>
-<li><a href="https://easylist-downloads.adblockplus.org/easylist.txt" target="_blank">EasyList</a> - 国际广告拦截</li>
-<li><a href="https://easylist-downloads.adblockplus.org/easylistchina.txt" target="_blank">EasyList China</a> - 中文补充规则</li>
-<li><a href="https://easylist-downloads.adblockplus.org/easyprivacy.txt" target="_blank">EasyPrivacy</a> - 隐私保护</li>
-<li><a href="https://secure.fanboy.co.nz/fanboy-annoyance.txt" target="_blank">Fanboy's Annoyance</a> - 反干扰规则</li>
-</ul>
-
-<li><strong>移动端专用规则</strong></li>
-<ul>
-<li><a href="https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.txt" target="_blank">HaGeZi Pro</a> - 专业级拦截</li>
-<li><a href="https://raw.githubusercontent.com/Cats-Team/AdRules/main/adguard_mobile.txt" target="_blank">AdGuard Mobile</a> - 移动端优化</li>
-</ul>
-
-<li><strong>AdGuard 官方规则集</strong></li>
-<ul>
-<li><a href="https://adguardteam.github.io/HostlistsRegistry/assets/filter_2.txt" target="_blank">Base Filter</a> - 基础过滤器</li>
-<li><a href="https://adguardteam.github.io/HostlistsRegistry/assets/filter_3.txt" target="_blank">Tracking Protection</a> - 跟踪保护</li>
-<li><a href="https://adguardteam.github.io/HostlistsRegistry/assets/filter_4.txt" target="_blank">Social Media</a> - 社交媒体过滤</li>
-<li><a href="https://adguardteam.github.io/HostlistsRegistry/assets/filter_11.txt" target="_blank">Mobile Ads</a> - 移动广告</li>
-<li><a href="https://adguardteam.github.io/HostlistsRegistry/assets/filter_17.txt" target="_blank">Annoyances</a> - 反干扰</li>
-</ul>
-
-<li><strong>视频网站专用</strong></li>
-<ul>
-<li><a href="https://raw.githubusercontent.com/Silentely/AdBlock-Acceleration/master/AdGuard_Simplified_Domain.txt" target="_blank">视频广告拦截</a></li>
-<li><a href="https://raw.githubusercontent.com/o0HalfLife0o/list/master/ad.txt" target="_blank">HalfLife 广告规则</a></li>
-</ul>
-
-<li><strong>隐私保护</strong></li>
-<ul>
-<li><a href="https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/hosts/spy.txt" target="_blank">Windows Spy Blocker</a> - 阻止 Windows 遥测</li>
+<li><a href="https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareAdGuardHome.txt" target="_blank">DandelionSprout Anti-Malware</a> - 反恶意软件</li>
 </ul>
 </ul>
 </details>
