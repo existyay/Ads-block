@@ -1,6 +1,6 @@
 # Ads-block
 # 源码参考自https://github.com/lingeringsound/adblock_auto/
-### 🚀 强力广告拦截规则集 - 自动更新(`date +'%F %T'`)
+### 🚀 强力广告拦截规则集 - 自动更新(2025-12-14 19:39:03)
 
 **涵盖 8 优秀规则源，精简高效规则集**
 
@@ -26,7 +26,7 @@
 <li><strong>其他高质量规则源</strong></li>
 <ul>
 <li><a href="https://bitbucket.org/hacamer/adrules/raw/main/adblock_lite.txt" target="_blank">hacamer adblock_lite</a> - 精简广告拦截规则</li>
-<li><a href="https://gitea.com/lemon399/AdRules/raw/branch/main/abpmerge.txt" target="_blank">lemon399 abpmerge</a> - ABP格式合并规则</li>
+<li><a href="https://raw.githubusercontent.com/damengzhu/abpmerge/main/abpmerge.txt" target="_blank">lemon399 abpmerge</a> - ABP格式合并规则</li>
 </ul>
 
 <li><strong>国内手机App广告</strong></li>
