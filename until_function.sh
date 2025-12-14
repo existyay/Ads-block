@@ -8,32 +8,24 @@ function download_link(){
     test "${target_dir}" = "" && target_dir="`pwd`/temple/download_Rules"
     mkdir -p "${target_dir}"
 
-    # 精简版规则源 - 减少数量以优化性能
-    # 保留核心规则，移除重复和低效源
+    # 极简版规则源 - 大幅减少数量以优化性能
+    # 只保留最核心的高质量源，移除所有重复和低效源
     local list='
 # === 核心 DNS 拦截规则 ===
 # 217heidai adblockdns: 已整合 anti-AD、EasyList、EasyPrivacy 等多个上游
 https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdns.txt|adblockdns.txt
 
-# === Hagezi 精选规则 ===
-# multi: 综合广告拦截
+# === Hagezi 核心规则 ===
+# multi: 综合广告拦截（最全面）
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/multi.txt|hagezi_multi.txt
-# TIF: 威胁情报（恶意软件、钓鱼、诈骗）
-https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/tif.txt|hagezi_tif.txt
 
-# === 中国区广告拦截（核心）===
-# 秋风广告规则：国产 App 开屏广告
+# === 中国区核心广告拦截 ===
+# 秋风广告规则：国产 App 开屏广告（最有效）
 https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt|AWAvenue.txt
-# ad-wars: hosts 格式的中文广告规则
-https://raw.githubusercontent.com/jdlingyu/ad-wars/master/hosts|ad-wars_hosts.txt
-# NoAppDownload: 拦截"下载 App"弹窗
-https://raw.githubusercontent.com/Noyllopa/NoAppDownload/master/NoAppDownload.txt|NoAppDownload.txt
-# CatsTeam DNS 规则（穿山甲、优量汇、快手联盟等广告 SDK）
-https://raw.githubusercontent.com/Cats-Team/AdRules/main/dns.txt|CatsTeam_dns.txt
 # 大圣净化规则（专注国产 App 广告）
 https://raw.githubusercontent.com/jk278/Ad-J/main/Ad-J.txt|Ad-J.txt
 
-# === 安全规则补充 ===
+# === 安全规则 ===
 # DandelionSprout 反恶意软件（AdGuard Home 专用格式）
 https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareAdGuardHome.txt|dandelion_antimalware.txt
 '
@@ -313,8 +305,12 @@ function clean_adguard_rules(){
     grep -Ev '^\|\|[a-zA-Z]\^$' | \
     # 移除包含无效字符的规则
     grep -Ev '\|\|.*[_].*\^' | \
-    # 移除过短的域名（如 ||a.b^）
-    grep -Ev '^\|\|[a-zA-Z0-9]\.[a-zA-Z0-9]\^$' | \
+    # 移除过短的域名（少于4字符的有效部分）
+    grep -Ev '^\|\|[a-zA-Z0-9]{1,3}\.[a-zA-Z]{1,3}\^$' | \
+    # 移除明显无效的顶级域名（保留常见有效TLD）
+    grep -Ev '\|\|.*\.(local|internal|test|example|invalid|localhost)\^' | \
+    # 移除纯IP地址格式（如果有）
+    grep -Ev '\|\|([0-9]{1,3}\.){3}[0-9]{1,3}\^' | \
     # 排序去重
     sort -u \
     > "${temp_file}"
@@ -528,23 +524,19 @@ function update_README_info(){
 <details>
 <summary>点击查看上游规则</summary>
 <ul>
-<li><strong>核心规则集（必备）</strong></li>
+<li><strong>核心规则集</strong></li>
 <ul>
-<li><a href="https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdns.txt" target="_blank">adblockdns</a> - DNS 拦截规则</li>
+<li><a href="https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdns.txt" target="_blank">adblockdns</a> - 综合 DNS 拦截规则</li>
 </ul>
 
-<li><strong>Hagezi 精选规则</strong></li>
+<li><strong>Hagezi 规则</strong></li>
 <ul>
 <li><a href="https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/multi.txt" target="_blank">HaGeZi Multi</a> - 综合广告拦截</li>
-<li><a href="https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/tif.txt" target="_blank">HaGeZi TIF</a> - 威胁情报</li>
 </ul>
 
-<li><strong>中文规则集（强力拦截）</strong></li>
+<li><strong>中文规则集</strong></li>
 <ul>
 <li><a href="https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt" target="_blank">秋风广告规则</a> - 国产 App 开屏广告</li>
-<li><a href="https://raw.githubusercontent.com/jdlingyu/ad-wars/master/hosts" target="_blank">ad-wars</a> - hosts 格式规则</li>
-<li><a href="https://raw.githubusercontent.com/Noyllopa/NoAppDownload/master/NoAppDownload.txt" target="_blank">NoAppDownload</a> - 应用下载提示拦截</li>
-<li><a href="https://raw.githubusercontent.com/Cats-Team/AdRules/main/dns.txt" target="_blank">CatsTeam DNS</a> - 广告 SDK 拦截</li>
 <li><a href="https://raw.githubusercontent.com/jk278/Ad-J/main/Ad-J.txt" target="_blank">Ad-J</a> - 综合广告拦截</li>
 </ul>
 
