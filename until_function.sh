@@ -23,7 +23,7 @@ https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWA
 # hacamer adblock_lite: 精简广告拦截规则
 https://bitbucket.org/hacamer/adrules/raw/main/adblock_lite.txt|hacamer_lite.txt
 # lemon399 abpmerge: ABP格式合并规则
-https://gitea.com/lemon399/AdRules/raw/branch/main/abpmerge.txt|lemon399_abpmerge.txt
+https://raw.githubusercontent.com/damengzhu/abpmerge/main/abpmerge.txt|lemon399_abpmerge.txt
 
 # 大圣净化规则：专注国产 App 广告
 https://raw.githubusercontent.com/jk278/Ad-J/main/Ad-J.txt|Ad-J.txt
@@ -538,7 +538,7 @@ function update_README_info(){
 <li><strong>其他高质量规则源</strong></li>
 <ul>
 <li><a href="https://bitbucket.org/hacamer/adrules/raw/main/adblock_lite.txt" target="_blank">hacamer adblock_lite</a> - 精简广告拦截规则</li>
-<li><a href="https://gitea.com/lemon399/AdRules/raw/branch/main/abpmerge.txt" target="_blank">lemon399 abpmerge</a> - ABP格式合并规则</li>
+<li><a href="https://raw.githubusercontent.com/damengzhu/abpmerge/main/abpmerge.txt" target="_blank">lemon399 abpmerge</a> - ABP格式合并规则</li>
 </ul>
 
 <li><strong>国内手机App广告</strong></li>
