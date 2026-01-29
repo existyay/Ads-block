@@ -18,8 +18,10 @@ https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ad
 # === 移动端广告拦截 ===
 # AdGuard Mobile Ads Filter：移动端广告专用规则（含元素隐藏）
 https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_11_Mobile/filter.txt|adguard_mobile.txt
-# CatsTeam AdRules Mobile：国内移动端广告拦截
-https://raw.githubusercontent.com/Cats-Team/AdRules/main/adguard.txt|catsTeam_adguard.txt
+# 大圣净化规则：专注国产 App 广告
+https://raw.githubusercontent.com/jk278/Ad-J/main/Ad-J.txt|Ad-J.txt
+# NoAppDownload：应用下载提示拦截
+https://raw.githubusercontent.com/Noyllopa/NoAppDownload/master/NoAppDownload.txt|NoAppDownload.txt
 
 # === 追踪拦截规则 ===
 # AdGuard Tracking Protection：追踪保护规则
@@ -608,7 +610,8 @@ function update_README_info(){
 <li><strong>移动端广告拦截</strong></li>
 <ul>
 <li><a href="https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_11_Mobile/filter.txt" target="_blank">AdGuard Mobile Ads Filter</a> - 移动端广告专用规则（含元素隐藏）</li>
-<li><a href="https://raw.githubusercontent.com/Cats-Team/AdRules/main/adguard.txt" target="_blank">CatsTeam AdRules</a> - 国内移动端广告拦截</li>
+<li><a href="https://raw.githubusercontent.com/jk278/Ad-J/main/Ad-J.txt" target="_blank">大圣净化 Ad-J</a> - 国产 App 广告净化</li>
+<li><a href="https://raw.githubusercontent.com/Noyllopa/NoAppDownload/master/NoAppDownload.txt" target="_blank">NoAppDownload</a> - 应用下载提示拦截</li>
 </ul>
 
 <li><strong>追踪拦截规则</strong></li>
