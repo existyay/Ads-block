@@ -1,9 +1,9 @@
-! Title: AdGuard 广告拦截规则集 (更新日期 2026-02-01 10:23:00)
-! Checksum: TFIbswS9TK1xTylvbJw9DQ
-! Version: 20260201102300
+! Title: AdGuard 广告拦截规则集 (更新日期 2026-02-02 10:07:12)
+! Checksum: xJ6+RvERoE15GG8UxVj8hg
+! Version: 20260202100713
 ! Expires: 24 hours (update frequency)
-! Last modified: 2026-02-01 10:23:00
-! Total Count: 217937
+! Last modified: 2026-02-02 10:07:13
+! Total Count: 217967
 ! Description: AdGuard 完整规则集，支持 DNS 拦截 + 元素隐藏，兼容 AdGuard Home/客户端/浏览器扩展 (AdGuard Home DNS 拦截规则)
 ! Homepage: https://github.com/existyay/Ads-block
 
@@ -644,7 +644,7 @@
 @@||brm-core-0.brsrvr.com/api/*/core$domain=dollargeneral.com^
 @@||brm-core-0.brsrvr.com/api/*/core/?account_id=$domain=m.toysrus.com^
 @@||browser-intake-datadoghq.com^$app=com.nttdocomo.android.caboneurecord^
-@@||browser-intake-datadoghq.com^$xmlhttprequest,domain=mightyape.co.nz^
+@@||browser-intake-datadoghq.com^$xmlhttprequest,domain=grubhub.com|mightyape.co.nz^
 @@||browser.covatic.io/sdk/v1/bauer.js$script,domain=hellorayo.co.uk^
 @@||browser.events.data.microsoft.com/onecollector/$script,xmlhttprequest,domain=microsoft.com^
 @@||browser.sentry-cdn.com^$domain=acustica-audio.com|alphaxiv.org|dic.pixiv.net|doconcall.com.my|eco-clobber.co.uk|fundhero.io|marshmallow-qa.com|members.bifa.film|menshealth.com|ocado.com|podcasty.seznam.cz|roomster.com|shop.dns-net.de|spacemarket.com|timesprime.com|vivareal.com.br|womenshealthmag.com^
@@ -7634,6 +7634,7 @@
 ||4tololo.ru/core/modules/statistics/statistics.php^
 ||4totls9uh.com^
 ||4travel.jp/*/s_code_smt^
+||4u079hpvl.com^
 ||4u3222y7.xyz^
 ||4u4chance.org^
 ||4u69.com^
@@ -20785,6 +20786,7 @@
 ||analytics.moneycat.vn^
 ||analytics.monobloc.de^
 ||analytics.mopub.com^
+||analytics.morphe.software^
 ||analytics.motoemotostore.it^
 ||analytics.mouthshut.com^
 ||analytics.move.ru^
@@ -22464,6 +22466,7 @@
 ||api.comboplay.online^
 ||api.compramais.com.br^
 ||api.compramosagora.pt^
+||api.config-security.com/first^
 ||api.connecto.io^
 ||api.constructionconnectionusa.com^
 ||api.construtoradinamica.com.br^
@@ -22481,6 +22484,7 @@
 ||api.country.is^
 ||api.creditfinder.app^
 ||api.criancasmodoturbo.com^
+||api.croct.io^
 ||api.crossengage.io/api/*/track^
 ||api.curation.ameba.jp^
 ||api.curso.cenariobaloes.com.br^
@@ -24700,6 +24704,7 @@
 ||apps.omegatheme.com/facebook-pixel/^
 ||apps.outfit7.com/rest/ad/^
 ||apps.pubmatic.com^
+||apps.rokt-api.com/webevents/^
 ||apps.sascdn.com^$app=com.dubox.drive^
 ||apps.shakaguide.com^
 ||apps.software.netsimplicity.com^
@@ -33095,6 +33100,7 @@
 ||c8.net.ua^
 ||c8.statcounter.com^
 ||c81.ipanocloud.com^
+||c8q27tqnaw.com^
 ||c9.amazingcounters.com^
 ||c9.statcounter.com^
 ||c917.pandasuite.io^
@@ -35241,6 +35247,7 @@
 ||ce.x-opt.io^
 ||ce2f0495.liftmyresume.com^
 ||ce71jubc2.com^
+||ce9qb0h4v.com^
 ||ceasedthoughtful.com^
 ||cebewicedub.com^
 ||cebue.magmafurnace.top^
@@ -99661,6 +99668,7 @@
 ||fp-*it*.fengkongcloud.com^
 ||fp-analytics.hotstar.com^
 ||fp-cdn.azureedge.net^
+||fp-flame.vercel.app^
 ||fp-it-acc.portal101.cn/deviceprofile/^
 ||fp-it.fengkongcloud.com^
 ||fp-sa-it.fengkongcloud.com^
@@ -105575,6 +105583,9 @@
 ||gsk801301hh.com^
 ||gsk801310hh.com^
 ||gsk801311hh.com^
+||gsk802010hh.com^
+||gsk802011hh.com^
+||gsk802020hh.com^
 ||gsl144.com^
 ||gslb.hpplay.cn^
 ||gslbeacon.lijit.com^
@@ -108860,6 +108871,7 @@
 ||guttersinsummerville.com^
 ||guttertaughtfoliage.com^
 ||gutturiurl.rest^
+||guu0bfmpf5.com^
 ||guufxr.sdbullion.com^
 ||guurniuvgo.com^
 ||guuyuiwkjsa.golden-king-tw.com^
@@ -114613,6 +114625,7 @@
 ||inc2.igexin.com^
 ||incanendam.rest^
 ||incapabledespair.com^
+||incapacity75.top^
 ||incapdns.net/monitor.js^
 ||incargluco.pro^
 ||incasbisto.rest^
@@ -117640,6 +117653,7 @@
 ||iwl2d7pa4yx1.www.logology.co^
 ||iwlnpw.claudiepierlot.com^
 ||iwmjsk.jw.com.au^
+||iwoihuemn.com^
 ||iwpkp.xyz^
 ||iwqx.cn^
 ||iws2.io.naver.com^
@@ -119750,6 +119764,7 @@
 ||k8mb640mta.com^
 ||k90ey77nx.com^
 ||k99.cc^
+||k9egtgh8v.com^
 ||k9s2ow.lat^
 ||kaacsi.belvilla.nl^
 ||kaan.kakao.com^
@@ -130977,6 +130992,7 @@
 ||ltsveh.wetteronline.ch^
 ||ltsveh.wetteronline.de^
 ||lttusg.rolarola.com^
+||ltuzz346m.com^
 ||ltvfrs.toymiso.com^
 ||ltwebstatic.com/she_dist/libs/devices/fpv2.^
 ||ltwebstatic.com^*/libs/sensors/^
@@ -135983,6 +135999,7 @@
 ||member.email.seasoned.co^
 ||member.streffy.com/base/v2/Advertisement/GetDisplayAdvertisements$jsonprune=\$.advertisements[?(has advertisementId)]^
 ||member.usenix.org^
+||membernook.com^
 ||members.atomcomplete.com^
 ||members.babbel.com/mo/^
 ||members.chello.at^
@@ -140309,6 +140326,7 @@
 ||motherpipe.net^
 ||motifiles.com^
 ||motion.kollmorgen.com^
+||motionarray.net^
 ||motionbasedverge.com^
 ||motionexplainedbacteria.com^
 ||motionflowers.com^
@@ -141179,6 +141197,7 @@
 ||mx2.happ.social^
 ||mx2.mailgun.multoweb.nl^
 ||mx2.mtrl.me^
+||mx278ol2d.com^
 ||mx5.adgtrk.com^
 ||mxa.sedlv.net^
 ||mxafaw.icu^
@@ -141842,6 +141861,7 @@
 ||n0ocxl4w5g.top^
 ||n0t901n9h0me.xyz^
 ||n0usvkb1x.com^
+||n0zwlat83.com^
 ||n1.nskfyl.com^
 ||n11.com/*/ha.js^
 ||n11.com/realTime/count^
@@ -142271,6 +142291,7 @@
 ||nbf9b5aurl.com^
 ||nbfopy.jjshouse.com^
 ||nbg.seagate.com^
+||nbhedrelpl.com^
 ||nbiav.hoka.com^
 ||nbimg.dt00.net^
 ||nbitr.truenutrition.com^
@@ -145670,6 +145691,7 @@
 ||ojm4.palladiumhotelgroup.com^
 ||ojmv.cn^
 ||ojmxro.yatsan.com^
+||ojn1zxz0ni.com^
 ||ojnpn.dorasti.com^
 ||ojolink.fr^
 ||ojpvyv.corail.co^
@@ -147384,6 +147406,7 @@
 ||otfx.cn^
 ||otfy.cn^
 ||otg.mblycdn.com/bundles/cmp.js^
+||otgihnae.com^
 ||oth.eve.mdt.qq.com^
 ||oth.str.mdt.qq.com^
 ||othanasis.openapp.link^
@@ -156910,6 +156933,7 @@
 ||qiyukf.com/webda/da.gif$domain=youdao.com^
 ||qiyun.org/images/js/*.htm^
 ||qizhihaotian.com^*.js^
+||qizq4hn7pr.com^
 ||qizut.furniturefair.net^
 ||qj9m4nou8t.com^
 ||qjapso.r.pl^
@@ -158280,6 +158304,7 @@
 ||rccnyh.airportrentalcars.com^
 ||rcevcm.lyst.co.uk^
 ||rcgi.video.qq.com^
+||rcguamf.icu^
 ||rcgwej.lights.co.uk^
 ||rchqtr.icu^
 ||rcilgeill.com^
@@ -169944,6 +169969,7 @@
 ||shufflecom.com^
 ||shufoo.net/log/^
 ||shufoo.net/plus/media/beacon^
+||shuhaoxs.com/public/^
 ||shui5.cn^*/ima/gg^
 ||shuidixs.com/1.^
 ||shulihua.net/js/gzlishi468google.js^
@@ -170169,6 +170195,7 @@
 ||simi.sleekflame.com^
 ||simibrick.com^
 ||simified.com^
+||similarity98.com^
 ||similarlymergermanpower.com^
 ||similarmarriage.com^
 ||similarweb.com/scripts/lite-app/client/dist/tracking.min.js^
@@ -197235,6 +197262,7 @@
 ||tracker.gtarcade.com^
 ||tracker.hdtvcloud.com^
 ||tracker.hitmatic.com^
+||tracker.hollandandbarrett.com^
 ||tracker.icerocket.com^
 ||tracker.idocdn.com^
 ||tracker.iltrovatore.it^
@@ -208105,6 +208133,7 @@
 ||vytn.cn^
 ||vytomi.gotrackier.com^
 ||vyuodh.your-look-for-less.nl^
+||vyxw.cn^
 ||vyyikx.sixt.ch^
 ||vyykdr.renogy.com^
 ||vyz3nn85ed0e.controlconceptsusa.com^
@@ -215848,6 +215877,7 @@
 ||yitongfang.com^
 ||yitongkan.com/splash.xml$redirect=noopjs,domain=yitongkan.com^
 ||yiukig.icu^
+||yiunpfniv.com^
 ||yivxzt.doctor-agent.com^
 ||yixvbp.merkal.com^
 ||yiybmi.icu^
