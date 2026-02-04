@@ -1,9 +1,9 @@
-! Title: AdGuard 广告拦截规则集 (更新日期 2026-02-03 10:05:14)
-! Checksum: q5qx4fpqh2FbcDtw9V+pUg
-! Version: 20260203100514
+! Title: AdGuard 广告拦截规则集 (更新日期 2026-02-04 10:00:27)
+! Checksum: W5z+ozIuFI3sWx0hdmFugA
+! Version: 20260204100027
 ! Expires: 24 hours (update frequency)
-! Last modified: 2026-02-03 10:05:14
-! Total Count: 225635
+! Last modified: 2026-02-04 10:00:27
+! Total Count: 225653
 ! Description: AdGuard 完整规则集，支持 DNS 拦截 + 元素隐藏，兼容 AdGuard Home/客户端/浏览器扩展 (AdGuard Home DNS 拦截规则)
 ! Homepage: https://github.com/existyay/Ads-block
 
@@ -193,6 +193,7 @@
 @@||adobe.com^$cookie=/^AMCVS?_.*AdobeOrg/^
 @@||adobe.tt.omtrdc.net/rest/v1/delivery?client=adobe&sessionId=$domain=acrobat.adobe.com^
 @@||adobedc.demdex.net/ee/v1/identity/$xmlhttprequest,domain=cibc.com^
+@@||adobedc.demdex.net^$xmlhttprequest,domain=sc.com^
 @@||adobedtm.com/extensions/$domain=antena3.com|apple.com|atresmedia.com|atresplayer.com|automobiles.honda.com|bravotv.com|cadenaser.com|crave.ca|foodnetwork.com|lasexta.com|telus.com|verizon.com|xfinity.com^
 @@||adobedtm.com/launch-^
 @@||adobedtm.com^$script,domain=sonystyle.com.cn^
@@ -4117,6 +4118,7 @@
 @@||swr3.de/static/swrplayer/web/plugins/ivw/ivw.js^
 @@||swsc.com.cn/download/ad_images/^
 @@||sxjbjt.com^*/ad^
+@@||syndication.realsrv.com/splash.php?idzone=$xmlhttprequest,domain=hentaila.tv^
 @@||synonymbog.com^
 @@||szhr.com.cn^
 @@||szhr.com.cn^*ad^
@@ -7077,6 +7079,7 @@
 ||2soft.com^
 ||2spendless.^
 ||2step-garage.co.uk^
+||2trk.info^
 ||2tty.overstappen.nl^
 ||2u1h56851n.top^
 ||2ueb.cn^
@@ -12255,6 +12258,7 @@
 ||accusstazi.pro^
 ||accuterm.com/data/stat.js^
 ||accwww9.53kf.com^
+||acds-events.adobe.io^
 ||ace-project.org^
 ||ace-sync.toast.com/sendid?sid=*&uid=^
 ||ace.naver.com^
@@ -35134,6 +35138,7 @@
 ||cdn-plugin-sync-upgrade-juui.hismarttv.com^
 ||cdn-production.polaranalytics.com/pap.txt^
 ||cdn-public.liftoffintl.io/app2web-sdk/sdk.js^
+||cdn-px-v1.metrix.az^
 ||cdn-qc.coccoc.com^
 ||cdn-ra.rockcontent.com^
 ||cdn-redirector.glopal.com^
@@ -35400,7 +35405,6 @@
 ||cdn.polarbyte.com^
 ||cdn.polmontventures.com^
 ||cdn.powerinboxedge.com^
-||cdn.preciso.net^
 ||cdn.privacy-mgmt.com/wrapper/metrics^
 ||cdn.production.townsquareblogs.com/wp-content/uploads/static/prebid/carbon/pb.js^
 ||cdn.program3.com^
@@ -35485,7 +35489,6 @@
 ||cdn.trackcollect.com/metrics/^
 ||cdn.trackjs.com^
 ||cdn.trakkr.ai^
-||cdn.transifex.com/live.js^
 ||cdn.tubecorp.com^
 ||cdn.uameta.ai/file/bucket-media/image/advertisement/^
 ||cdn.uprivaladserver.net^
@@ -100666,6 +100669,7 @@
 ||events.practo.com^
 ||events.prd.api.discomax.com^
 ||events.prd.api.max.com^
+||events.production.us1.pgw-pci.klarna.net^
 ||events.promo.mandirikartukredit.com^
 ||events.pyszne.pl^
 ||events.rahoy.com^
@@ -106557,6 +106561,7 @@
 ||gb.umavidaextraordinaria.com.br^
 ||gb24e.com^
 ||gb24n.com^
+||gb3scpejq.com^
 ||gba.kwm.com^
 ||gbbox.com^
 ||gbdke.schwankgrills.com^
@@ -108282,6 +108287,7 @@
 ||gnezdo.ru^
 ||gnfjvt.radpowerbikes.com^
 ||gnfqtz.smartphoto.se^
+||gnfr03906.com^
 ||gngholding.com^
 ||gnglehraith.com^
 ||gnh2.destinia.lv^
@@ -110622,6 +110628,7 @@
 ||gsk802020hh.com^
 ||gsk802021hh.com^
 ||gsk802030hh.com^
+||gsk802031hh.com^
 ||gsl144.com^
 ||gslb.hpplay.cn^
 ||gslbeacon.lijit.com^
@@ -114314,7 +114321,7 @@
 ||gyradiko.openapp.link^
 ||gyro-n.com^
 ||gyros.es^
-||gyrovague.com^$domain=archive.fo|archive.is|archive.li|archive.md|archive.ph|archive.today|archive.vn^
+||gyrovague.com^$domain=archive.fo|archive.is|archive.li|archive.md|archive.ph|archive.today|archive.vn|btdig.com^
 ||gytfpn.thdamshoes.com^
 ||gyvcwd.cdiscount.com^
 ||gyvlgl.sportitude.com.au^
@@ -125550,6 +125557,7 @@
 ||kdata.fr^
 ||kdconstructionusa.com^
 ||kde.qq.com^
+||kdewa111.familydoctor.com.cn^
 ||kdf-podatki.pl^
 ||kdfgi.eatshameless.com^
 ||kdfgm.belmetric.com^
@@ -131221,6 +131229,7 @@
 ||live.careplusvn.com^
 ||live.comunicaciones.jetstereo.com^
 ||live.cxo.name^
+||live.exchangesolutions.com^
 ||live.mrf.io/statics/marfeel/gardac-sync.js^
 ||live.polycom.com^
 ||live.ravelin.click^
@@ -160638,6 +160647,7 @@
 ||preciselytemp.com^
 ||precision-editing.com^
 ||precisioncounter.com^
+||preciso.net^
 ||precoinchi.rest^
 ||precointav.rest^
 ||precopicri.rest^
@@ -162015,6 +162025,7 @@
 ||publiads.com^
 ||public-data-api.miyoushe.com^
 ||public-gcs.subiz-cdn.com^
+||public.9gtb.com^
 ||public.adgger.jp^
 ||public.cobrowse.oraclecloud.com/rely/storage/^
 ||public.demo.securecloudsandbox.com^
@@ -162412,6 +162423,7 @@
 ||pvsa.gxfugy.cn^
 ||pvtag.yahoo.co.jp^
 ||pvtag.yahoo.co.jp^$script,redirect=noopjs,domain=paypayfleamarket.yahoo.co.jp^
+||pvtd.cn^
 ||pvtjt.ancestralsupplements.com^
 ||pvtvv.halfdaytravel.com^
 ||pvvii.griotsgarage.com^
@@ -162593,6 +162605,7 @@
 ||q1.yyxwzx.com^
 ||q1connect.com^
 ||q1mediahydraplatform.com^
+||q1txsah8s.com^
 ||q20jqurls0y7gk8.info^
 ||q29k22vpu.com^
 ||q2fwgl4q8.com^
@@ -167919,6 +167932,7 @@
 ||s-menus.com^
 ||s-microsoft.com/mscc/^
 ||s-msn.com/portal/xiatui.js^
+||s-nsk.ppstatic.pl/lib/ppa/v*/js/main.hb.js^
 ||s-odx.oleads.com^
 ||s-omniture.yell.com^
 ||s-onetag.com^
@@ -170251,6 +170265,7 @@
 ||scripts.mofos.com^
 ||scripts.mycounter.com.ua^
 ||scripts.mycounter.ua^
+||scripts.postie.com/otcteung/lp.1.js^
 ||scripts.psyma.com^
 ||scripts.rubiconredirect.com/scripts/vk_lightinthebox.js^
 ||scripts.sophus3.com/s3s/ams/logging.js^
@@ -200456,6 +200471,7 @@
 ||titanicmaximumlaboratory.com^
 ||titanklip.com^
 ||titanprod.narvar.com/*/track|^
+||titanprod.narvar.com^
 ||titansfalls.net^
 ||titanwave.click^
 ||titjzl.icu^
@@ -218798,6 +218814,7 @@
 ||wtaccesscontrol.com^
 ||wtach.club^
 ||wtag.estlier.net^
+||wtb-tag.mikmak.ai^
 ||wtb-tag.swaven.com^
 ||wtbevents.pricespider.com^
 ||wtchersweb.com^
@@ -224576,6 +224593,7 @@
 ||zcck60eqyw.world^
 ||zcd.zmzm.sa^
 ||zcdfnl.top^
+||zceniddd.com^
 ||zcfgvb.ara-arbeitsschutz.de^
 ||zcfhi.cn.com^
 ||zcfse.anhem.tech^
