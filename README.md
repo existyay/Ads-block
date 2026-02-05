@@ -1,6 +1,6 @@
 # Ads-block
 # 源码参考自https://github.com/lingeringsound/adblock_auto/
-### 🚀 强力广告拦截规则集 - 自动更新(2026-02-04 10:00:56)
+### 🚀 强力广告拦截规则集 - 自动更新(2026-02-05 10:02:27)
 
 **精选 4 个高质量规则源，支持 AdBlock 和 Hosts 格式**
 
