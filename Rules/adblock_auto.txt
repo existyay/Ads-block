@@ -1,9 +1,9 @@
-! Title: AdGuard 广告拦截规则集 (更新日期 2026-02-05 10:02:12)
-! Checksum: b9eTIq1dcYBQivfsm0zWhA
-! Version: 20260205100212
+! Title: AdGuard 广告拦截规则集 (更新日期 2026-02-06 10:01:19)
+! Checksum: voimWgaM+LFin1vnTy4xcg
+! Version: 20260206100119
 ! Expires: 24 hours (update frequency)
-! Last modified: 2026-02-05 10:02:12
-! Total Count: 226948
+! Last modified: 2026-02-06 10:01:19
+! Total Count: 226965
 ! Description: AdGuard 完整规则集，支持 DNS 拦截 + 元素隐藏，兼容 AdGuard Home/客户端/浏览器扩展 (AdGuard Home DNS 拦截规则)
 ! Homepage: https://github.com/existyay/Ads-block
 
@@ -3336,6 +3336,7 @@
 @@||optimize.webtrends.com^$domain=peterboroughtoday.co.uk^
 @@||optimizely.com/js/geo2.js$domain=cbs.com^
 @@||optimizely.com^$domain=sonos.com^
+@@||optimizely.com^$image,domain=marinco.navico.com^
 @@||optimost.com/counter/*/event.js?$domain=bebo.com^
 @@||optimost.com^*/FT_live.js$domain=ft.com^
 @@||optimost.com^*/content.js?$domain=bebo.com^
@@ -22924,6 +22925,7 @@
 ||api.gimbal.com^
 ||api.gipinheirosc.com^
 ||api.giraofertas.com.br^
+||api.gist.ai/v1/analytics/track^
 ||api.github.com/_private/browser/stats^
 ||api.gleap.io/sessions/ping^
 ||api.globalbunjang.com/api/log/^
@@ -28160,6 +28162,7 @@
 ||balook.com^
 ||balor-ghn.com^
 ||balssa.com^
+||balvehgmhw.com^
 ||balzotopin.rest^
 ||bam-x.com^
 ||bamasolutions.com^
@@ -32483,6 +32486,8 @@
 ||btfclfeqc9.com^
 ||btg360.com.br^
 ||btglss.net^
+||bthaber.com/js/ads-tracker.js^
+||bthaber.com/js/news-tracker.js^
 ||btjsvl.icu^
 ||btkat.com/style/l.js^
 ||btkbei.courir.com^
@@ -32742,6 +32747,7 @@
 ||bundle.9gtb.com^
 ||bundle.app/js/PushAnalyticsEvent.js^
 ||bundle.ppas.monster^
+||bundles-stats.kachingappz.app/impressions^
 ||bungeesleeves.com^
 ||bunghub.pl^
 ||bungwsemis.rest^
@@ -36848,7 +36854,6 @@
 ||cibconline-login.com^
 ||cibersexo.eu^
 ||cibntv.net/youku/*.mp4?$media,redirect=noopmp4-1s,domain=v.youku.com,important^
-||cibntv.net/youku/*.mp4?^
 ||cic-epargnrsalariale.fr^
 ||cicada.wordvested.org^
 ||cicadcagna.rest^
@@ -99096,6 +99101,7 @@
 ||emblemcharge.com^
 ||embleringe.rest^
 ||embodimentairport.com^
+||embofjpks.com^
 ||embowbarba.rest^
 ||embracecarolinas.com^
 ||embracestiffengrater.com^
@@ -108767,6 +108773,7 @@
 ||gnla02040qp.com^
 ||gnla02041qp.com^
 ||gnla02050qp.com^
+||gnla02051qp.com^
 ||gnnes.mintrx.com^
 ||gnnkrz.josbank.com^
 ||gnosticode.com^
@@ -111131,6 +111138,7 @@
 ||gsk802040hh.com^
 ||gsk802041hh.com^
 ||gsk802050hh.com^
+||gsk802051hh.com^
 ||gsl144.com^
 ||gslb.hpplay.cn^
 ||gslbeacon.lijit.com^
@@ -116319,6 +116327,7 @@
 ||hindiseries.com^
 ||hindranceretort.com^
 ||hindsight.significanceapps.com^
+||hindustantimes.com/cdp/user/ht^
 ||hindustantimes.com/res/images/one-pixel.png^
 ||hindustantimes.com^
 ||hinet.net/product/promotion/^
@@ -120525,6 +120534,7 @@
 ||inanhkhoi.net^
 ||inappropriateoutdoorsconfiguration.com^
 ||inapps.appflyer.com^
+||inapps.appsflyersdk.com^
 ||inarilyhukel.info^
 ||inateck.fr^
 ||inatv.pl^
@@ -122903,6 +122913,7 @@
 ||inzanemindz.net^
 ||inzegastr.rest^
 ||inzicht.cz.nl^
+||inzy3qq8q.com^
 ||inzynieria.com/addStats^
 ||io%2Fe%2Fo%2F^
 ||io-tech.fi/io/www/delvr/lokiz.php^
@@ -136111,6 +136122,7 @@
 ||log.1vn.app^
 ||log.247post.vn^
 ||log.51changdu.com^
+||log.ablyft.com^
 ||log.ad.xiaomi.com^
 ||log.adap.tv^
 ||log.adaptv.advertising.com^
@@ -145592,6 +145604,7 @@
 ||minigame5-normal-hl.zijieapi.com^
 ||minigame5-normal-lq.zijieapi.com^
 ||minimalvariousrefuge.com^
+||minimetrika.xsolla.com^
 ||minimizeallegiance.com^
 ||minimizedice.best^
 ||minimob.com^
@@ -149742,6 +149755,7 @@
 ||newsource-cdn-static.ns.cnn.com/prd/analytics/1.0.1/cnnvan-omniture.min.js^
 ||newspaperconvicted.com^
 ||newspicks.com/logs/^
+||newspicks.com^
 ||newspoland.convertri.com^
 ||newsportal.life^
 ||newsprofin.com^
@@ -151297,6 +151311,7 @@
 ||nv.5.p2l.info^
 ||nv.inhaabit.com^
 ||nv.ua^
+||nv0cl4nnq.com^
 ||nv24k.com^
 ||nvapi.nicovideo.jp/*/bandit-machine/^
 ||nvapi.nicovideo.jp/v1/bandit-machine/^
@@ -163801,6 +163816,7 @@
 ||qip.magna.ru^
 ||qirestavo.top^
 ||qirihui7.com^
+||qirqritp.com^
 ||qishula.com/css/wap.^
 ||qist.me^
 ||qitdsl.ralf.ru^
@@ -210447,6 +210463,7 @@
 ||ulyfrf.dekruidenbaron.nl^
 ||ulyhvfadchos.info^
 ||um.contentstudio.io^
+||um.merinfo.se^
 ||um.viuapi.io/loggingservice/^
 ||um5xcgngmart.xyz^
 ||umami.*/script.js|^
