@@ -1,9 +1,9 @@
-! Title: AdGuard 广告拦截规则集 (更新日期 2026-02-06 10:01:19)
-! Checksum: voimWgaM+LFin1vnTy4xcg
-! Version: 20260206100119
+! Title: AdGuard 广告拦截规则集 (更新日期 2026-02-07 09:57:51)
+! Checksum: KeAEot0T7DcMWQdyH0UizQ
+! Version: 20260207095751
 ! Expires: 24 hours (update frequency)
-! Last modified: 2026-02-06 10:01:19
-! Total Count: 226965
+! Last modified: 2026-02-07 09:57:51
+! Total Count: 226991
 ! Description: AdGuard 完整规则集，支持 DNS 拦截 + 元素隐藏，兼容 AdGuard Home/客户端/浏览器扩展 (AdGuard Home DNS 拦截规则)
 ! Homepage: https://github.com/existyay/Ads-block
 
@@ -1267,6 +1267,7 @@
 @@||dcinside.com^
 @@||dd.auspost.com.au/tags.js^
 @@||dd.blackhawknetwork.com.first-party-js.datadome.co^$domain=redeem.rewardlink.com^
+@@||dd.qa.moneygram.com.first-party-js.datadome.co^$script,xmlhttprequest,domain=moneygram.com^
 @@||dd.wizzair.com.first-party-js.datadome.co^$domain=wizzair.com^
 @@||dd6zx4ibq538k.cloudfront.net/static/images/$domain=tkmaxx.com^
 @@||deals.nextag.com^*/ClickTracker.jsp^
@@ -7567,6 +7568,7 @@
 ||4107269.ranking.fc2.com^
 ||411playz.com^
 ||4126.sfap-qa1.marketingcloudqaops.com^
+||412dyo1ef.com^
 ||413275.com^
 ||4145.ftp-qa1.marketingcloudqaops.com^
 ||4164.sfap-qa1.marketingcloudqaops.com^
@@ -7679,6 +7681,7 @@
 ||4biogas.de^
 ||4bo5t8fzd.com^
 ||4bqs.com^
+||4br824ktty.com^
 ||4bvc.com^
 ||4cc16592.liftmyresume.com^
 ||4clicker.pro^
@@ -18108,6 +18111,7 @@
 ||agri-impactgroup.com^
 ||agri.webspecmail.com^
 ||agribusiness.intelligence.informa.com^
+||agricultural64.top^
 ||agriculturalproshereby.com^
 ||agrimemleket.net^
 ||agriturismoilcascinone.com^
@@ -19728,6 +19732,7 @@
 ||amazonaws.com/default/tracking?url=^
 ||amazonaws.com/embed/live/techbook/affiliate^
 ||amazonaws.com/frame-image-br/bg.png?^
+||amazonaws.com/icontracker/^
 ||amazonaws.com/iglu.acme.com.dev.clixtream/tracker.js^
 ||amazonaws.com/j.kissinsights.com/^
 ||amazonaws.com/js/reach.js^
@@ -20600,6 +20605,7 @@
 ||analytics.ecoslay.com^
 ||analytics.edaily.co.kr^
 ||analytics.edgekey.net^
+||analytics.editorialedomani.it^
 ||analytics.effectory.com^
 ||analytics.egdata.app^
 ||analytics.egernsund.com^
@@ -23739,7 +23745,7 @@
 ||app.acekuwait.com^
 ||app.activetrail.com^
 ||app.activityhero.com^
-||app.adjust.com^$app=com.easybrain.nonogram|ru.pikabu.android|com.maroieqrwlk.unpin|com.touchtao.soccerkinggoogle|com.mobirix.zumaking2|com.mobirix.swipebrick2|com.mobirix.mahjongking2|com.mobirix.hit7.casino.slots|com.mobirix.gmm|com.mobirix.fishingchampionship|com.mobirix.airhockey|com.mobirix.abmon|com.mobirix.MultiplyWar|com.UCMobile.intl|kz.kolesa|uz.avtoelon|kz.krisha|com.loomgames.pixelflow^
+||app.adjust.com^$app=com.easybrain.nonogram|ru.pikabu.android|com.maroieqrwlk.unpin|com.touchtao.soccerkinggoogle|com.mobirix.zumaking2|com.mobirix.swipebrick2|com.mobirix.mahjongking2|com.mobirix.hit7.casino.slots|com.mobirix.gmm|com.mobirix.fishingchampionship|com.mobirix.airhockey|com.mobirix.abmon|com.mobirix.MultiplyWar|com.UCMobile.intl|kz.kolesa|uz.avtoelon|kz.krisha|com.loomgames.pixelflow|com.ebay.kleinanzeigen^
 ||app.adjust.com^$app=com.microsoft.bing|jp.gocro.smartnews.android|com.daily.health.tracker.monitor|com.glovo|com.edadeal.android|com.dailymotion.dailymotion|com.novoda.dch|com.jotform.v2|com.location.track.proxy.gps|com.magical.smart.alban^
 ||app.adjust.com^$redirect=nooptext,app=com.ilike.cartoon,important^
 ||app.adjust.io^
@@ -26414,6 +26420,7 @@
 ||atomicdirty.bond^
 ||atomicpulseacre.com^
 ||atomicterrifieddocument.com^
+||atomictrackercollector-i5adxi4wfq-uc.a.run.app^
 ||atool.org/res/ads/^
 ||atopimports.com^
 ||atothaugged.com^
@@ -27539,6 +27546,7 @@
 ||aztaksi.com^
 ||aztbeszelik.com^
 ||aztrack.digim.co.il^
+||aztwrmsgn4.com^
 ||aztwwe.satom.ru^
 ||azuaka.the-cover-store.com^
 ||azulerie.it^
@@ -29953,6 +29961,7 @@
 ||bhgmarketing.112.2o7.net^
 ||bhhqvf.theway9.co.kr^
 ||bhhsg.superstarcarwashaz.com^
+||bhidhaerb.com^
 ||bhiking.com^
 ||bhjylcugaldr.info^
 ||bhl401f8g.com^
@@ -50727,6 +50736,7 @@
 ||dcv4p460uqa46.cloudfront.net^
 ||dcvideoproductions.com^
 ||dcwblida.dz^
+||dcwxhamq0.com^
 ||dcxusu.lacuracao.pe^
 ||dcys.ijinshan.com^
 ||dd.auspost.com.au^
@@ -100829,6 +100839,7 @@
 ||event.thermoscientific.cn^
 ||event.thermoscientific.com^
 ||event.tosspayments.com^
+||event.tradedealer.ru^
 ||event.ucarpac.com^
 ||event.webcollage.net^
 ||event.wondershare.com^
@@ -106202,6 +106213,7 @@
 ||fvc.alcatel-lucent.com^
 ||fvfcf.bugmd.com^
 ||fvitteilse.com^
+||fvk6k2jrdu.com^
 ||fvlqjw.top^
 ||fvmpm.fromrebel.com^
 ||fvuitt.alibabuy.com^
@@ -106459,6 +106471,7 @@
 ||g1thub.com^
 ||g1v3ev3ry7h1n9.xyz^
 ||g2.072m.com^
+||g2.com/activity/events^
 ||g2.ganjing.world^
 ||g2048.rgluk.com^
 ||g2575096355.co^
@@ -108774,6 +108787,7 @@
 ||gnla02041qp.com^
 ||gnla02050qp.com^
 ||gnla02051qp.com^
+||gnla02061qp.com^
 ||gnnes.mintrx.com^
 ||gnnkrz.josbank.com^
 ||gnosticode.com^
@@ -111139,6 +111153,7 @@
 ||gsk802041hh.com^
 ||gsk802050hh.com^
 ||gsk802051hh.com^
+||gsk802061hh.com^
 ||gsl144.com^
 ||gslb.hpplay.cn^
 ||gslbeacon.lijit.com^
@@ -114798,6 +114813,7 @@
 ||gxqzz.7766.org^
 ||gxsuum.discountmugs.com^
 ||gxusko.pinkpanda.hu^
+||gxvf.cn^
 ||gxyaxf.pixartprinting.be^
 ||gxyjpy.krenobat.fr^
 ||gxyojn.underarmour.fr^
@@ -118680,6 +118696,7 @@
 ||iconbrowsacademy.com^
 ||iconcnd.net^
 ||iconfitness.fr^
+||iconmediapixel-ipv4.com^
 ||iconmediapixel.com^
 ||iconnode.com^
 ||iconrefer.com^
@@ -120317,6 +120334,7 @@
 ||immoderatetender.com^
 ||immortalhostess.com^
 ||immoweb.be/*/track/^
+||immowelt.de/serp-bff/analytics/^
 ||immunocap.thermofisher.com^
 ||imnks.com/ad2023/^
 ||imobie.com/js/analytics.js^
@@ -123694,6 +123712,7 @@
 ||ivy.pconline.com.cn^
 ||ivybaron.com^
 ||ivykiosk.com^
+||ivza0m05f.com^
 ||ivzaq2irg.com^
 ||iw.pentonmarketingsvcs.com^
 ||iwa.iplsc.com/iwa.js^
@@ -150405,6 +150424,7 @@
 ||nmulwz.cn^
 ||nnavigo.fr^
 ||nndeor.click-six.de^
+||nneephon.com^
 ||nnglgliginnglgligi.top^
 ||nnhxjd.zielonalazienka.pl^
 ||nnivvr.zimmo.be^
@@ -151468,6 +151488,7 @@
 ||ny.5.p2l.info^
 ||ny.frontpush.com.br^
 ||ny.lshdw.cc^
+||ny70zesy5v.com^
 ||ny77jj.washingtonpost.com^
 ||nyaa.*/static/js/ccheck.js^
 ||nyaa.fun/static/img/*_refesh.^
@@ -159314,6 +159335,7 @@
 ||pixel.runative-syndicate.com^
 ||pixel.s3xified.com^
 ||pixel.safe-installation.com^
+||pixel.scoring.ru^
 ||pixel.servebom.com^
 ||pixel.shareaholic.com^
 ||pixel.sibellemodas.com.br^
@@ -159468,6 +159490,7 @@
 ||pkbjr.wildthreadsco.com^
 ||pkbkxpsol.info^
 ||pkc5.hardrockhoteltenerife.com^
+||pkdcfefqqf.com^
 ||pkdimy.shoptime.com.br^
 ||pkdntb.emploi-pro.fr^
 ||pkdzd.kafibody.com^
@@ -162298,6 +162321,7 @@
 ||prooo.ajkerbaazarlight.com^
 ||prop-erly.eu^
 ||prop-trading.pl^
+||prop.astonvillanews.co.uk^
 ||propagandascoot.com^
 ||proparm.jp^
 ||propdfconverter.com^
@@ -166948,6 +166972,7 @@
 ||revexium-app.com^
 ||revhunter.tech^
 ||revi.rcs.it^
+||revico.jp/js/put_revico_cookie/put_revico_cookie.js^
 ||revico.jp/providejs/revico_tracking.js^
 ||revid.centech.glulive.com^
 ||review*.cre.ma/events?^
@@ -169454,6 +169479,7 @@
 ||s3.amazonaws.com/downloads.mailchimp.com/$script,domain=confection.io^
 ||s3.amazonaws.com/hcluster4^
 ||s3.amazonaws.com/hcluster5^
+||s3.amazonaws.com/icontracker/^
 ||s3.amazonaws.com/maropost/^
 ||s3.amazonaws.com/promos.withbuddies.com/prod/ads/^
 ||s3.amazonaws.com/www.audiencenetwork.ai/^
@@ -172328,7 +172354,7 @@
 ||secureporter.com^
 ||secureprovide1.com/*=tracking^
 ||securepubads.g.doubleclick.net/tag/js/gpt.js$script,redirect=googletagservices-gpt,domain=line.me^
-||securepubads.g.doubleclick.net/tag/js/gpt.js$script,redirect=googletagservices-gpt,domain=~golf.com|~today.line.me|~inmuebles24.com|~inside.com.tw|~investing.com|~olx.com.eg|~eksisozluk.com|~heycar.co.uk|~gizmodo.jp^
+||securepubads.g.doubleclick.net/tag/js/gpt.js$script,redirect=googletagservices-gpt,domain=~golf.com|~today.line.me|~inmuebles24.com|~inside.com.tw|~investing.com|~olx.com.eg|~eksisozluk.com|~heycar.co.uk|~gizmodo.jp|~dexerto.com^
 ||securepubads.g.doubleclick.net/tag/js/gpt.js$script,redirect=googletagservices-gpt,important,domain=turbo.pt^
 ||securepubads.g.doubleclick.net^
 ||secureredirect101.com^
@@ -194757,7 +194783,6 @@
 ||store.steampowered.com/app/usabilitytracking/^
 ||store.tryravine.com^
 ||store.vspo.jp/cdn/s/trekkie.^
-||store.vspo.jp/cdn/shopifycloud/perf-kit/shopify-perf-kit-*.min.js^
 ||store.workshops-design.com^
 ||storea8tracking.alc.co.jp^
 ||storeaprkay.top^
@@ -217044,6 +217069,7 @@
 ||w56ff7.cc^
 ||w58547.cc^
 ||w58ce6.cc^
+||w58ce6.com^
 ||w592be.cc^
 ||w5ba5b.cc^
 ||w5bi16f3co.com^
