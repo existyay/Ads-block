@@ -1,9 +1,9 @@
-! Title: AdGuard 广告拦截规则集 (更新日期 2026-02-07 09:57:51)
-! Checksum: KeAEot0T7DcMWQdyH0UizQ
-! Version: 20260207095751
+! Title: AdGuard 广告拦截规则集 (更新日期 2026-02-08 10:31:00)
+! Checksum: KbWPLqdVAOUGjXD3oZzibw
+! Version: 20260208103100
 ! Expires: 24 hours (update frequency)
-! Last modified: 2026-02-07 09:57:51
-! Total Count: 226991
+! Last modified: 2026-02-08 10:31:00
+! Total Count: 227021
 ! Description: AdGuard 完整规则集，支持 DNS 拦截 + 元素隐藏，兼容 AdGuard Home/客户端/浏览器扩展 (AdGuard Home DNS 拦截规则)
 ! Homepage: https://github.com/existyay/Ads-block
 
@@ -3368,6 +3368,7 @@
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$domain=pansearch.me^
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$domain=repo.hackyouriphone.org^
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$domain=rjno1.com^
+@@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$domain=tstrs.me^
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$domain=tsubasa.im^
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$domain=tt1069.com|akashio.com|1991421.cn|kantie.org|kejilion.pro|bilinovel.com|mcappx.com|yeeach.com|blog.6ziz.com|docsmall.com|uiadmin.net|4horlover.com|23qb.net|4spaces.org|aboluowang.com|assbbs.com|chaojizhibo.net|chtoen.com|daxiaamu.com|demo.ama.pub|dizhishengcheng.com|doitwell.tw|ekamus.info|eu4cn.com|ff14angler.com|freedidi.com|fsbot.xyz|haoweichi.com|it365.abctool.info|linovelib.com|logi.im|mens1069.com|monnsutogatya.com|mpyit.com|myqqjd.com|numberempire.com|ozabc.com|pansearch.me|patch.ali213.net|pc3mag.com|reh.tw|shenfendaquan.com|sistersbedroom.com|sto520.com|vaptcha.com|wandhi.com|wenxuecity.com|wuyong.fun|xbeibeix.com|xiebruce.top|xugaoxiang.com|xxxxx520.com|yodu.org|yummy.best|zaixianjisuan.com^
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$domain=vorsprung-online.de^
@@ -3810,6 +3811,7 @@
 @@||securepubads.g.doubleclick.net/tag/js/gpt.js$domain=mytvsuper.com^
 @@||securepubads.g.doubleclick.net/tag/js/gpt.js$domain=sinarharian.com.my^
 @@||securepubads.g.doubleclick.net/tag/js/gpt.js$domain=sncf-connect.com^
+@@||securepubads.g.doubleclick.net/tag/js/gpt.js$domain=tstrs.me^
 @@||securepubads.g.doubleclick.net/tag/js/gpt.js$domain=usatoday.com^
 @@||securepubads.g.doubleclick.net/tag/js/gpt.js$domain=yorkshirepost.co.uk^
 @@||securepubads.g.doubleclick.net/tag/js/gpt.js$script,domain=line.me^
@@ -4322,6 +4324,7 @@
 @@||try.abtasty.com/403fb16c20596e4691fbe9ec5db9720e.js$domain=shop.euromaster.de^
 @@||try.abtasty.com/78cb84f9b3158bdce6932109a6d7c7c1.js$domain=tf1.fr^
 @@||try.abtasty.com^$script,domain=tickpick.com^
+@@||tstrs.me^
 @@||tsyndicate.com/sdk/v1/n.js$domain=hpjav.tv^
 @@||tt.omtrdc.net/rest/$xmlhttprequest,domain=shop.shoppersdrugmart.ca^
 @@||tt.personio.com/9sgqlkuag.js$script,domain=personio.com^
@@ -26083,6 +26086,7 @@
 ||assets.soom.la^
 ||assets.spectrumhealthlakeland.org^
 ||assets.sport1.de/imagix/filter2/jpeg/_set=dyn_size_no_crop/imagix/^
+||assets.targetimg1.com/ssx/ssx.mod.js$domain=target.com^
 ||assets.telefonanlage-shop.de^
 ||assets.thdstatic.com/analytics/core/*/appMeasure$domain=homedepot.com^
 ||assets.trendii.com/pixel/main.js^
@@ -27173,6 +27177,7 @@
 ||avpayments.com^
 ||avpgm.queencosmetics.store^
 ||avple.video/asset/bann.js^
+||avpr.cn^
 ||avptfg.madeinfrancebox.com^
 ||avqymy.you.gr^
 ||avrahammanberg.com^
@@ -49554,6 +49559,7 @@
 ||data.iviskin.pl^
 ||data.iviskin.se^
 ||data.janvanderstorm.de^
+||data.jaytuckwell.com^
 ||data.jerkmate.com^
 ||data.joongna.com/log/^
 ||data.joongna.com/log/ga^
@@ -105292,6 +105298,7 @@
 ||framezyik.com^
 ||framinggreeting.com^
 ||framixbitnova.com^
+||fran.pro^
 ||francais.rt.com/nbc-stats/^
 ||france.alphabet.com^
 ||france24.com/bon.jour?^
@@ -105637,6 +105644,7 @@
 ||frevontaris.top^
 ||freyr.futurecdn.net/freyr.js^
 ||frfge.bonobos.com^
+||frhi5v6ez1.com^
 ||frhopo.cn^
 ||frhqq.xeroshoes.com^
 ||fribboverb.pro^
@@ -108383,6 +108391,7 @@
 ||gjnxabol.info^
 ||gjrjr.maxa-group.com^
 ||gjrrr.hotelcollection.com^
+||gjt6z9wga.com^
 ||gjtrack.uc.cn^
 ||gjtrack.ucweb.com^
 ||gjwind.com/xxmh.gif^
@@ -108788,6 +108797,9 @@
 ||gnla02050qp.com^
 ||gnla02051qp.com^
 ||gnla02061qp.com^
+||gnla02070qp.com^
+||gnla02071qp.com^
+||gnla02080qp.com^
 ||gnnes.mintrx.com^
 ||gnnkrz.josbank.com^
 ||gnosticode.com^
@@ -108852,6 +108864,7 @@
 ||go.90daypipeline.com^
 ||go.abcam.com^
 ||go.abqisotopes.com^
+||go.absolventa.de^
 ||go.accmgr.com^
 ||go.accredible.com^
 ||go.accumaxglobal.com.au^
@@ -108901,6 +108914,7 @@
 ||go.azets.fi^
 ||go.azets.no^
 ||go.azets.se^
+||go.azubi.de^
 ||go.backtest.io^
 ||go.bandits.com^
 ||go.batsbaseball.com^
@@ -118454,6 +118468,7 @@
 ||i3zh.com/wp-content/plugins/cm-pop-up-banners/^
 ||i4.ictorganisers.com^
 ||i4.vaishnaviinterior.com^
+||i4320rdrta.com^
 ||i4h0wp.lol^
 ||i4track.net^
 ||i5.ictorganisers.com^
@@ -118469,6 +118484,7 @@
 ||i73u6dnnh.com^
 ||i79zj-tzyj9.ads.tremorhub.com^
 ||i7mfm1hl44.com^
+||i7xkqmhjw.com^
 ||i80auto.com^
 ||i867.journal-advocate.com^
 ||i891x23n1x3.shop^
@@ -128505,6 +128521,7 @@
 ||lcsopa.onamae.com^
 ||lctfgw.evernew.ca^
 ||lcugj.pestie.com^
+||lcugzodfdo.com^
 ||lcvl.cn^
 ||lcw3qzs.biz^
 ||lcwodl.bleulibellule.com^
@@ -144897,6 +144914,7 @@
 ||metricsvtex.oficinareserva.com^
 ||metricswave.com^
 ||metricus.artlebedev.ru^
+||metrik.freitag.de^
 ||metrika-informer.com^
 ||metrika.kontur.ru^
 ||metrika.lookmovie2.to^
@@ -148172,6 +148190,7 @@
 ||myhome.usg.com^
 ||myhotelbook.pegs.com^
 ||myhst2024.com^
+||myieldell.com^
 ||myinfo.borland.com^
 ||myinfo.eaton.com^
 ||myjcb-card.com^
@@ -157540,6 +157559,7 @@
 ||partovo.com^
 ||partplanes.com^
 ||parts-egypt.com^
+||partsgeek.com/sspgt/^
 ||partsonpoint.com^
 ||parttimes.com^
 ||party-vqgdyvoycc.now.sh^
@@ -166240,6 +166260,7 @@
 ||reloadpage.net^
 ||reltrd.peteralexander.com.au^
 ||relty-goods.com^
+||reluctance58.com^
 ||relybelonged.com^
 ||relyfiascoair.com^
 ||relyonit.americanexpress.co.uk^
@@ -187431,6 +187452,7 @@
 ||sst.carousel.be^
 ||sst.carpenterofnature.com^
 ||sst.carrefour.tn^
+||sst.carwow.^
 ||sst.carwow.co.uk^
 ||sst.carwow.de^
 ||sst.carwow.es^
@@ -197659,6 +197681,7 @@
 ||t.thalesgroup.com^
 ||t.thebettyrocker.com^
 ||t.thefishercenter.com^
+||t.themarketer.com^
 ||t.themonument.live^
 ||t.thesoonerclub.com^
 ||t.ticketatlantic.com^
@@ -212654,6 +212677,7 @@
 ||vcs.zijieapi.com^
 ||vcxtkb.myomee.com^
 ||vcypfn.readers.com^
+||vcz9kuhac.com^
 ||vd-test.net.anwalt.de^
 ||vda.oipzyrzffum.ovh^
 ||vda.viettel.vn^
@@ -216909,6 +216933,7 @@
 ||vwuudahnarh.com^
 ||vwv-telegram.com^
 ||vwv-telergam.com^
+||vwvaddoet.com^
 ||vwvj.cn^
 ||vww-telegram.com^
 ||vww-telergam.com^
@@ -217068,6 +217093,7 @@
 ||w56953.cc^
 ||w56ff7.cc^
 ||w58547.cc^
+||w58547.com^
 ||w58ce6.cc^
 ||w58ce6.com^
 ||w592be.cc^
@@ -219570,6 +219596,7 @@
 ||wo0f-wo0f.com^
 ||wo0f-wo0f.net^
 ||wo30sg1orn.com^
+||wo6h5tx8w.com^
 ||woaidu.org/images/20180802/3.jpg^
 ||woaiiwo.com^
 ||wobifoyuwwitoba.today^
@@ -223665,6 +223692,7 @@
 ||xjsefd.materik-m.ru^
 ||xjvunf.top^
 ||xjwgyq.fatquartershop.com^
+||xjwhad.com^
 ||xjwhtz10.com^
 ||xjwhtz2.com^
 ||xjwhtz3.com^
@@ -225572,6 +225600,7 @@
 ||yy17173.dtime.com^
 ||yy18.info/yyads/^
 ||yy18.info^*thanks^
+||yy19xdgtud.com^
 ||yy1veaxhf.com^
 ||yy3hws3gm1.popularitybazaar.com^
 ||yy8090.vip/js/abc/^
@@ -226942,6 +226971,7 @@
 ||zybkrv.icu^
 ||zybveu.swappie.com^
 ||zycnof.distrelec.de^
+||zyek35wsn.com^
 ||zyekguitars.com^
 ||zyeptr.mebline.pl^
 ||zyfrapro-app.com^
