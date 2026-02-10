@@ -1,6 +1,6 @@
 # Ads-block
 # 源码参考自https://github.com/lingeringsound/adblock_auto/
-### 🚀 AdGuard Home DNS 拦截规则集 - 自动更新(`date +'%F %T'`)
+### 🚀 AdGuard Home DNS 拦截规则集 - 自动更新
 
 **专为 luci-app-adguardhome / AdGuard Home 优化，国内广告优先，避免误封 Cloudflare 和 PT 站点**
 
@@ -84,8 +84,6 @@
 | **DNS 拦截** | `\|\|ad.example.com^` | ✅ AdGuard Home / luci-app-adguardhome |
 | **白名单** | `@@\|\|example.com^` | ✅ AdGuard Home / luci-app-adguardhome |
 
-> ⚠️ **注意**: 元素隐藏规则 (`##.class`) 在 AdGuard Home 中 **不生效**，需要 AdGuard 客户端或浏览器扩展。
-
 ## 与其他规则的区别
 
 | 对比项 | 本规则集 | 通用规则集 |
@@ -102,7 +100,3 @@
 
 ---
 
-⚠️ **重要提示**：DNS 拦截能力有限，无法 100% 拦截所有开屏/弹窗广告。如需更强效果，建议：
-- Android：安装 AdGuard 客户端或使用 Magisk 模块（如 AdAway）
-- iOS：安装 AdGuard Pro 或使用 Quantumult X 等工具
-- 使用支持 SSL 拦截的方案可获得最佳效果
