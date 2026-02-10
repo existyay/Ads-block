@@ -588,7 +588,7 @@ function update_README_info(){
     cat << EOF > "${file}"
 # Ads-block
 # 源码参考自https://github.com/lingeringsound/adblock_auto/
-### 🚀 AdGuard Home DNS 拦截规则集 - 自动更新(\`date +'%F %T'\`)
+### 🚀 AdGuard Home DNS 拦截规则集 - 自动更新
 
 **专为 luci-app-adguardhome / AdGuard Home 优化，国内广告优先，避免误封 Cloudflare 和 PT 站点**
 
