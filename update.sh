@@ -1,8 +1,8 @@
 #!/bin/sh
 
-# AdGuard 广告拦截规则生成脚本
-# 支持 DNS 拦截 + 元素隐藏规则
-# 兼容 AdGuard Home (DNS拦截) 和 AdGuard 客户端/浏览器扩展 (完整规则)
+# AdGuard Home DNS 拦截规则生成脚本
+# 专为 luci-app-adguardhome / AdGuard Home 优化
+# 仅生成 DNS 拦截规则 (||domain^)，避免误封 Cloudflare 和 PT 站点
 
 # 加载公共函数
 source "$(pwd)/until_function.sh"
@@ -33,8 +33,8 @@ for rule_file in "${Download_Folder}"/*.txt; do
         filename=$(basename "${rule_file}")
         echo "※$(date +'%F %T') 处理 ${filename}"
         
-        # 使用完整模式处理（保留元素隐藏规则）
-        sort_adguard_rules "${Sort_Folder}" "${rule_file}" "full"
+        # 使用 DNS 模式处理（仅保留 ||domain^ 格式规则，兼容 luci-app-adguardhome）
+        sort_adguard_rules "${Sort_Folder}" "${rule_file}" "dns"
     fi
 done
 
@@ -52,9 +52,9 @@ done
 echo "※$(date +'%F %T') 合并规则文件..."
 Combine_adblock_original_file "${Rules_Folder}/adblock_auto.txt" "${Sort_Folder}"
 
-# 净化和优化规则
+# 净化和优化规则（DNS 模式）
 echo "※$(date +'%F %T') 净化规则..."
-modtify_adblock_original_file "${Rules_Folder}/adblock_auto.txt" "" "full"
+modtify_adblock_original_file "${Rules_Folder}/adblock_auto.txt" "" "dns"
 
 # 移除不支持的修饰符（保留元素隐藏语法）
 echo "※$(date +'%F %T') 规范化规则格式..."
@@ -66,9 +66,9 @@ if [ -f "$(pwd)/white_list/white_list.prop" ]; then
     make_white_rules "${Rules_Folder}/adblock_auto.txt" "$(pwd)/white_list/white_list.prop"
 fi
 
-# 清理和去重
+# 清理和去重（DNS 模式）
 echo "※$(date +'%F %T') 清理和去重规则..."
-clean_adguard_rules "${Rules_Folder}/adblock_auto.txt" "full"
+clean_adguard_rules "${Rules_Folder}/adblock_auto.txt" "dns"
 
 # 移除冗余子域名（无论规则数量多大都执行）
 rule_count=$(wc -l < "${Rules_Folder}/adblock_auto.txt")
@@ -83,8 +83,8 @@ format_adguard_rules "${Rules_Folder}/adblock_auto.txt"
 # 写入文件头
 echo "※$(date +'%F %T') 写入文件头信息..."
 write_head "${Rules_Folder}/adblock_auto.txt" \
-    "AdGuard 广告拦截规则集 (更新日期 $(date '+%F %T'))" \
-    "AdGuard 完整规则集，支持 DNS 拦截 + 元素隐藏，兼容 AdGuard Home/客户端/浏览器扩展"
+    "AdGuard Home DNS 拦截规则集 (更新日期 $(date '+%F %T'))" \
+    "专为 luci-app-adguardhome / AdGuard Home 优化的 DNS 拦截规则，国内广告优先，避免误封 Cloudflare 和 PT 站点"
 
 echo "※$(date +'%F %T') 规则生成完成！"
 

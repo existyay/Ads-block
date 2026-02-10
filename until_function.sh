@@ -8,38 +8,41 @@ function download_link(){
     test "${target_dir}" = "" && target_dir="`pwd`/temple/download_Rules"
     mkdir -p "${target_dir}"
 
-    # 精简高效版 - 精选高质量规则源
-    # 支持格式：AdBlock、Hosts、元素隐藏、追踪拦截
+    # 精简高效版 - 精选高质量规则源（针对 luci-app-adguardhome 优化）
+    # 优先国内广告拦截，避免误封 Cloudflare 和 PT 站点
+    # 仅使用 DNS 拦截规则格式 (||domain^)，确保 AdGuard Home 兼容
     local list='
-# === 核心规则（精简高效）===
-# AWAvenue 秋风广告规则：专注国产 App 开屏广告
+# === 核心规则（国内广告优先）===
+# AWAvenue 秋风广告规则：专注国产 App 开屏广告（精准、低误杀）
 https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt|AWAvenue_main.txt
 
-# === 移动端广告拦截 ===
-# AdGuard Mobile Ads Filter：移动端广告专用规则（含元素隐藏）
-https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_11_Mobile/filter.txt|adguard_mobile.txt
+# anti-AD：精准的中文区广告拦截规则（AdGuard Home 专用格式）
+https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/anti-ad-adguard.txt|anti-ad-adguard.txt
+
+# === 国内移动端广告拦截 ===
 # 大圣净化规则：专注国产 App 广告
 https://raw.githubusercontent.com/jk278/Ad-J/main/Ad-J.txt|Ad-J.txt
+
 # NoAppDownload：应用下载提示拦截
 https://raw.githubusercontent.com/Noyllopa/NoAppDownload/master/NoAppDownload.txt|NoAppDownload.txt
 
-# === 追踪拦截规则 ===
-# AdGuard Tracking Protection：追踪保护规则
-https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_3_Spyware/filter.txt|adguard_tracking.txt
-# EasyPrivacy：隐私保护规则
-https://easylist.to/easylist/easyprivacy.txt|easyprivacy.txt
+# 乘风视频广告规则：国内视频网站广告拦截
+https://raw.githubusercontent.com/xinggsf/Adblock-Plus-Rule/master/rule.txt|xinggsf_rule.txt
 
-# === Hosts 格式规则 ===
-# StevenBlack Hosts：统一多源的 hosts 广告拦截
-https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts|stevenblack_hosts.txt
+# === 通用广告拦截（保守模式）===
+# AdGuard DNS Filter：专为 DNS 拦截优化的规则（误杀率低）
+https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt|adguard_dns_filter.txt
 
-# === 元素隐藏规则 ===
-# AdGuard Chinese Filter：中文网站元素隐藏
+# AdGuard Chinese Filter：中文网站广告拦截（仅提取 DNS 规则）
 https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_224_Chinese/filter.txt|adguard_chinese.txt
 
 # === 安全威胁拦截 ===
-# DandelionSprout 反恶意软件：安全威胁拦截
+# DandelionSprout 反恶意软件：安全威胁拦截（AdGuard Home 专用格式）
 https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareAdGuardHome.txt|dandelion_antimalware.txt
+
+# === 隐私保护（精简版，避免误封 PT tracker）===
+# AdGuard Tracking Protection：仅核心追踪保护（移除了 EasyPrivacy 避免 PT 误封）
+https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_3_Spyware/filter.txt|adguard_tracking.txt
 '
 
     for i in ${list}; do
@@ -585,9 +588,17 @@ function update_README_info(){
     cat << EOF > "${file}"
 # Ads-block
 # 源码参考自https://github.com/lingeringsound/adblock_auto/
-### 🚀 强力广告拦截规则集 - 自动更新(`date +'%F %T'`)
+### 🚀 AdGuard Home DNS 拦截规则集 - 自动更新(\`date +'%F %T'\`)
 
-**精选 4 个高质量规则源，支持 AdBlock 和 Hosts 格式**
+**专为 luci-app-adguardhome / AdGuard Home 优化，国内广告优先，避免误封 Cloudflare 和 PT 站点**
+
+## ✨ 特性
+
+- ✅ 仅使用 \`||domain^\` 格式，100% 兼容 AdGuard Home / luci-app-adguardhome
+- ✅ 国内广告规则优先，精准拦截开屏广告和应用内广告
+- ✅ 内置白名单保护 Cloudflare、常见 PT 站点、支付服务等
+- ✅ 移除了 EasyPrivacy 和 StevenBlack Hosts 等可能导致误封的规则源
+- ✅ 每日自动更新，保持规则新鲜度
 
 ## 订阅链接
 
@@ -602,43 +613,48 @@ function update_README_info(){
 <details>
 <summary>点击查看上游规则</summary>
 <ul>
-<li><strong>核心规则</strong></li>
+<li><strong>国内广告拦截（优先）</strong></li>
 <ul>
-<li><a href="https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt" target="_blank">AWAvenue 秋风广告规则</a> - 精简高效的国产 App 开屏广告拦截</li>
-</ul>
-
-<li><strong>移动端广告拦截</strong></li>
-<ul>
-<li><a href="https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_11_Mobile/filter.txt" target="_blank">AdGuard Mobile Ads Filter</a> - 移动端广告专用规则（含元素隐藏）</li>
+<li><a href="https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt" target="_blank">AWAvenue 秋风广告规则</a> - 专注国产 App 开屏广告（精准、低误杀）</li>
+<li><a href="https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/anti-ad-adguard.txt" target="_blank">anti-AD</a> - 精准的中文区广告拦截规则（AdGuard Home 专用）</li>
 <li><a href="https://raw.githubusercontent.com/jk278/Ad-J/main/Ad-J.txt" target="_blank">大圣净化 Ad-J</a> - 国产 App 广告净化</li>
+<li><a href="https://raw.githubusercontent.com/xinggsf/Adblock-Plus-Rule/master/rule.txt" target="_blank">乘风视频广告规则</a> - 国内视频网站广告拦截</li>
+</ul>
+
+<li><strong>通用广告拦截</strong></li>
+<ul>
+<li><a href="https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt" target="_blank">AdGuard DNS Filter</a> - 专为 DNS 拦截优化的规则（误杀率低）</li>
 <li><a href="https://raw.githubusercontent.com/Noyllopa/NoAppDownload/master/NoAppDownload.txt" target="_blank">NoAppDownload</a> - 应用下载提示拦截</li>
+<li><a href="https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_224_Chinese/filter.txt" target="_blank">AdGuard Chinese Filter</a> - 中文网站广告拦截</li>
 </ul>
 
-<li><strong>追踪拦截规则</strong></li>
+<li><strong>隐私保护与安全</strong></li>
 <ul>
-<li><a href="https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_3_Spyware/filter.txt" target="_blank">AdGuard Tracking Protection</a> - 追踪保护规则</li>
-<li><a href="https://easylist.to/easylist/easyprivacy.txt" target="_blank">EasyPrivacy</a> - 隐私保护规则</li>
-</ul>
-
-<li><strong>Hosts 格式规则</strong></li>
-<ul>
-<li><a href="https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts" target="_blank">StevenBlack Hosts</a> - 统一多源的 hosts 广告拦截</li>
-</ul>
-
-<li><strong>元素隐藏规则</strong></li>
-<ul>
-<li><a href="https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_224_Chinese/filter.txt" target="_blank">AdGuard Chinese Filter</a> - 中文网站元素隐藏</li>
-</ul>
-
-<li><strong>安全威胁</strong></li>
-<ul>
+<li><a href="https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_3_Spyware/filter.txt" target="_blank">AdGuard Tracking Protection</a> - 核心追踪保护（已移除 EasyPrivacy 避免 PT 误封）</li>
 <li><a href="https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareAdGuardHome.txt" target="_blank">DandelionSprout Anti-Malware</a> - 恶意软件拦截</li>
 </ul>
 </ul>
 </details>
 
+## 白名单保护
+
+本规则集内置白名单，保护以下服务不被误封：
+
+- **Cloudflare**: cloudflare.com, 1.1.1.1, workers.dev, pages.dev 等
+- **PT 站点**: 国内外常见 PT 站点及 Tracker 服务
+- **支付服务**: 支付宝、微信支付等
+- **云服务**: 阿里云、腾讯云、七牛云等
+- **开发服务**: GitHub、npm、jsDelivr 等
+
 
 ## 使用说明
+
+### 在 luci-app-adguardhome 中使用
+
+1. 进入 OpenWrt 管理界面 > 服务 > AdGuard Home
+2. 在「过滤器」>「DNS 封锁清单」中添加规则
+3. 粘贴上方的订阅链接
+4. 保存并更新
 
 ### 在 AdGuard Home 中使用
 
@@ -647,33 +663,32 @@ function update_README_info(){
 3. 粘贴上方的订阅链接
 4. 保存并更新
 
-## 支持的规则格式
+## 规则格式说明
 
-本项目支持以下输入格式，自动转换为 AdGuard 标准格式：
+本项目 **仅输出** \`||domain^\` 格式的 DNS 拦截规则，确保：
 
-| 格式类型 | 示例 | 作用 |
+| 格式类型 | 示例 | 兼容性 |
 | :-- | :-- | :-- |
-| **DNS 拦截** | \`\|\|example.com^\` | 拦截整个域名 |
-| **Hosts** | \`0.0.0.0 example.com\` | 转换为 DNS 拦截 |
-| **元素隐藏** | \`##.ad-banner\` | 隐藏页面广告元素 |
-| **特定域名元素隐藏** | \`example.com##.ad\` | 仅在指定域名隐藏 |
-| **扩展CSS选择器** | \`#?#div:has(.ad)\` | 高级元素匹配 |
-| **带修饰符规则** | \`\|\|ad.com^\$third-party\` | 条件拦截 |
-| **Clash/Surge** | \`DOMAIN,example.com\` | 转换为 DNS 拦截 |
-| **dnsmasq** | \`address=/example.com/\` | 转换为 DNS 拦截 |
+| **DNS 拦截** | \`\|\|ad.example.com^\` | ✅ AdGuard Home / luci-app-adguardhome |
+| **白名单** | \`@@\|\|example.com^\` | ✅ AdGuard Home / luci-app-adguardhome |
 
-### 规则类型说明
+> ⚠️ **注意**: 元素隐藏规则 (\`##.class\`) 在 AdGuard Home 中 **不生效**，需要 AdGuard 客户端或浏览器扩展。
 
-- **DNS 拦截规则** - 适用于 AdGuard Home、AdGuard DNS 等 DNS 级拦截
-- **元素隐藏规则** - 需要 AdGuard 客户端或浏览器扩展（可精准隐藏页面元素而不影响域名访问）
+## 与其他规则的区别
+
+| 对比项 | 本规则集 | 通用规则集 |
+| :-- | :-- | :-- |
+| Cloudflare 兼容 | ✅ 白名单保护 | ❌ 可能误封 |
+| PT 站点兼容 | ✅ 白名单保护 | ❌ Tracker 被拦截 |
+| 国内广告 | ⭐ 优先处理 | 一般 |
+| 规则格式 | DNS 专用 | 混合格式 |
+| luci-app-adguardhome | ✅ 完全兼容 | ⚠️ 部分规则不生效 |
 
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=existyay/Ads-block&type=Date)](https://star-history.com/#existyay/Ads-block&Date)
 
 ---
-
-**注意**: 本规则集为标准 \`||domain^\` 格式的 DNS 拦截规则，专为 AdGuard Home 优化。
 
 ⚠️ **重要提示**：DNS 拦截能力有限，无法 100% 拦截所有开屏/弹窗广告。如需更强效果，建议：
 - Android：安装 AdGuard 客户端或使用 Magisk 模块（如 AdAway）

@@ -1,0 +1,131 @@
+! 白名单规则 - 防止误封重要服务
+! Cloudflare 相关域名
+cloudflare\.com
+cloudflare-dns\.com
+cloudflare\.net
+cloudflareinsights\.com
+cloudflarestream\.com
+cloudflareclient\.com
+cloudflaressl\.com
+cloudflare-ipfs\.com
+workers\.dev
+pages\.dev
+1\.1\.1\.1
+one\.one\.one\.one
+warp\.plus
+cf-ipfs\.com
+
+! Cloudflare CDN 和服务
+cdnjs\.cloudflare\.com
+ajax\.cloudflare\.com
+challenges\.cloudflare\.com
+static\.cloudflareinsights\.com
+
+! PT 站点相关（Tracker 服务）
+! 国内 PT 站点
+chdbits\.co
+hdsky\.me
+hdhome\.org
+pthome\.net
+pterclub\.com
+ourbits\.club
+hdchina\.org
+totheglory\.im
+mteam\.cc
+m-team\.cc
+opencd\.me
+ssd\.pub
+springsunday\.net
+tjupt\.org
+hdtime\.org
+hddolby\.com
+hdfans\.org
+hdatmos\.club
+audiences\.me
+nicept\.net
+keepfrds\.com
+ilolicon\.com
+femdomcult\.org
+avgv\.cc
+ptsbao\.club
+btschool\.club
+haidan\.video
+azusa\.ru
+
+! 国外常见 PT 站点
+iptorrents\.com
+torrentleech\.org
+bibliotik\.me
+myanonamouse\.net
+passthepopcorn\.me
+broadcasthe\.net
+redacted\.ch
+orpheus\.network
+hdts\.ru
+limetorrents\.info
+1337x\.to
+torrent9\.ac
+rarbg\.(to|is)
+
+! PT Tracker 域名
+tracker\.
+announce\.
+scrape\.
+
+! 常用国内服务（防止误封）
+! 支付和金融
+alipay\.com
+alipayobjects\.com
+weixin\.qq\.com
+pay\.weixin\.qq\.com
+mch\.weixin\.qq\.com
+wechat\.com
+
+! 电商
+taobao\.com
+tmall\.com
+jd\.com
+360buyimg\.com
+tbcdn\.cn
+alicdn\.com
+suning\.com
+pinduoduo\.com
+
+! 视频服务（广告拦截可能误伤）
+! 注意：这里不白名单整个视频站，只白名单核心服务
+hdslb\.com
+bilivideo\.com
+
+! 云服务
+aliyuncs\.com
+tencentyun\.com
+myqcloud\.com
+ksyun\.com
+ucloud\.cn
+qiniucdn\.com
+qiniudn\.com
+
+! 开发相关
+github\.com
+githubusercontent\.com
+githubassets\.com
+gitlab\.com
+npmjs\.com
+unpkg\.com
+jsdelivr\.net
+bootcdn\.cn
+cdnjs\.com
+
+! 办公协作
+dingtalk\.com
+feishu\.cn
+bytedance\.com
+
+! 其他常被误封的服务
+recaptcha\.net
+gstatic\.com
+hcaptcha\.com
+akamaized\.net
+akamai\.net
+fastly\.net
+edgecastcdn\.net
