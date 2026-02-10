@@ -1,4 +1,20 @@
 ! 白名单规则 - 防止误封重要服务
+! QQ/微信 头像和核心服务
+qlogo\.cn
+q\.qlogo\.cn
+thirdqq\.qlogo\.cn
+wx\.qlogo\.cn
+p\.qlogo\.cn
+qpic\.cn
+gchat\.qpic\.cn
+c2cpicdw\.qpic\.cn
+mmbiz\.qpic\.cn
+qq\.com
+gtimg\.cn
+gtimg\.com
+idqqimg\.com
+imqq\.com
+
 ! Cloudflare 相关域名
 cloudflare\.com
 cloudflare-dns\.com
