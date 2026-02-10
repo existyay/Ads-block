@@ -1,9 +1,9 @@
-! Title: AdGuard 广告拦截规则集 (更新日期 2026-02-09 10:09:03)
-! Checksum: 7DvmebrRCaV2/KUlSW+K9A
-! Version: 20260209100903
+! Title: AdGuard 广告拦截规则集 (更新日期 2026-02-10 10:25:34)
+! Checksum: 3rlnepjAdS/s2B8AqwiScA
+! Version: 20260210102534
 ! Expires: 24 hours (update frequency)
-! Last modified: 2026-02-09 10:09:03
-! Total Count: 227038
+! Last modified: 2026-02-10 10:25:34
+! Total Count: 227066
 ! Description: AdGuard 完整规则集，支持 DNS 拦截 + 元素隐藏，兼容 AdGuard Home/客户端/浏览器扩展 (AdGuard Home DNS 拦截规则)
 ! Homepage: https://github.com/existyay/Ads-block
 
@@ -8848,6 +8848,7 @@
 ||8k9ynfczfd.com^
 ||8khmer.com^
 ||8le8le.com^
+||8lmggang9.com^
 ||8lz3swf01q.com^
 ||8maple.ru/dzcm$redirect=1x1-transparent.gif,domain=8maple.ru^
 ||8mdphsb8fm.com^
@@ -17668,6 +17669,7 @@
 ||affiliate.hanibal.cz^
 ||affiliate.herbadent.cz^
 ||affiliate.hokr.eu^
+||affiliate.hrkgame.com^
 ||affiliate.htb-energy.co.jp^
 ||affiliate.ihrelinsen.at^
 ||affiliate.imperiaonline.org^
@@ -23646,6 +23648,7 @@
 ||apm.tnet.nl^
 ||apm.yahoo.co.jp^
 ||apmplus.ap-southeast-1.volces.com^
+||apmplus.volces.com/monitor_web/^
 ||apnakarigar.com^
 ||apnews.com/blaize/datalayer^
 ||apnews.com/newrelic/newrelic.browser.prod.js^
@@ -24378,6 +24381,7 @@
 ||app.pandasuite.io^
 ||app.panomoments.com^
 ||app.partner.fisglobal.com^
+||app.partnerboost.com/brand/track.*.min.js^
 ||app.partnerboost.com^
 ||app.pawsket.com^
 ||app.payments-response.americanexpress.co.uk^
@@ -35617,6 +35621,7 @@
 ||cdn.shoplondon.dk^
 ||cdn.sift.com/s.js^
 ||cdn.simpleanalytics.io^
+||cdn.sinparty.com^$subdocument,domain=imgbox.com^
 ||cdn.skt-asum.com^$app=com.skt.prod.dialer^
 ||cdn.skypack.dev/uuid^
 ||cdn.smlog.co.kr^
@@ -35809,6 +35814,7 @@
 ||cdp.ems.onet.pl/*/me?domain=^
 ||cdp.getswisscard.ch^
 ||cdp.miles-and-more-cards.ch^
+||cdp.sph.com.sg/activation/activation.js^
 ||cdp.swisscard.ch^
 ||cdp.vemt.com^
 ||cdp.vercel.com/rs/^
@@ -36887,6 +36893,7 @@
 ||cici-luna.com^
 ||cicibans.club^
 ||cicontents.biz^
+||cidb5rr2t.com^
 ||cidea.cyou^
 ||ciderfeast.com^
 ||cidianwang.com/css/tj.^
@@ -50312,6 +50319,7 @@
 ||datacygnal.io^
 ||datadatal.info^
 ||datado.me^
+||datadog-log.clovergames.io^
 ||datadog-service.mvfglobal.com^
 ||datadoghq-browser-agent.com^
 ||datadoghq.com/assets/dd-browser-logs-rum.js^
@@ -54847,6 +54855,7 @@
 ||dwga.verdescannabis.com^
 ||dwga.wt-gosen.de^
 ||dwglgp.dunelm.com^
+||dwh-prod.moz.de^
 ||dwhidsyhvyr.info^
 ||dwightpliableemulate.com^
 ||dwin1.com^
@@ -101131,6 +101140,7 @@
 ||events.xletix.com^
 ||events.yourcx.io^
 ||events.zaloapp.com^
+||events1.avantisvideo.com^
 ||events2.directos.eu^
 ||events2.www.edenfantasys.com^
 ||eventsapi.grocerkey.com^
@@ -101619,7 +101629,7 @@
 ||expo.nada.org^
 ||expo.plbimportadora.com.br^
 ||expoclknu.com^
-||exponea.com%2F%2A%2Fopen^
+||exponea.com%2F*%2Fopen^
 ||exponea.com/*/open^
 ||exponea.com^
 ||exponential.com^
@@ -106930,6 +106940,7 @@
 ||gat7e.info^
 ||gatag.uplus.co.kr^
 ||gate.adgtrk.com^
+||gate.com/api/web/v*/marketing-tools/growth-placement/record-view^
 ||gate.hyperpaysys.com^
 ||gate.mykite.com.ua^
 ||gate.rvc.cl^
@@ -108805,6 +108816,7 @@
 ||gnla02071qp.com^
 ||gnla02080qp.com^
 ||gnla02081qp.com^
+||gnla02091qp.com^
 ||gnnes.mintrx.com^
 ||gnnkrz.josbank.com^
 ||gnosticode.com^
@@ -117244,6 +117256,9 @@
 ||hornymatches.com^*/visit.php?^
 ||hornytraffic.com^
 ||horoscopevoracious.com^
+||horoskopy.cz/*/hit|^
+||horoskopy.cz/*/impress?^
+||horoskopy.cz/*?zoneId=^
 ||horriblebytespeer.com^
 ||horriblegrew.com^
 ||horribletrainer.com^
@@ -117650,6 +117665,7 @@
 ||hridoy.niyeci.com^
 ||hriy.cn^
 ||hrjg.com.cn^
+||hrkgame.com/allstaticfiles/js/cookie.min.js^
 ||hrlmn.lorex.com^
 ||hrm.healthgrades.com^
 ||hrnecek.com^
@@ -125893,6 +125909,7 @@
 ||k99.cc^
 ||k9egtgh8v.com^
 ||k9s2ow.lat^
+||k9zxbudgix.com^
 ||kaacsi.belvilla.nl^
 ||kaan.kakao.com^
 ||kaartenhuis.nl.site-id.nl^
@@ -125900,6 +125917,7 @@
 ||kabbmedia.com^
 ||kabbo.kabbocollectionbd.com^
 ||kabokc.webuy.com^
+||kaboodle49.com^
 ||kabookk.fr^
 ||kabu-sokuhou.com/js/cpv/^
 ||kabukydenimoficial.com^
@@ -126562,6 +126580,7 @@
 ||kickass.unlockproj.party/analyze*.js^
 ||kickcrawford.com^
 ||kickfire.com^
+||kicklogz.com/anl/mytag.js^
 ||kickoff.cm^
 ||kickoffo.site^
 ||kickprincess.com^
@@ -147060,6 +147079,7 @@
 ||mowvra.idlookmall.com^
 ||moxiplayer-ss.checkoutera.com^
 ||moxiplayer-ss.topashopo.com^
+||moz.de^$cookie=/^spid/^
 ||moz.execulink.net^
 ||mozbar.moz.com^
 ||mozebyctwoje.com^
@@ -159383,6 +159403,7 @@
 ||pixel.thoughtmetric.io^
 ||pixel.trackverify.com^
 ||pixel.tuko.co.ke^
+||pixel.udpauto.ru^
 ||pixel.underzstore.com^
 ||pixel.veritone-ce.com^
 ||pixel.videohub.tv^
@@ -161537,6 +161558,7 @@
 ||prebid.cootlogix.com^
 ||prebid.loopmertb.com^
 ||prebid.org^
+||prebid.tapatalk.com^
 ||prebid.technoratimedia.com^
 ||prebidmanager.com^
 ||prebids.adnsx.com^
@@ -166634,6 +166656,7 @@
 ||resautic.com^
 ||reschedule-delivery.ups.com.^
 ||rescuedogsoftware.com^
+||rescueothers.com^
 ||rescuerhino.com^
 ||reseamorning.click^
 ||research-artisan.com^
@@ -182814,6 +182837,7 @@
 ||sns2.secureforms.mcafee.com^
 ||snscf.fr^
 ||snsnum.sfo3.cdn.digitaloceanspaces.com^
+||snssdk.gatedata.org^
 ||snuea.coopsleepgoods.com^
 ||snva.jp/api/bcon/^
 ||snva.jp/api/bcon/basic?^
@@ -198027,6 +198051,7 @@
 ||tag.nifty.com^
 ||tag.octopusenergy.fr^
 ||tag.panorama.ai^
+||tag.perx.ru^
 ||tag.phantomscreens.com.au^
 ||tag.placelocal.com^
 ||tag.pluripharma.com.br^
@@ -209475,6 +209500,7 @@
 ||tvpgs.palmgolfco.com^
 ||tvpixel.com^
 ||tvqagropu.com^
+||tvqmgheb.com^
 ||tvsbb.representclo.com^
 ||tvseries.gymhay.com^
 ||tvserieshd.net^
@@ -212572,6 +212598,7 @@
 ||vast.optimatic.com^
 ||vast.ssp.optimatic.com^
 ||vastila.com^
+||vastmillions.com^
 ||vasz.cn^
 ||vatrack.hinet.net^
 ||vats.vsl.co.at^
@@ -212888,6 +212915,7 @@
 ||veoxa.com/get_trackingcode.^
 ||veozn3f.com^
 ||vep.hautnah-kosmetik-grafenau.de^
+||veq8qbwjh.com^
 ||veqekuph.com^
 ||vequn.pacificcatch.com^
 ||veqvek.bnnbloomberg.ca^
@@ -225713,8 +225741,7 @@
 ||z444o.com^
 ||z492.ctinsider.com^
 ||z4a.net/images/*/960-60.^
-||z4a.net^$domain=9xav.cc^
-||z4a.net^$domain=aotu43.com^
+||z4a.net^$domain=aotu43.com|9xav.cc^
 ||z4a.net^*/960x^
 ||z4tnhm97b.com^
 ||z5v6h8recpgb.com^
@@ -225733,6 +225760,7 @@
 ||z8ugmu.bond^
 ||z929.fuelfix.com^
 ||z953.marinij.com^
+||z9dy1kq9wv.com^
 ||z9idsc.lat^
 ||za-go.experian.com^
 ||za.agiay.vn^
