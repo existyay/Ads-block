@@ -672,8 +672,6 @@ function update_README_info(){
 | **DNS 拦截** | \`\|\|ad.example.com^\` | ✅ AdGuard Home / luci-app-adguardhome |
 | **白名单** | \`@@\|\|example.com^\` | ✅ AdGuard Home / luci-app-adguardhome |
 
-> ⚠️ **注意**: 元素隐藏规则 (\`##.class\`) 在 AdGuard Home 中 **不生效**，需要 AdGuard 客户端或浏览器扩展。
-
 ## 与其他规则的区别
 
 | 对比项 | 本规则集 | 通用规则集 |
@@ -690,9 +688,5 @@ function update_README_info(){
 
 ---
 
-⚠️ **重要提示**：DNS 拦截能力有限，无法 100% 拦截所有开屏/弹窗广告。如需更强效果，建议：
-- Android：安装 AdGuard 客户端或使用 Magisk 模块（如 AdAway）
-- iOS：安装 AdGuard Pro 或使用 Quantumult X 等工具
-- 使用支持 SSL 拦截的方案可获得最佳效果
 EOF
 }
